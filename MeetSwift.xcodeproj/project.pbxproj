@@ -7,14 +7,36 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		066C9C6DF264D6850C8B15B3 /* Pods_MeetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C7257901B74844DD6CF9D94 /* Pods_MeetSwift.framework */; };
+		A14930111D717F210090E647 /* MAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14930101D717F210090E647 /* MAPI.swift */; };
+		A1B91D151D7F200D00BCF30A /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */; };
+		A1B91D171D7F2ED200BCF30A /* MeetModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D161D7F20E300BCF30A /* MeetModel.swift */; };
+		A1B91D1A1D8117E100BCF30A /* WordBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D191D8117E100BCF30A /* WordBasicCell.swift */; };
+		A1B91D1C1D81198600BCF30A /* WordSampleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D1B1D81198600BCF30A /* WordSampleCell.swift */; };
+		A1B91D1F1D817A6000BCF30A /* TodayCollectTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D1D1D8178F900BCF30A /* TodayCollectTableViewController.swift */; };
+		A1B91D201D817A6000BCF30A /* StoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D1E1D81791500BCF30A /* StoreTableViewController.swift */; };
+		A1B91D221D81BC5C00BCF30A /* UserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D211D81BC5C00BCF30A /* UserProfileViewController.swift */; };
+		A1B91D271D81BE4D00BCF30A /* UserProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D261D81BE4D00BCF30A /* UserProfileCell.swift */; };
 		A1EEB2D51D6C388D0089FA42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB2D41D6C388D0089FA42 /* AppDelegate.swift */; };
 		A1EEB2D71D6C388D0089FA42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB2D61D6C388D0089FA42 /* ViewController.swift */; };
 		A1EEB2DA1D6C388D0089FA42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1EEB2D81D6C388D0089FA42 /* Main.storyboard */; };
 		A1EEB2DC1D6C388D0089FA42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EEB2DB1D6C388D0089FA42 /* Assets.xcassets */; };
 		A1EEB2DF1D6C388D0089FA42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1EEB2DD1D6C388D0089FA42 /* LaunchScreen.storyboard */; };
+		A1EEB2EB1D6DFA0B0089FA42 /* CollectWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6C7257901B74844DD6CF9D94 /* Pods_MeetSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		72B42701F12D3C037CA9A09A /* Pods-MeetSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		A14930101D717F210090E647 /* MAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAPI.swift; sourceTree = "<group>"; };
+		A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
+		A1B91D161D7F20E300BCF30A /* MeetModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetModel.swift; sourceTree = "<group>"; };
+		A1B91D191D8117E100BCF30A /* WordBasicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordBasicCell.swift; sourceTree = "<group>"; };
+		A1B91D1B1D81198600BCF30A /* WordSampleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordSampleCell.swift; sourceTree = "<group>"; };
+		A1B91D1D1D8178F900BCF30A /* TodayCollectTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCollectTableViewController.swift; sourceTree = "<group>"; };
+		A1B91D1E1D81791500BCF30A /* StoreTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreTableViewController.swift; sourceTree = "<group>"; };
+		A1B91D211D81BC5C00BCF30A /* UserProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileViewController.swift; sourceTree = "<group>"; };
+		A1B91D261D81BE4D00BCF30A /* UserProfileCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCell.swift; sourceTree = "<group>"; };
 		A1EEB2D11D6C388D0089FA42 /* MeetSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EEB2D41D6C388D0089FA42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1EEB2D61D6C388D0089FA42 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +44,8 @@
 		A1EEB2DB1D6C388D0089FA42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A1EEB2DE1D6C388D0089FA42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1EEB2E01D6C388D0089FA42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectWordsViewController.swift; sourceTree = "<group>"; };
+		C18BD93F41EB40E675A9D400 /* Pods-MeetSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +53,46 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				066C9C6DF264D6850C8B15B3 /* Pods_MeetSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1FAA6D62A5F8FFF0BE9EFE30 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				72B42701F12D3C037CA9A09A /* Pods-MeetSwift.debug.xcconfig */,
+				C18BD93F41EB40E675A9D400 /* Pods-MeetSwift.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A1B91D181D8117BD00BCF30A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				A1B91D191D8117E100BCF30A /* WordBasicCell.swift */,
+				A1B91D1B1D81198600BCF30A /* WordSampleCell.swift */,
+				A1B91D261D81BE4D00BCF30A /* UserProfileCell.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		A1B91D251D81BDF800BCF30A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		A1EEB2C81D6C388D0089FA42 = {
 			isa = PBXGroup;
 			children = (
 				A1EEB2D31D6C388D0089FA42 /* MeetSwift */,
 				A1EEB2D21D6C388D0089FA42 /* Products */,
+				1FAA6D62A5F8FFF0BE9EFE30 /* Pods */,
+				B354D076EAAABACEAB4982E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +107,31 @@
 		A1EEB2D31D6C388D0089FA42 /* MeetSwift */ = {
 			isa = PBXGroup;
 			children = (
+				A1B91D251D81BDF800BCF30A /* View */,
+				A1B91D181D8117BD00BCF30A /* Cell */,
 				A1EEB2D41D6C388D0089FA42 /* AppDelegate.swift */,
 				A1EEB2D61D6C388D0089FA42 /* ViewController.swift */,
+				A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */,
+				A1B91D1D1D8178F900BCF30A /* TodayCollectTableViewController.swift */,
+				A1B91D1E1D81791500BCF30A /* StoreTableViewController.swift */,
+				A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */,
+				A1B91D211D81BC5C00BCF30A /* UserProfileViewController.swift */,
 				A1EEB2D81D6C388D0089FA42 /* Main.storyboard */,
 				A1EEB2DB1D6C388D0089FA42 /* Assets.xcassets */,
 				A1EEB2DD1D6C388D0089FA42 /* LaunchScreen.storyboard */,
 				A1EEB2E01D6C388D0089FA42 /* Info.plist */,
+				A14930101D717F210090E647 /* MAPI.swift */,
+				A1B91D161D7F20E300BCF30A /* MeetModel.swift */,
 			);
 			path = MeetSwift;
+			sourceTree = "<group>";
+		};
+		B354D076EAAABACEAB4982E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C7257901B74844DD6CF9D94 /* Pods_MeetSwift.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +141,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1EEB2E31D6C388D0089FA42 /* Build configuration list for PBXNativeTarget "MeetSwift" */;
 			buildPhases = (
+				97D7F8656E5A3BD7C51D93FC /* [CP] Check Pods Manifest.lock */,
 				A1EEB2CD1D6C388D0089FA42 /* Sources */,
 				A1EEB2CE1D6C388D0089FA42 /* Frameworks */,
 				A1EEB2CF1D6C388D0089FA42 /* Resources */,
+				EB39F04F6420F0499AA3A929 /* [CP] Embed Pods Frameworks */,
+				99E67C9A85451F3426EF02F6 /* [CP] Copy Pods Resources */,
+				1F97F4220ED38DE64D8ED03F /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -96,6 +170,7 @@
 				TargetAttributes = {
 					A1EEB2D01D6C388D0089FA42 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 5W47V2SDCF;
 					};
 				};
 			};
@@ -130,13 +205,86 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		1F97F4220ED38DE64D8ED03F /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97D7F8656E5A3BD7C51D93FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		99E67C9A85451F3426EF02F6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EB39F04F6420F0499AA3A929 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		A1EEB2CD1D6C388D0089FA42 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1B91D1F1D817A6000BCF30A /* TodayCollectTableViewController.swift in Sources */,
+				A1B91D201D817A6000BCF30A /* StoreTableViewController.swift in Sources */,
+				A1B91D171D7F2ED200BCF30A /* MeetModel.swift in Sources */,
+				A14930111D717F210090E647 /* MAPI.swift in Sources */,
+				A1B91D151D7F200D00BCF30A /* WordDetailViewController.swift in Sources */,
 				A1EEB2D71D6C388D0089FA42 /* ViewController.swift in Sources */,
 				A1EEB2D51D6C388D0089FA42 /* AppDelegate.swift in Sources */,
+				A1B91D271D81BE4D00BCF30A /* UserProfileCell.swift in Sources */,
+				A1B91D1C1D81198600BCF30A /* WordSampleCell.swift in Sources */,
+				A1EEB2EB1D6DFA0B0089FA42 /* CollectWordsViewController.swift in Sources */,
+				A1B91D221D81BC5C00BCF30A /* UserProfileViewController.swift in Sources */,
+				A1B91D1A1D8117E100BCF30A /* WordBasicCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -249,22 +397,29 @@
 		};
 		A1EEB2E41D6C388D0089FA42 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 72B42701F12D3C037CA9A09A /* Pods-MeetSwift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = MeetSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aventlabs.MeetSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aventlabs.meet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
 		A1EEB2E51D6C388D0089FA42 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C18BD93F41EB40E675A9D400 /* Pods-MeetSwift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MeetSwift/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.aventlabs.MeetSwift;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aventlabs.meet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -288,6 +443,7 @@
 				A1EEB2E51D6C388D0089FA42 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
