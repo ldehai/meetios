@@ -10,6 +10,7 @@ pod 'Alamofire', '~> 3.4'
 pod 'SwiftyJSON'
 pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
 pod 'RealmSwift'
-
+pod 'Fabric'
+pod 'Crashlytics'
 end
 

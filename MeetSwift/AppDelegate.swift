@@ -7,18 +7,43 @@
 //
 
 import UIKit
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //崩溃服务初始化(www.fabric.io)
+        Fabric.with([Crashlytics.self])
+        
+        //没有登录时，要求登录
+        let userDefault = NSUserDefaults .standardUserDefaults()
+        if userDefault.objectForKey("userId") == nil{
+            let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let userProfileVC:SignInViewController = storyboard.instantiateViewControllerWithIdentifier("SignInVC") as! SignInViewController
+            let nav = UINavigationController(rootViewController: userProfileVC)
+            
+            self.window?.rootViewController = nav
+        }
+        
+        //消息监听
+        NSNotificationCenter .defaultCenter() .addObserver(self, selector:#selector(loginOK), name: NOTIFY_LOGIN_OK, object: nil)
+        
         return true
     }
 
+    func loginOK(){
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let userProfileVC:ViewController = storyboard.instantiateViewControllerWithIdentifier("rootVC") as! ViewController
+        let nav = UINavigationController(rootViewController: userProfileVC)
+        
+        self.window?.rootViewController = nav
+    }
+    
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.

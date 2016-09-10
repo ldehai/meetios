@@ -20,13 +20,27 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var goldCountLable: UILabel!
     @IBOutlet weak var goldImage: UIImageView!
     
+    @IBOutlet weak var reviseView: CircleProgressView!
+    @IBOutlet weak var todayView: CircleProgressView!
     let locationManager = CLLocationManager()
     
+    @IBAction func topContributerAction(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let topContributer:TopContributerViewController = storyboard.instantiateViewControllerWithIdentifier("topContributerVC") as! TopContributerViewController
+        self.navigationController!.pushViewController(topContributer, animated: true)
+    }
+    
+    @IBAction func globalRankAction(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let globalRankVC:GlobalViewController = storyboard.instantiateViewControllerWithIdentifier("globalRankVC") as! GlobalViewController
+        self.navigationController!.pushViewController(globalRankVC, animated: true)
+    }
     @IBAction func goCollect(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let collectVC:UIViewController = storyboard.instantiateViewControllerWithIdentifier("CollectWords")
-        collectVC.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
-        self.presentViewController(collectVC, animated: false, completion: nil)
+        let nav = UINavigationController(rootViewController: collectVC)
+        nav.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
+        self.presentViewController(nav, animated: false, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -36,7 +50,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         
         avatarImage.snp_makeConstraints { (make) in
             make.width.height.equalTo(60);
-//            make.top.left.equalTo(15);
         };
         avatarImage.userInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openUserProfile))
@@ -48,8 +61,36 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
+        
+        todayView.circleColor = UIColor(hex: "00A56F")!
+        todayView.backgroundColor = UIColor .clearColor()
+        todayView.circleBorderWidth = 20
+        todayView .update(60)
+        todayView.userInteractionEnabled = true
+        let gestureToday = UITapGestureRecognizer(target: self, action: #selector(openTodayPractice))
+        todayView .addGestureRecognizer(gestureToday)
+        
+        reviseView.circleColor = UIColor(hex: "00A56F")!
+        reviseView.backgroundColor = UIColor .clearColor()
+        reviseView.circleBorderWidth = 20
+        reviseView .update(80)
+        reviseView.userInteractionEnabled = true
+        let gestureRevise = UITapGestureRecognizer(target: self, action: #selector(openReviseWords))
+        reviseView .addGestureRecognizer(gestureRevise)
+    }
+    
+    func openTodayPractice(){
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
+        self.navigationController!.pushViewController(userProfileVC, animated: true)
     }
 
+    func openReviseWords(){
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
+        self.navigationController!.pushViewController(userProfileVC, animated: true)
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -60,11 +101,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     func openUserProfile(){
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
-//        userProfileVC.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
-//        self.presentViewController(userProfileVC, animated: false, completion: nil)
-        
-        let nav = UINavigationController(rootViewController: userProfileVC)
-        self.presentViewController(nav, animated: false, completion: nil)
+        self.navigationController!.pushViewController(userProfileVC, animated: true)
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){

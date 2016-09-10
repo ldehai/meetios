@@ -32,13 +32,12 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
 
     var coordinate:CLLocationCoordinate2D?
     var bHaveLocation:Bool = false
-    var wordArray = [Word]()
+    lazy var wordArray = [Word]()
     
     @IBAction func myCollectAction(sender: AnyObject) {
         let todayCollect = TodayCollectTableViewController()
-//        todayCollect.modalPresentationStyle = UIModalPresentationStyle.Custom;
-        let nav = UINavigationController(rootViewController: todayCollect)
-        self.presentViewController(nav, animated: false, completion: nil)
+        self.navigationController!.pushViewController(todayCollect, animated: true)
+        
     }
     @IBAction func openStore(sender: AnyObject) {
     }
@@ -51,7 +50,7 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationController? .setNavigationBarHidden(false, animated: true);
+        self.navigationController? .setNavigationBarHidden(true, animated: true);
         
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -91,6 +90,13 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
 //            print(json["errorCode"])
 //
 //        }
+    }
+
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        
     }
 
     func goHomeAction(){

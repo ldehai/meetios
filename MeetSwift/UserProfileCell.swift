@@ -10,6 +10,8 @@ import UIKit
 
 class UserProfileCell: UITableViewCell {
 
+    var user:User!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

@@ -110,27 +110,52 @@ public class SysExample:NSObject{
 }
 
 public class User:NSObject{
-    public var userId = ""
-    public var nickName = ""
-    public var avatar = ""
-    public var golden = 0
+    var userId = ""
+    var nickName = ""
+    var avatar = ""
+    var email = ""
+    var tel = 0
+    var following = 0
+    var follower = 0
+    var wordcount = 0
+    var grade = 0
+    var gradename = ""
+    var golden = 0
+    var contributerWord = 0
     
-    init(userId: String, nickName: String, avatar: String, golden:Int) {
+    init(userId: String, nickName: String, avatar: String, email:String,tel:Int,following:Int,follower:Int,wordcount:Int,grade:Int,gradename:String, golden:Int,contributerWord:Int) {
         self.userId = userId
         self.nickName = nickName
         self.avatar = avatar
         self.golden = golden
+        self.email = email
+        self.tel = tel
+        self.following = following
+        self.follower = follower
+        self.wordcount = wordcount
+        self.grade = grade
+        self.gradename = gradename
+        self.golden = golden
+        self.contributerWord = contributerWord
         
         super.init()
     }
     class func fromJSON(json: JSON) -> User? {
         
-        let userId = json["userId"].stringValue
-        let nickName = json["nickName"].stringValue
+        let userId = json["userid"].stringValue
+        let nickName = json["nickname"].stringValue
         let avatar = json["avatar"].stringValue
         let golden = json["golden"].intValue
+        let email = json["email"].stringValue
+        let tel = json["tel"].intValue
+        let following = json["following"].intValue
+        let follower = json["follower"].intValue
+        let wordcount = json["wordcount"].intValue
+        let grade = json["grade"].intValue
+        let gradename = json["gradename"].stringValue
+        let contributerWord = json["contributerword"].intValue
         
-        return User(userId: userId, nickName: nickName, avatar: avatar, golden:golden)
+        return User(userId: userId, nickName: nickName, avatar: avatar,email: email,tel:tel,following: following,follower: follower,wordcount: wordcount,grade: grade,gradename: gradename,golden:golden,contributerWord:contributerWord)
     }
 }
 

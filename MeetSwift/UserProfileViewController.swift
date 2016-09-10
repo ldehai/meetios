@@ -7,15 +7,24 @@
 //
 
 import UIKit
+import SwiftyJSON
 
 class UserProfileViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    var user:User!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "个人中心"
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        MAPI .getUserProfile { (respond) in
+            let json = JSON(data:respond)
+            self.user = User.fromJSON(json["data"])
+        }
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -32,7 +41,7 @@ class UserProfileViewController: UIViewController {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UserProfileCell = tableView .dequeueReusableCellWithIdentifier("UserProfileCell") as! UserProfileCell
-        
+        cell.user = self.user
 //        cell.textLabel?.text = word.name
 //        cell.detailTextLabel?.text = word.def_cn
         

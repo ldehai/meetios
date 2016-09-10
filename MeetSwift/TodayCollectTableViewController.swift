@@ -12,10 +12,11 @@ import SwiftyJSON
 class TodayCollectTableViewController: UITableViewController {
 
     private var wordArray = [Word]()
-//    private var emptyTip = UIImageView()
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "采集袋"
+        self.navigationController?.setNavigationBarHidden(false, animated: true);
+        self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
         
         MAPI .getWordsTodayCollect { (respond) in
             let json = JSON(data:respond)
