@@ -10,14 +10,25 @@ import UIKit
 
 class CircleProgressView: UIView {
 
+    //一圈分100段
     let kCircleSegs:Double = 100
+    
+    //当前进度
     var currentProgress:Double = 50.0
+    
+    //中间数字的颜色
     var numberColor = UIColor .blackColor()
+    
+    //中间数字的字体
     var numberFont = UIFont .systemFontOfSize(16)
     
+    //圆弧进度条颜色
     var circleColor = UIColor .greenColor()
+    
+    //圆弧宽度
     var circleBorderWidth:CGFloat = 5.0
     
+    //更新进度
     func update(progress:Double){
         self.currentProgress = progress
         self .setNeedsDisplay()
@@ -26,9 +37,13 @@ class CircleProgressView: UIView {
     override func drawRect(rect: CGRect) {
         let context = UIGraphicsGetCurrentContext();
         
+        //圆弧中心线的半径
         let radius = CGRectGetWidth(rect)/2.0 - self.circleBorderWidth/2.0;
+        
+        //两个PI，就是360度
         let angleOffset = M_PI_2;
         
+        //画圆弧进度条
         CGContextSetLineWidth(context, self.circleBorderWidth);
         CGContextBeginPath(context);
         
@@ -42,6 +57,7 @@ class CircleProgressView: UIView {
         CGContextSetStrokeColorWithColor(context, self.circleColor.CGColor);
         CGContextStrokePath(context);
         
+        //进度条不满时，画剩下的圆弧
         if (self.currentProgress != kCircleSegs) {
             CGContextAddArc(context,
                             CGRectGetMidX(rect), CGRectGetMidY(rect),
@@ -54,6 +70,7 @@ class CircleProgressView: UIView {
             CGContextStrokePath(context);
         }
         
+        //画中间显示的数字
         CGContextSetLineWidth(context, 1.0);
         let numberText = String(Int(self.currentProgress));
         let size: CGSize = numberText.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(16.0)])

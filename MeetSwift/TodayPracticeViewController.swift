@@ -1,56 +1,42 @@
 //
-//  TodayCollectTableViewController.swift
+//  TodayPracticeViewController.swift
 //  MeetSwift
 //
-//  Created by andy on 9/8/16.
+//  Created by andy on 9/11/16.
 //  Copyright © 2016 AventLabs. All rights reserved.
 //
 
 import UIKit
-import SwiftyJSON
 
-class TodayCollectTableViewController: UITableViewController {
+class TodayPracticeViewController: UIViewController {
 
-    private var wordArray = [Word]()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "采集袋"
-        self.navigationController?.setNavigationBarHidden(false, animated: true);
-        self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
-        
-        MAPI .getWordsTodayCollect { (respond) in
-            let json = JSON(data:respond)
-            let wordList = json["data"].array
-            for item in wordList! {
-                let word = Word.fromJSON(item)
-                self.wordArray.append(word!)
-            }
-            
-            self.tableView .reloadData()
-        }
+
+        // Do any additional setup after loading the view.
     }
 
     // MARK: - Table view data source
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.wordArray.count
     }
-
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
         return 60.0;
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "WordCell")
-
+        
         let word = self.wordArray[indexPath.row]
         cell.textLabel?.text = word.name
         cell.detailTextLabel?.text = word.def_cn
-
+        
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         tableView .deselectRowAtIndexPath(indexPath, animated: true)
         
         let word = self.wordArray[indexPath.row]

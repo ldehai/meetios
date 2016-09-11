@@ -14,6 +14,7 @@ import Realm
 public class WordModel:Object {
     dynamic var lat = ""
     dynamic var lon = ""
+    dynamic var id = ""
     dynamic var word:Word? = Word()
     var sysExample = List<SysExample>()
     var userExample = List<UserExample>()
@@ -43,6 +44,7 @@ public class WordModel:Object {
         p.sysExample = sysExample
         p.userExample = userExample
         p.word = word!
+        p.id = word!.id
         
         return p
     }

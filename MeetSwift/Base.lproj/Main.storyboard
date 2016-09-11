@@ -219,6 +219,24 @@
             </objects>
             <point key="canvasLocation" x="22" y="307"/>
         </scene>
+        <!--Today Collect Table View Controller-->
+        <scene sceneID="9ko-tO-5Oo">
+            <objects>
+                <viewController id="xuY-Gc-crc" customClass="TodayCollectTableViewController" customModule="MeetSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ogV-Ic-6ig"/>
+                        <viewControllerLayoutGuide type="bottom" id="cra-eK-SoF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lh3-xU-7Dr">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oIJ-IX-mmn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="385" y="307"/>
+        </scene>
         <!--Revise Words View Controller-->
         <scene sceneID="84D-IR-aSS">
             <objects>
@@ -235,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tDG-KB-Iua" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="385" y="307"/>
+            <point key="canvasLocation" x="765" y="307"/>
         </scene>
         <!--Top Contributer View Controller-->
         <scene sceneID="qIB-Ug-ccE">

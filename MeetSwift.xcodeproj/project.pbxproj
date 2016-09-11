@@ -13,6 +13,8 @@
 		A15ED1131D8462E20022AA87 /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED1121D8462E20022AA87 /* HexColor.swift */; };
 		A15ED1171D8478BB0022AA87 /* ReviseWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */; };
 		A15ED1191D847AAE0022AA87 /* RealmConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED1181D847AAE0022AA87 /* RealmConfig.swift */; };
+		A15ED11D1D853DCE0022AA87 /* WordAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED11C1D853DCE0022AA87 /* WordAnnotation.swift */; };
+		A15ED11F1D85AD690022AA87 /* TodayPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED11E1D85AD690022AA87 /* TodayPracticeViewController.swift */; };
 		A19335BD1D839DDC00A9E4BD /* TopContributerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19335BC1D839DDC00A9E4BD /* TopContributerViewController.swift */; };
 		A19335BF1D83AA6400A9E4BD /* GlobalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19335BE1D83AA6400A9E4BD /* GlobalViewController.swift */; };
 		A1B91D151D7F200D00BCF30A /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */; };
@@ -43,6 +45,8 @@
 		A15ED1121D8462E20022AA87 /* HexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviseWordsViewController.swift; sourceTree = "<group>"; };
 		A15ED1181D847AAE0022AA87 /* RealmConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmConfig.swift; sourceTree = "<group>"; };
+		A15ED11C1D853DCE0022AA87 /* WordAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordAnnotation.swift; sourceTree = "<group>"; };
+		A15ED11E1D85AD690022AA87 /* TodayPracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayPracticeViewController.swift; sourceTree = "<group>"; };
 		A19335BC1D839DDC00A9E4BD /* TopContributerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopContributerViewController.swift; sourceTree = "<group>"; };
 		A19335BE1D83AA6400A9E4BD /* GlobalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalViewController.swift; sourceTree = "<group>"; };
 		A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
@@ -97,6 +101,18 @@
 			name = Helper;
 			sourceTree = "<group>";
 		};
+		A15ED11B1D85394E0022AA87 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				A14930101D717F210090E647 /* MAPI.swift */,
+				A1B91D161D7F20E300BCF30A /* MeetModel.swift */,
+				A1B91D2D1D82728400BCF30A /* Config.swift */,
+				A1B91D2F1D8273A500BCF30A /* UserDefault.swift */,
+				A15ED1181D847AAE0022AA87 /* RealmConfig.swift */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		A1B91D181D8117BD00BCF30A /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				A15ED10F1D8456660022AA87 /* CircleProgressView.swift */,
+				A15ED11C1D853DCE0022AA87 /* WordAnnotation.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -136,13 +153,19 @@
 		A1EEB2D31D6C388D0089FA42 /* MeetSwift */ = {
 			isa = PBXGroup;
 			children = (
+				A15ED11B1D85394E0022AA87 /* Common */,
 				A15ED1111D84629D0022AA87 /* Helper */,
 				A1B91D251D81BDF800BCF30A /* View */,
 				A1B91D181D8117BD00BCF30A /* Cell */,
 				A1EEB2D41D6C388D0089FA42 /* AppDelegate.swift */,
+				A1B91D281D82690000BCF30A /* SignUpViewController.swift */,
+				A1B91D2A1D82691400BCF30A /* SignInViewController.swift */,
 				A1EEB2D61D6C388D0089FA42 /* ViewController.swift */,
 				A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */,
+				A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */,
 				A1B91D1D1D8178F900BCF30A /* TodayCollectTableViewController.swift */,
+				A19335BC1D839DDC00A9E4BD /* TopContributerViewController.swift */,
+				A19335BE1D83AA6400A9E4BD /* GlobalViewController.swift */,
 				A1B91D1E1D81791500BCF30A /* StoreTableViewController.swift */,
 				A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */,
 				A1B91D211D81BC5C00BCF30A /* UserProfileViewController.swift */,
@@ -150,16 +173,7 @@
 				A1EEB2DB1D6C388D0089FA42 /* Assets.xcassets */,
 				A1EEB2DD1D6C388D0089FA42 /* LaunchScreen.storyboard */,
 				A1EEB2E01D6C388D0089FA42 /* Info.plist */,
-				A14930101D717F210090E647 /* MAPI.swift */,
-				A1B91D161D7F20E300BCF30A /* MeetModel.swift */,
-				A1B91D281D82690000BCF30A /* SignUpViewController.swift */,
-				A1B91D2A1D82691400BCF30A /* SignInViewController.swift */,
-				A1B91D2D1D82728400BCF30A /* Config.swift */,
-				A1B91D2F1D8273A500BCF30A /* UserDefault.swift */,
-				A19335BC1D839DDC00A9E4BD /* TopContributerViewController.swift */,
-				A19335BE1D83AA6400A9E4BD /* GlobalViewController.swift */,
-				A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */,
-				A15ED1181D847AAE0022AA87 /* RealmConfig.swift */,
+				A15ED11E1D85AD690022AA87 /* TodayPracticeViewController.swift */,
 			);
 			path = MeetSwift;
 			sourceTree = "<group>";
@@ -335,6 +349,7 @@
 				A1B91D2B1D82691400BCF30A /* SignInViewController.swift in Sources */,
 				A1B91D1F1D817A6000BCF30A /* TodayCollectTableViewController.swift in Sources */,
 				A1B91D2E1D82728400BCF30A /* Config.swift in Sources */,
+				A15ED11F1D85AD690022AA87 /* TodayPracticeViewController.swift in Sources */,
 				A1B91D201D817A6000BCF30A /* StoreTableViewController.swift in Sources */,
 				A1B91D171D7F2ED200BCF30A /* MeetModel.swift in Sources */,
 				A14930111D717F210090E647 /* MAPI.swift in Sources */,
@@ -346,6 +361,7 @@
 				A1B91D1C1D81198600BCF30A /* WordSampleCell.swift in Sources */,
 				A19335BF1D83AA6400A9E4BD /* GlobalViewController.swift in Sources */,
 				A15ED1171D8478BB0022AA87 /* ReviseWordsViewController.swift in Sources */,
+				A15ED11D1D853DCE0022AA87 /* WordAnnotation.swift in Sources */,
 				A1EEB2EB1D6DFA0B0089FA42 /* CollectWordsViewController.swift in Sources */,
 				A1B91D221D81BC5C00BCF30A /* UserProfileViewController.swift in Sources */,
 				A15ED1131D8462E20022AA87 /* HexColor.swift in Sources */,
@@ -470,7 +486,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = MeetSwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aventlabs.meet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -484,7 +500,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = MeetSwift/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aventlabs.meet;
 				PRODUCT_NAME = "$(TARGET_NAME)";

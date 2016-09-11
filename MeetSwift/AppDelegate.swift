@@ -21,13 +21,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //崩溃服务初始化(www.fabric.io)
         Fabric.with([Crashlytics.self])
         
+        //配置Realm环境
         var config = Realm.Configuration()
         config.schemaVersion = 1
         config.migrationBlock = { migration, oldSchemaVersion in
         }
         Realm.Configuration.defaultConfiguration = config
         
-        //没有登录时，要求登录
+        //没有登录时，要求登录；已登录直接到首页
         let userDefault = NSUserDefaults .standardUserDefaults()
         if userDefault.objectForKey("userId") == nil{
             let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())

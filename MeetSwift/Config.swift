@@ -14,6 +14,7 @@ let MainColor = UIColor(hex: "00A56F")
 
 //define notify
 let NOTIFY_LOGIN_OK:String = "NOTIFY_LOGIN_OK"
+let NOTIFY_COLLECT_WORD:String = "NOTIFY_COLLECT_WORD"
 
 final public class Config {
     public static let appGroupID: String = "group.AventLabs-Inc."

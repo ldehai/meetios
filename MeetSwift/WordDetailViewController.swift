@@ -36,11 +36,13 @@ class WordDetailViewController: UIViewController {
             }) { (true) in
                 
                 //采集
-                MAPI.collectWord(self.word.word!.id, lon: "1", lat: "2") { (respond) in
+                MAPI.collectWord(self.word.word!.id, lon: (self.word.word?.lon)!, lat: (self.word.word?.lat)!) { (respond) in
                     let json = JSON(data:respond)
                     print(json["errorCode"])
                 }
 
+                NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_COLLECT_WORD, object:self, userInfo: ["wordId":self.word!.id])
+                
                 //保存到本地
                 let realm = try! Realm()
                 try! realm.write {

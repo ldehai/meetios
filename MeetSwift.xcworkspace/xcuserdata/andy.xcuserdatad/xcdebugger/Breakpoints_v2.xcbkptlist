@@ -25,28 +25,12 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "MeetSwift/ReviseWordsViewController.swift"
-            timestampString = "495223084.854997"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "MeetSwift/Config.swift"
-            timestampString = "495249082.955425"
+            timestampString = "495275112.91037"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
+            startingLineNumber = "20"
+            endingLineNumber = "20"
             landmarkName = "Config"
             landmarkType = "3">
             <Locations>
@@ -54,16 +38,16 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "globalinit_33_5187EADCB8DE20C5EE8B42E1F187D79C_func2"
+                  symbolName = "globalinit_33_5187EADCB8DE20C5EE8B42E1F187D79C_func3"
                   moduleName = "MeetSwift"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/andy/labs/meet/MeetSwift/MeetSwift/Config.swift"
-                  timestampString = "495256811.674747"
+                  timestampString = "495298559.706737"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "23">
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "8">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -73,12 +57,27 @@
                   moduleName = "MeetSwift"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/andy/labs/meet/MeetSwift/MeetSwift/Config.swift"
-                  timestampString = "495256811.674979"
+                  timestampString = "495298559.706984"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "19"
-                  endingLineNumber = "19"
-                  offsetFromSymbolStart = "4">
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "16">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static MeetSwift.Config.appGroupID.getter : Swift.String"
+                  moduleName = "MeetSwift"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/andy/labs/meet/MeetSwift/MeetSwift/Config.swift"
+                  timestampString = "495298559.707218"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "48">
                </Location>
             </Locations>
          </BreakpointContent>
