@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import RealmSwift
 
 class WordDetailViewController: UIViewController {
 
@@ -16,7 +17,7 @@ class WordDetailViewController: UIViewController {
     @IBOutlet weak var detailTableView: UITableView!
     var word:WordModel!
     
-    //关闭窗口
+    //不采集直接关闭窗口
     @IBAction func closeDlg(sender: AnyObject) {
         UIView .animateWithDuration(0.3, animations: {
             self.view.alpha = 0.0
@@ -34,11 +35,19 @@ class WordDetailViewController: UIViewController {
             self.view.alpha = 0.0
             }) { (true) in
                 
-                MAPI.collectWord(self.word.word.id, lon: "1", lat: "2") { (respond) in
+                //采集
+                MAPI.collectWord(self.word.word!.id, lon: "1", lat: "2") { (respond) in
                     let json = JSON(data:respond)
                     print(json["errorCode"])
                 }
 
+                //保存到本地
+                let realm = try! Realm()
+                try! realm.write {
+                    self.word.word?.own = 1
+                    realm.add(self.word)
+                }
+                
                 self.dismissViewControllerAnimated(false){
                     
                 }
@@ -48,9 +57,8 @@ class WordDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(white: 0.6, alpha: 0.6)
-//        self.detailTableView.backgroundColor = UIColor .whiteColor()
         
-        wordName.text = self.word.word.name
+        wordName.text = self.word.word!.name
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
@@ -106,7 +114,7 @@ class WordDetailViewController: UIViewController {
         if indexPath.section == 0 {
             let cell: WordBasicCell = tableView.dequeueReusableCellWithIdentifier("WordBasicCell") as! WordBasicCell
             
-            cell.pronunciation.text = word.word.def_cn
+            cell.pronunciation.text = word.word!.def_cn
             return cell
         }
         //系统例句

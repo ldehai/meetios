@@ -9,6 +9,7 @@
 import UIKit
 import Fabric
 import Crashlytics
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //崩溃服务初始化(www.fabric.io)
         Fabric.with([Crashlytics.self])
+        
+        var config = Realm.Configuration()
+        config.schemaVersion = 1
+        config.migrationBlock = { migration, oldSchemaVersion in
+        }
+        Realm.Configuration.defaultConfiguration = config
         
         //没有登录时，要求登录
         let userDefault = NSUserDefaults .standardUserDefaults()

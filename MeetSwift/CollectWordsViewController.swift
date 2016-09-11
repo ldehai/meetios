@@ -9,6 +9,7 @@
 import UIKit
 import MapKit
 import SwiftyJSON
+import RealmSwift
 
 extension NSObject {
     
@@ -66,18 +67,20 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
                 self.wordArray.append(word!)
             }
         }
-        
+/*
         MAPI.getWordDetail("1") { (respond) in
             let json = JSON(data:respond)
             let word = WordModel.fromJSON(json["data"])
-            
+            try! realm.write {
+                realm.add(word!)
+            }
             let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             let wordDetail:WordDetailViewController = storyboard.instantiateViewControllerWithIdentifier("WordDetailVC") as! WordDetailViewController
             wordDetail.word = word
             wordDetail.modalPresentationStyle = UIModalPresentationStyle.Custom;
             self.presentViewController(wordDetail, animated: false, completion: nil)
         }
-        
+*/
 //        MAPI.collectWord("1", lon: "1", lat: "2") { (respond) in
 //            print("JSON: \(respond)")
 //            let json = JSON(data:respond)

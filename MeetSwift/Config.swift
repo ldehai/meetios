@@ -7,7 +7,12 @@
 //
 
 import Foundation
+import UIKit
 
+//define color
+let MainColor = UIColor(hex: "00A56F")
+
+//define notify
 let NOTIFY_LOGIN_OK:String = "NOTIFY_LOGIN_OK"
 
 final public class Config {

@@ -62,7 +62,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         
-        todayView.circleColor = UIColor(hex: "00A56F")!
+        todayView.circleColor = MainColor!
         todayView.backgroundColor = UIColor .clearColor()
         todayView.circleBorderWidth = 20
         todayView .update(60)
@@ -70,10 +70,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         let gestureToday = UITapGestureRecognizer(target: self, action: #selector(openTodayPractice))
         todayView .addGestureRecognizer(gestureToday)
         
-        reviseView.circleColor = UIColor(hex: "00A56F")!
+        reviseView.circleColor = MainColor!
         reviseView.backgroundColor = UIColor .clearColor()
         reviseView.circleBorderWidth = 20
-        reviseView .update(80)
+        reviseView.update(80)
         reviseView.userInteractionEnabled = true
         let gestureRevise = UITapGestureRecognizer(target: self, action: #selector(openReviseWords))
         reviseView .addGestureRecognizer(gestureRevise)
@@ -87,8 +87,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
 
     func openReviseWords(){
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
-        self.navigationController!.pushViewController(userProfileVC, animated: true)
+        let ReviseWordsVC:ReviseWordsViewController = storyboard.instantiateViewControllerWithIdentifier("ReviseWordsVC") as! ReviseWordsViewController
+        self.navigationController!.pushViewController(ReviseWordsVC, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {

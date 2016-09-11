@@ -18,6 +18,8 @@ class TodayCollectTableViewController: UITableViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true);
         self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
         
+        
+        
         MAPI .getWordsTodayCollect { (respond) in
             let json = JSON(data:respond)
             let wordList = json["data"].array
