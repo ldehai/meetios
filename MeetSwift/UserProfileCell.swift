@@ -15,17 +15,17 @@ class UserProfileCell: UITableViewCell {
     var user: User? {
         didSet {
         
-            nicknameLabel.text = user?.nickName
-            followingLabel.text = "\(user?.following)"
-            followerLabel.text = "\(user?.follower)"
-            wordcountLabel.text = "\(user?.wordcount)"
-            gradeLabel.text = "\(user?.grade)"
-            
-            goldenLabel.text = "\(user?.golden)" 
-    
-            
-            
-        }
+            guard let user = user else
+            {
+                return;
+            }
+            nicknameLabel.text = user.nickName
+            followingLabel.text = "\(user.following)"
+            followerLabel.text = "\(user.follower)"
+            wordcountLabel.text = "\(user.wordcount)"
+            gradeLabel.text = "\(user.grade)"
+            goldenLabel.text = "\(user.golden)"
+      }
     }
    @IBOutlet weak var avatarImageView: UIImageView!
     
