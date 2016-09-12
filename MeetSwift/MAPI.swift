@@ -23,6 +23,16 @@ class MAPI: NSObject {
         }
     }
     
+    class func userId() -> String{
+        let userDefault = NSUserDefaults .standardUserDefaults()
+        if let userId =  userDefault .stringForKey("userId"){
+            return userId
+        }
+        else{
+            return ""
+        }
+    }
+    
     //获取当前地点的可采集单词
     class func getWordsBy(
         lon:NSString,
@@ -124,7 +134,7 @@ class MAPI: NSObject {
     class func getUserProfile(completion: (respond :NSData) ->())
     {
         let parameters = ["token":MAPI .accessToken()];
-        Alamofire.request(.POST, APIBase + "/user/" + "1", parameters: parameters, encoding: .JSON)
+        Alamofire.request(.POST, APIBase + "/user/" + MAPI .userId(), parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)
                 if let JSON = response.result.value {
