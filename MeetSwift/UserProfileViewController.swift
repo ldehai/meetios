@@ -22,6 +22,8 @@ class UserProfileViewController: UIViewController {
         MAPI .getUserProfile { (respond) in
             let json = JSON(data:respond)
             self.user = User.fromJSON(json["data"])
+            
+            self.tableView .reloadData()
         }
     }
     
