@@ -10,9 +10,42 @@ import UIKit
 
 class UserProfileCell: UITableViewCell {
 
-    var user:User!
+   
+   
+    var user: User? {
+        didSet {
+        
+            nicknameLabel.text = user?.nickName
+            followingLabel.text = "\(user?.following)"
+            followerLabel.text = "\(user?.follower)"
+            wordcountLabel.text = "\(user?.wordcount)"
+            gradeLabel.text = "\(user?.grade)"
+            
+            goldenLabel.text = "\(user?.golden)" 
+    
+            
+            
+        }
+    }
+   @IBOutlet weak var avatarImageView: UIImageView!
+    
+    @IBOutlet weak var nicknameLabel: UILabel!
+    
+    @IBOutlet weak var followingLabel: UILabel!
+    
+    @IBOutlet weak var followerLabel: UILabel!
+    
+    @IBOutlet weak var wordcountLabel: UILabel!
+    
+    @IBOutlet weak var gradeLabel: UILabel!
+    
+    @IBOutlet weak var goldenLabel: UILabel!
+    
+    
+    
     
     override func awakeFromNib() {
+    
         super.awakeFromNib()
         // Initialization code
     }

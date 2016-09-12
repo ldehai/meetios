@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="V4Z-Ay-HUN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="V4Z-Ay-HUN">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -324,7 +323,7 @@
                                         <rect key="frame" x="0.0" y="28" width="280" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="d6F-Ud-FAs" id="uYo-cp-zBM">
-                                            <rect key="frame" x="0.0" y="0.0" width="280" height="64"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="280" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="1." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GxY-ks-hCd">
@@ -582,6 +581,15 @@
                                                 <constraint firstItem="xMv-IM-gY1" firstAttribute="centerX" secondItem="QgH-O3-d0E" secondAttribute="centerX" id="u9e-fh-ndw"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="avatarImageView" destination="vlk-OZ-0pk" id="zBq-Ku-PIL"/>
+                                            <outlet property="followerLabel" destination="GRo-3s-b3w" id="7MX-hV-mTR"/>
+                                            <outlet property="followingLabel" destination="qQl-gD-uq7" id="lV0-pe-Q7z"/>
+                                            <outlet property="goldenLabel" destination="QgH-O3-d0E" id="WVi-go-HFR"/>
+                                            <outlet property="gradeLabel" destination="5xe-Mr-bg5" id="hK4-LQ-cRE"/>
+                                            <outlet property="nicknameLabel" destination="zAE-z9-ifd" id="saN-h6-gg5"/>
+                                            <outlet property="wordcountLabel" destination="Nf5-T3-azX" id="B1Z-nH-SH3"/>
+                                        </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="zbS-h2-POB">
                                         <rect key="frame" x="0.0" y="368" width="320" height="44"/>
@@ -815,7 +823,7 @@
                                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WordBasicCell" rowHeight="64" id="XhE-iu-pTc" customClass="WordBasicCell" customModule="MeetSwift" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="50" width="264" height="64"/>
+                                                <rect key="frame" x="0.0" y="49.5" width="264" height="64"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XhE-iu-pTc" id="GyS-IK-dyp">
                                                     <rect key="frame" x="0.0" y="0.0" width="264" height="64"/>
@@ -845,7 +853,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="WordSampleCell" rowHeight="103" id="HCq-M3-TA2" customClass="WordSampleCell" customModule="MeetSwift" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="114" width="264" height="103"/>
+                                                <rect key="frame" x="0.0" y="113.5" width="264" height="103"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HCq-M3-TA2" id="j6s-mS-3sd">
                                                     <rect key="frame" x="0.0" y="0.0" width="264" height="103"/>
