@@ -162,6 +162,7 @@
 				A1B91D2A1D82691400BCF30A /* SignInViewController.swift */,
 				A1EEB2D61D6C388D0089FA42 /* ViewController.swift */,
 				A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */,
+				A15ED11E1D85AD690022AA87 /* TodayPracticeViewController.swift */,
 				A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */,
 				A1B91D1D1D8178F900BCF30A /* TodayCollectTableViewController.swift */,
 				A19335BC1D839DDC00A9E4BD /* TopContributerViewController.swift */,
@@ -173,7 +174,6 @@
 				A1EEB2DB1D6C388D0089FA42 /* Assets.xcassets */,
 				A1EEB2DD1D6C388D0089FA42 /* LaunchScreen.storyboard */,
 				A1EEB2E01D6C388D0089FA42 /* Info.plist */,
-				A15ED11E1D85AD690022AA87 /* TodayPracticeViewController.swift */,
 			);
 			path = MeetSwift;
 			sourceTree = "<group>";
