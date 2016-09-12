@@ -15,7 +15,7 @@ class TodayPracticeViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
-
+/*
     // MARK: - Table view data source
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.wordArray.count
@@ -50,5 +50,5 @@ class TodayPracticeViewController: UIViewController {
             wordDetail.modalPresentationStyle = UIModalPresentationStyle.Custom;
             self.presentViewController(wordDetail, animated: false, completion: nil)
         }
-    }
+    }*/
 }
