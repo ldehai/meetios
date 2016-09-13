@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-private let reuseIdentifier = "FootprintCell"
+private let reuseIdentifier = "FootprintCellId"
 
 private let space:CGFloat = 20.0
 
@@ -27,17 +27,12 @@ class UserProfileCollectionViewController: UICollectionViewController {
     var currentTabType:TabType = TabType.TabTypeFootprint
     var user:User!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "个人中心"
         self.navigationController?.setNavigationBarHidden(false, animated: true)
-        
-        self.layout.headerReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, 350)
+        self.layout.headerReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, 300)
         self.collectionView?.backgroundColor = UIColor.whiteColor()
-        self.collectionView?.registerNib(UINib.init(nibName: "FootprintCell", bundle: nil), forCellWithReuseIdentifier: reuseIdentifier)
-        self.collectionView?.registerNib(UINib.init(nibName: "WordContributionCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "WordContributionCollectionViewCell")
-        self.collectionView?.registerNib(UINib.init(nibName: "UserProfileReusableView", bundle: nil), forSupplementaryViewOfKind:UICollectionElementKindSectionHeader, withReuseIdentifier: "UserProfileReusableId")
         
         MAPI .getUserProfile { (respond) in
             let json = JSON(data:respond)
@@ -71,16 +66,15 @@ class UserProfileCollectionViewController: UICollectionViewController {
         switch currentTabType {
         case .TabTypeFootprint:
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier(reuseIdentifier, forIndexPath: indexPath) as!FootprintCell
-            cell.backgroundColor = UIColor.redColor()
             return cell
             
         case.TabTypeContribution:
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WordContributionCollectionViewCell", forIndexPath: indexPath) as!WordContributionCollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WordContributionCellId", forIndexPath: indexPath) as!WordContributionCollectionViewCell
             cell.backgroundColor = UIColor.whiteColor()
             return cell
             
         default:
-            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WordContributionCollectionViewCell", forIndexPath: indexPath) as!WordContributionCollectionViewCell
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("WordContributionCellId", forIndexPath: indexPath) as!WordContributionCollectionViewCell
             cell.backgroundColor = UIColor.greenColor()
             return cell
         }
@@ -92,7 +86,7 @@ class UserProfileCollectionViewController: UICollectionViewController {
         let cell1 = UICollectionReusableView()
         if (kind == UICollectionElementKindSectionHeader) {
             
-            let cell: UserProfileReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "UserProfileReusableId", forIndexPath: indexPath) as! UserProfileReusableView
+            let cell: UserProfileReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "UserProfileReusableViewId", forIndexPath: indexPath) as! UserProfileReusableView
             cell.user = self.user
             cell.completeTabClick = { tabType  in
                 print(tabType)

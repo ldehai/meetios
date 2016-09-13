@@ -37,11 +37,8 @@
 		A1EEB2EB1D6DFA0B0089FA42 /* CollectWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */; };
 		D44F8B8F1D87BA9F0043AF9C /* UserProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F8B8E1D87BA9F0043AF9C /* UserProfileCollectionViewController.swift */; };
 		D44F8B941D87BFE80043AF9C /* FootprintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F8B921D87BFE80043AF9C /* FootprintCell.swift */; };
-		D44F8B951D87BFE80043AF9C /* FootprintCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D44F8B931D87BFE80043AF9C /* FootprintCell.xib */; };
 		D44F8B981D87C1500043AF9C /* UserProfileReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F8B961D87C1500043AF9C /* UserProfileReusableView.swift */; };
-		D44F8B991D87C1500043AF9C /* UserProfileReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = D44F8B971D87C1500043AF9C /* UserProfileReusableView.xib */; };
 		D44F8B9C1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F8B9A1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift */; };
-		D44F8B9D1D87E07B0043AF9C /* WordContributionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = D44F8B9B1D87E07B0043AF9C /* WordContributionCollectionViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -79,11 +76,8 @@
 		C18BD93F41EB40E675A9D400 /* Pods-MeetSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift.release.xcconfig"; sourceTree = "<group>"; };
 		D44F8B8E1D87BA9F0043AF9C /* UserProfileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		D44F8B921D87BFE80043AF9C /* FootprintCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootprintCell.swift; sourceTree = "<group>"; };
-		D44F8B931D87BFE80043AF9C /* FootprintCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FootprintCell.xib; sourceTree = "<group>"; };
 		D44F8B961D87C1500043AF9C /* UserProfileReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileReusableView.swift; sourceTree = "<group>"; };
-		D44F8B971D87C1500043AF9C /* UserProfileReusableView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserProfileReusableView.xib; sourceTree = "<group>"; };
 		D44F8B9A1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordContributionCollectionViewCell.swift; sourceTree = "<group>"; };
-		D44F8B9B1D87E07B0043AF9C /* WordContributionCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WordContributionCollectionViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,11 +128,8 @@
 				A1B91D1B1D81198600BCF30A /* WordSampleCell.swift */,
 				A1B91D261D81BE4D00BCF30A /* UserProfileCell.swift */,
 				D44F8B921D87BFE80043AF9C /* FootprintCell.swift */,
-				D44F8B931D87BFE80043AF9C /* FootprintCell.xib */,
 				D44F8B961D87C1500043AF9C /* UserProfileReusableView.swift */,
-				D44F8B971D87C1500043AF9C /* UserProfileReusableView.xib */,
 				D44F8B9A1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift */,
-				D44F8B9B1D87E07B0043AF9C /* WordContributionCollectionViewCell.xib */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -275,12 +266,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D44F8B9D1D87E07B0043AF9C /* WordContributionCollectionViewCell.xib in Resources */,
-				D44F8B991D87C1500043AF9C /* UserProfileReusableView.xib in Resources */,
 				A1EEB2DF1D6C388D0089FA42 /* LaunchScreen.storyboard in Resources */,
 				A1EEB2DC1D6C388D0089FA42 /* Assets.xcassets in Resources */,
 				A1EEB2DA1D6C388D0089FA42 /* Main.storyboard in Resources */,
-				D44F8B951D87BFE80043AF9C /* FootprintCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
