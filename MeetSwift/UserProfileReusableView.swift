@@ -13,41 +13,6 @@ import UIKit
 class UserProfileReusableView: UICollectionReusableView {
  var completeTabClick:((TabType)->())?
     
-    
-    
-    var user: User? {
-        didSet {
-            
-            guard let user = user else
-            {
-                return;
-            }
-            nicknameLabel.text = user.nickName
-            followingLabel.text = "\(user.following)"
-            followerLabel.text = "\(user.follower)"
-            wordcountLabel.text = "\(user.wordcount)"
-            gradeLabel.text = "\(user.grade)"
-            goldenLabel.text = "\(user.golden)"
-        }
-    }
-    
-    @IBAction func tabBtnClick(sender: UIButton) {
-    
-     guard let completeTabClick = completeTabClick else
-    
-     {
-        return
-     }
-    switch sender.tag {
-    case 0:
-        completeTabClick(TabType.TabTypeFootprint)
-    case 1:
-        completeTabClick(TabType.TabTypeContribution)
-    default:
-        completeTabClick(TabType.TabTypeLike)
-    }
-  
-    }
     @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var nicknameLabel: UILabel!
@@ -61,6 +26,35 @@ class UserProfileReusableView: UICollectionReusableView {
     @IBOutlet weak var gradeLabel: UILabel!
     
     @IBOutlet weak var goldenLabel: UILabel!
+    
+    var user: User? {
+        didSet {
+            guard let user = user else {
+                return;
+            }
+            nicknameLabel.text = user.nickName
+            followingLabel.text = "\(user.following)"
+            followerLabel.text = "\(user.follower)"
+            wordcountLabel.text = "\(user.wordcount)"
+            gradeLabel.text = "\(user.grade)"
+            goldenLabel.text = "\(user.golden)"
+        }
+    }
+    
+    @IBAction func tabBtnClick(sender: UIButton) {
+        guard let completeTabClick = completeTabClick else{
+            return
+        }
+        switch sender.tag {
+        case 0:
+            completeTabClick(TabType.TabTypeFootprint)
+        case 1:
+            completeTabClick(TabType.TabTypeContribution)
+        default:
+            completeTabClick(TabType.TabTypeLike)
+        }
+    }
+
     
     
     

@@ -10,24 +10,7 @@ import UIKit
 
 class UserProfileCell: UITableViewCell {
 
-   
-   
-    var user: User? {
-        didSet {
-        
-            guard let user = user else
-            {
-                return;
-            }
-            nicknameLabel.text = user.nickName
-            followingLabel.text = "\(user.following)"
-            followerLabel.text = "\(user.follower)"
-            wordcountLabel.text = "\(user.wordcount)"
-            gradeLabel.text = "\(user.grade)"
-            goldenLabel.text = "\(user.golden)"
-      }
-    }
-   @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImageView: UIImageView!
     
     @IBOutlet weak var nicknameLabel: UILabel!
     
@@ -41,15 +24,26 @@ class UserProfileCell: UITableViewCell {
     
     @IBOutlet weak var goldenLabel: UILabel!
     
-    
-    
+    var user: User? {
+        didSet {
+            guard let user = user else {
+                return;
+            }
+            nicknameLabel.text = user.nickName
+            followingLabel.text = "\(user.following)"
+            followerLabel.text = "\(user.follower)"
+            wordcountLabel.text = "\(user.wordcount)"
+            gradeLabel.text = "\(user.grade)"
+            goldenLabel.text = "\(user.golden)"
+        }
+    }
     
     override func awakeFromNib() {
     
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
