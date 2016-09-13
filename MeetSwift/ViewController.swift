@@ -99,7 +99,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     func openUserProfile(){
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
+//        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
+//        
+       let userProfileVC:UserProfileCollectionViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileCollectionVC") as! UserProfileCollectionViewController  
+        
         self.navigationController!.pushViewController(userProfileVC, animated: true)
     }
     

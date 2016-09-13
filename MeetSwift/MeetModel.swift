@@ -96,16 +96,17 @@ public class SysExample:Object{
 public class User:Object{
     var userId: String?
     var nickName: String?
-    dynamic var avatar = ""
-    dynamic var email = ""
-    dynamic var tel = 0
+    var avatar: String?
+    var email: String?
+    var tel:Int = 0
     var following:Int = 0
-    dynamic var follower = 0
-    dynamic var wordcount = 0
-    dynamic var grade = 0
-    dynamic var gradename = ""
+    var follower:Int = 0
+    var wordcount:Int = 0
+    var grade:Int = 0
+    var gradename: String?
     var golden:Int = 0
-    dynamic var contributerWord = 0
+    var contributerWord:Int = 0
+
     
     class func fromJSON(json: JSON) -> User? {
         let p = User()

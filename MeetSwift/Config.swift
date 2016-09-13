@@ -16,6 +16,11 @@ let MainColor = UIColor(hex: "00A56F")
 let NOTIFY_LOGIN_OK:String = "NOTIFY_LOGIN_OK"
 let NOTIFY_COLLECT_WORD:String = "NOTIFY_COLLECT_WORD"
 
+// MARK: - 屏幕宽高
+ let kDeviceWidth = UIScreen.mainScreen().bounds.size.width
+ let kDeviceheight = UIScreen.mainScreen().bounds.size.height
+
+
 final public class Config {
     public static let appGroupID: String = "group.AventLabs-Inc."
     

@@ -591,11 +591,11 @@
                                             <outlet property="wordcountLabel" destination="Nf5-T3-azX" id="B1Z-nH-SH3"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="zbS-h2-POB">
-                                        <rect key="frame" x="0.0" y="368" width="320" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="186" id="zbS-h2-POB">
+                                        <rect key="frame" x="0.0" y="368" width="320" height="186"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zbS-h2-POB" id="nSu-C2-ncd">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="186"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -621,6 +621,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DLl-qd-Zam" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="20" y="1032"/>
+        </scene>
+        <!--User Profile Collection View Controller-->
+        <scene sceneID="Yrb-mt-0wK">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dDH-n1-4Lh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <collectionViewController storyboardIdentifier="UserProfileCollectionVC" id="2hf-52-Afq" customClass="UserProfileCollectionViewController" customModule="MeetSwift" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="6F4-Vj-gHq">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="TgD-aL-Q2e">
+                            <size key="itemSize" width="311" height="182"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells/>
+                        <connections>
+                            <outlet property="dataSource" destination="2hf-52-Afq" id="Heb-ls-sEz"/>
+                            <outlet property="delegate" destination="2hf-52-Afq" id="dv3-sT-wle"/>
+                        </connections>
+                    </collectionView>
+                    <connections>
+                        <outlet property="layout" destination="TgD-aL-Q2e" id="N8q-mE-nai"/>
+                    </connections>
+                </collectionViewController>
+            </objects>
+            <point key="canvasLocation" x="-3" y="1683"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="EJw-f6-LJa">
