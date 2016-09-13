@@ -898,6 +898,7 @@
                                     <state key="normal" title="贡献" backgroundImage="tabbgnormal">
                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <state key="selected" backgroundImage="tabbgactive"/>
                                     <connections>
                                         <action selector="tabBtnClick:" destination="YVh-vx-BrG" eventType="touchUpInside" id="Hfa-Fm-MBC"/>
                                     </connections>
@@ -912,20 +913,22 @@
                                     <state key="normal" title="喜欢" backgroundImage="tabbgnormal">
                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <state key="selected" backgroundImage="tabbgactive"/>
                                     <connections>
                                         <action selector="tabBtnClick:" destination="YVh-vx-BrG" eventType="touchUpInside" id="Vvw-dw-HiA"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jN-sF-tbt">
+                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0jN-sF-tbt">
                                     <rect key="frame" x="20" y="268" width="90" height="30"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="90" id="6C0-Qc-4Vq"/>
                                         <constraint firstAttribute="height" constant="30" id="oh0-Vv-mjH"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                    <state key="normal" title="足迹" backgroundImage="tabbgactive">
+                                    <state key="normal" title="足迹" backgroundImage="tabbgnormal">
                                         <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <state key="selected" backgroundImage="tabbgactive"/>
                                     <connections>
                                         <action selector="tabBtnClick:" destination="YVh-vx-BrG" eventType="touchUpInside" id="lf5-J3-sNl"/>
                                     </connections>
@@ -974,6 +977,7 @@
                                 <outlet property="avatarImageView" destination="s7Z-mE-vhA" id="9tZ-Xh-diu"/>
                                 <outlet property="followerLabel" destination="p2I-S8-Opy" id="Shy-cs-3XU"/>
                                 <outlet property="followingLabel" destination="HYe-cB-XsW" id="qfL-Mw-kmc"/>
+                                <outlet property="footprintBtn" destination="0jN-sF-tbt" id="k2d-Pf-9mg"/>
                                 <outlet property="goldenLabel" destination="CKn-Fa-xJL" id="2sW-BY-VeY"/>
                                 <outlet property="gradeLabel" destination="ac0-E9-ygF" id="ap5-6M-n4M"/>
                                 <outlet property="nicknameLabel" destination="9mC-PI-G3x" id="Dob-zO-75j"/>

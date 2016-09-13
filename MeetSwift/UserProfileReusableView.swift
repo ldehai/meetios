@@ -4,7 +4,7 @@
 //
 //  Created by 夏雪 on 16/9/13.
 //  Copyright © 2016年 AventLabs. All rights reserved.
-//
+//  个人中心头部
 
 import UIKit
 
@@ -27,6 +27,10 @@ class UserProfileReusableView: UICollectionReusableView {
     
     @IBOutlet weak var goldenLabel: UILabel!
     
+    @IBOutlet weak var footprintBtn: UIButton!
+    
+   lazy var selectBtn:UIButton = UIButton.init(type:.Custom)
+
     var user: User? {
         didSet {
             guard let user = user else {
@@ -53,15 +57,14 @@ class UserProfileReusableView: UICollectionReusableView {
         default:
             completeTabClick(TabType.TabTypeLike)
         }
+        selectBtn.selected = false
+        sender.selected = true
+        selectBtn = sender
     }
-
-    
-    
-    
-    
-    
+ 
     override func awakeFromNib() {
         super.awakeFromNib()
+        selectBtn = footprintBtn
         // Initialization code
     }
     
