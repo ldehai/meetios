@@ -107,7 +107,6 @@ public class User:Object{
     var golden:Int = 0
     var contributerWord:Int = 0
 
-    
     class func fromJSON(json: JSON) -> User? {
         let p = User()
         p.userId = json["userid"].stringValue

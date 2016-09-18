@@ -8,28 +8,19 @@
 
 import UIKit
 
-
-
 class UserProfileReusableView: UICollectionReusableView {
- var completeTabClick:((TabType)->())?
+    var completeTabClick:((TabType)->())?
     
     @IBOutlet weak var avatarImageView: UIImageView!
-    
     @IBOutlet weak var nicknameLabel: UILabel!
-    
     @IBOutlet weak var followingLabel: UILabel!
-    
     @IBOutlet weak var followerLabel: UILabel!
-    
     @IBOutlet weak var wordcountLabel: UILabel!
-    
     @IBOutlet weak var gradeLabel: UILabel!
-    
     @IBOutlet weak var goldenLabel: UILabel!
-    
     @IBOutlet weak var footprintBtn: UIButton!
     
-   lazy var selectBtn:UIButton = UIButton.init(type:.Custom)
+    lazy var selectBtn:UIButton = UIButton.init(type:.Custom)
 
     var user: User? {
         didSet {
@@ -54,8 +45,10 @@ class UserProfileReusableView: UICollectionReusableView {
             completeTabClick(TabType.TabTypeFootprint)
         case 1:
             completeTabClick(TabType.TabTypeContribution)
-        default:
+        case 2:
             completeTabClick(TabType.TabTypeLike)
+        default:
+            completeTabClick(TabType.TabTypeFootprint)
         }
         selectBtn.selected = false
         sender.selected = true

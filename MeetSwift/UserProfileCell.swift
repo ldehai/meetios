@@ -11,17 +11,11 @@ import UIKit
 class UserProfileCell: UITableViewCell {
 
     @IBOutlet weak var avatarImageView: UIImageView!
-    
     @IBOutlet weak var nicknameLabel: UILabel!
-    
     @IBOutlet weak var followingLabel: UILabel!
-    
     @IBOutlet weak var followerLabel: UILabel!
-    
     @IBOutlet weak var wordcountLabel: UILabel!
-    
     @IBOutlet weak var gradeLabel: UILabel!
-    
     @IBOutlet weak var goldenLabel: UILabel!
     
     var user: User? {

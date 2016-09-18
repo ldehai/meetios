@@ -10,10 +10,7 @@ import UIKit
 import SwiftyJSON
 
 private let reuseIdentifier = "FootprintCellId"
-
 private let space:CGFloat = 20.0
-
-
 enum TabType {
     case TabTypeFootprint         // 足迹
     case TabTypeContribution      // 贡献
@@ -21,9 +18,7 @@ enum TabType {
 };
 
 class UserProfileCollectionViewController: UICollectionViewController {
-    
     @IBOutlet weak var layout: UICollectionViewFlowLayout!
-    
     var currentTabType:TabType = TabType.TabTypeFootprint
     var user:User!
     
@@ -46,15 +41,11 @@ class UserProfileCollectionViewController: UICollectionViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
     // MARK: UICollectionViewDataSource
-    
     override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
         
         return 1
     }
-    
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -78,7 +69,6 @@ class UserProfileCollectionViewController: UICollectionViewController {
             cell.backgroundColor = UIColor.greenColor()
             return cell
         }
-        
     }
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
@@ -96,11 +86,10 @@ class UserProfileCollectionViewController: UICollectionViewController {
             return cell
         }
         return cell1
-        
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize
-    {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{
+        
         switch self.currentTabType {
         case .TabTypeFootprint:
             return CGSizeMake(150 , 100)
@@ -109,9 +98,8 @@ class UserProfileCollectionViewController: UICollectionViewController {
         }
     }
     
-    
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets
-    {
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets{
+        
         switch self.currentTabType {
         case .TabTypeFootprint:
             return UIEdgeInsetsMake(space, space, space, space)
@@ -119,5 +107,4 @@ class UserProfileCollectionViewController: UICollectionViewController {
             return UIEdgeInsetsMake(space, space, space, space)
         }
     }
-    
 }
