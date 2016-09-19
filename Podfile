@@ -13,6 +13,5 @@ pod 'RealmSwift'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'SDWebImage', '~>3.8'
-pod 'MBProgressHUD'
 end
 

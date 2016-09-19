@@ -55,6 +55,8 @@
 		A11F60321D8EFEF800EA0B19 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		A11F60341D8EFF1300EA0B19 /* SetNickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetNickNameViewController.swift; sourceTree = "<group>"; };
 		A14930101D717F210090E647 /* MAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAPI.swift; sourceTree = "<group>"; };
+		A15C012C1D900AB900EC8188 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		A15C012D1D900AB900EC8188 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		A15ED10F1D8456660022AA87 /* CircleProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProgressView.swift; sourceTree = "<group>"; };
 		A15ED1121D8462E20022AA87 /* HexColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
 		A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviseWordsViewController.swift; sourceTree = "<group>"; };
@@ -114,6 +116,8 @@
 		A11F60231D8EDAB100EA0B19 /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				A15C012C1D900AB900EC8188 /* MBProgressHUD.h */,
+				A15C012D1D900AB900EC8188 /* MBProgressHUD.m */,
 				A11F602D1D8EE7C800EA0B19 /* MBProgressHUD+MJ.h */,
 				A11F602E1D8EE7C800EA0B19 /* MBProgressHUD+MJ.m */,
 				A11F60291D8EE4C800EA0B19 /* MeetSwift-Bridging-Header.h */,
