@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 //define color
-let MainColor = UIColor(hex: "00A56F")
+let MainColor = UIColor(hex: "00A56F", alpha: 1.0)
 
 //define notify
 let NOTIFY_LOGIN_OK:String = "NOTIFY_LOGIN_OK"

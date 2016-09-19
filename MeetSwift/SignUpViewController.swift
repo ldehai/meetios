@@ -8,25 +8,23 @@
 
 import UIKit
 import SwiftyJSON
+import Spring
 
 class SignUpViewController: UIViewController {
 
-    @IBOutlet weak var telField: UITextField!
-    @IBOutlet weak var verifyCodeField: UITextField!
-    @IBOutlet weak var getVerifyCodeBtn: UIButton!
-    @IBOutlet weak var passwordField: UITextField!
-    @IBOutlet weak var nickNameField: UITextField!
-    @IBAction func getVerifyCode(sender: AnyObject) {
-        MAPI .getVerifyCode(telField.text!) { (respond) in
-            let json = JSON(data:respond)
-        }
-    }
-    @IBAction func signUpAction(sender: AnyObject) {
-        MAPI.signup(telField.text!,verifycode: verifyCodeField.text!,password: passwordField.text!,nickName: nickNameField.text!,lon: "0",lat: "0") { (respond) in
-            
-            let json = JSON(data:respond)
-        }
-    }
+    @IBOutlet weak var telField: SpringTextField!
+    @IBOutlet weak var pwdField: SpringTextField!
+//    @IBAction func getVerifyCode(sender: AnyObject) {
+//        MAPI .getVerifyCode(telField.text!) { (respond) in
+//            let json = JSON(data:respond)
+//        }
+//    }
+//    @IBAction func signUpAction(sender: AnyObject) {
+//        MAPI.signup(telField.text!,verifycode: verifyCodeField.text!,password: passwordField.text!,nickName: nickNameField.text!,lon: "0",lat: "0") { (respond) in
+//            
+//            let json = JSON(data:respond)
+//        }
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,8 +36,6 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -47,6 +43,23 @@ class SignUpViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+    
+    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool{
+        
+        if telField.text!.isEmpty {
+            MBProgressHUD .showError("手机号码不能为空")
+            return false
+        }
+        if pwdField.text!.isEmpty {
+            MBProgressHUD .showError("密码不能为空")
+            return false
+        }
+        
+        let userDefault = NSUserDefaults .standardUserDefaults()
+        userDefault .setObject(telField.text!, forKey: "tel")
+        userDefault .setObject(pwdField.text!, forKey: "pwd")
+        
+        return true
+    }
 
 }

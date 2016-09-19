@@ -190,6 +190,21 @@ class MAPI: NSObject {
     class func getVerifyCode(tel:String, completion: (respond :NSData) ->())
     {
         let parameters = ["tel":tel];
+        Alamofire.request(.POST, APIBase + "/getverifycode", parameters: parameters, encoding: .JSON)
+            .responseJSON { response in
+                print(response.result)
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+                }
+                
+                completion(respond: response.data!)
+        }
+    }
+    
+    //验证短信验证码
+    class func verifyCode(tel:String,verifycode:String, completion: (respond :NSData) ->())
+    {
+        let parameters = ["tel":tel,"verifycode":verifycode];
         Alamofire.request(.POST, APIBase + "/verifycode", parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)

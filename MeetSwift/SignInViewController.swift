@@ -8,12 +8,21 @@
 
 import UIKit
 import SwiftyJSON
+import Spring
 
 class SignInViewController: UIViewController {
 
-    @IBOutlet weak var telField: UITextField!
-    @IBOutlet weak var pwdField: UITextField!
+    @IBOutlet weak var telField: SpringTextField!
+    @IBOutlet weak var pwdField: SpringTextField!
     @IBAction func signInAction(sender: AnyObject) {
+        if telField.text!.isEmpty {
+            MBProgressHUD .showError("手机号码不能为空")
+            return
+        }
+        if pwdField.text!.isEmpty {
+            MBProgressHUD .showError("密码不能为空")
+            return
+        }
         MAPI .signin(telField.text!, password: pwdField.text!) { (respond) in
             let json = JSON(data:respond)
             let code = json["code"]
