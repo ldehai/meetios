@@ -16,6 +16,12 @@ class SignInViewController: UIViewController {
     @IBAction func signInAction(sender: AnyObject) {
         MAPI .signin(telField.text!, password: pwdField.text!) { (respond) in
             let json = JSON(data:respond)
+            let code = json["code"]
+            if code != "0"{
+                MBProgressHUD .showError("用户名或密码有误")
+                return
+            }
+            
             let userId = json["data"]["userid"].stringValue
             let accessToken = json["data"]["accesstoken"].stringValue
             

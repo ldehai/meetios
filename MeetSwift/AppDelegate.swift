@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let userDefault = NSUserDefaults .standardUserDefaults()
         if userDefault.objectForKey("userId") == nil{
             let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let userProfileVC:SignInViewController = storyboard.instantiateViewControllerWithIdentifier("SignInVC") as! SignInViewController
+            let userProfileVC:GuideViewController = storyboard.instantiateViewControllerWithIdentifier("GuideVC") as! GuideViewController
             let nav = UINavigationController(rootViewController: userProfileVC)
             
             self.window?.rootViewController = nav
