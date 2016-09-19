@@ -22,18 +22,18 @@ class VerifyViewController: UIViewController {
     override func viewDidAppear(animated: Bool) {
         let userDefault = NSUserDefaults .standardUserDefaults()
         let tel = userDefault .objectForKey("tel") as! String
-//        MAPI .getVerifyCode(tel) { (respond) in
-//            let json = JSON(data:respond)
-//            let code = json["code"]
-//            if code == "0"{
-//                MBProgressHUD .showError("验证码已经发出，请查收短信")
-//                return
-//            }
-//            else{
-//                MBProgressHUD .showError("发送短信失败")
-//                return
-//            }
-//        }
+        MAPI .getVerifyCode(tel) { (respond) in
+            let json = JSON(data:respond)
+            let code = json["code"]
+            if code == "0"{
+                MBProgressHUD .showError("验证码已经发出，请查收短信")
+                return
+            }
+            else{
+                MBProgressHUD .showError("发送短信失败")
+                return
+            }
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
