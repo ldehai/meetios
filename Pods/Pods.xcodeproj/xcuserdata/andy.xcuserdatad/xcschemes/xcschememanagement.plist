@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-MeetSwift.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -20,6 +25,11 @@
 			<false/>
 		</dict>
 		<key>RealmSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,17 +52,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0E80530ACB980CA6C8068085761D9E52</key>
+		<key>01DF1E9FB80BE667FA4F84012350DC21</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>15F3C8BAF34310EE45649B9EC39DEC20</key>
+		<key>36442B2B818C3077C570D404F5756D57</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>37A94AE34E38A273BE2575F43B98FC36</key>
+		<key>5280C1F3FBECB511CE1C51EF38B0E95E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>77143D8027504AA38CEE3A4B79797F2E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7899372123BEF2619E2F435BDDFCAD1D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -62,17 +82,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>86EBFF9454FA1CE4824A3FC39C507033</key>
+		<key>AC59D76888F913DF2A2E493CF90542A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A20AE96A6FD5CDE89CEF9DAEC50C0DCF</key>
+		<key>DBA6001481CEA0EBA031CC5C94508FAA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CD819B1148F7FE0F141DCE4D214E7405</key>
+		<key>E716E5C34DD446DD8B29C1C15476D886</key>
 		<dict>
 			<key>primary</key>
 			<true/>

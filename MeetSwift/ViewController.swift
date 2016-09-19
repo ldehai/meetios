@@ -9,9 +9,12 @@
 import UIKit
 import SnapKit
 import CoreLocation
+import SwiftyJSON
+import SDWebImage
 
 class ViewController: UIViewController, CLLocationManagerDelegate{
 
+    var user = User()
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var wordCountView: UIView!
     @IBOutlet weak var wordCountLabel: UILabel!
@@ -77,6 +80,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         reviseView.userInteractionEnabled = true
         let gestureRevise = UITapGestureRecognizer(target: self, action: #selector(openReviseWords))
         reviseView .addGestureRecognizer(gestureRevise)
+        
+        //获取个人详情
+        MAPI .getUserProfile { (respond) in
+            let json = JSON(data:respond)
+            self.user = User.fromJSON(json["data"])!
+            
+            self.avatarImage .sd_setImageWithURL(NSURL(fileURLWithPath: ImageBaseURL + self.user.avatar!), placeholderImage: UIImage(named: "avatar"))
+        }
     }
     
     func openTodayPractice(){

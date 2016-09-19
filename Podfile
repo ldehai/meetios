@@ -5,12 +5,14 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target "MeetSwift" do
     
-pod 'SnapKit'
+pod 'SnapKit', '~> 0.22.0'
 pod 'Alamofire', '~> 3.4'
 pod 'SwiftyJSON'
 pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
 pod 'RealmSwift'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'SDWebImage', '~>3.8'
+pod 'MBProgressHUD'
 end
 

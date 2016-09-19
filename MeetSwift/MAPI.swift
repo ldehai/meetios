@@ -9,10 +9,10 @@
 import UIKit
 import Alamofire
 
-class MAPI: NSObject {
+let APIBase = "http://121.41.37.3:9000/api/meet"
+let ImageBaseURL = "http://121.41.37.3:9000/static/upload/"
 
-    static let APIBase = "http://121.41.37.3:9000/api/meet"
-    
+class MAPI: NSObject {
     class func accessToken() -> String{
         let userDefault = NSUserDefaults .standardUserDefaults()
         if let token =  userDefault .stringForKey("accessToken"){

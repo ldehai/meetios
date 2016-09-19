@@ -85,16 +85,20 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-MeetSwift/Alamofire.framework"
+  install_framework "Pods-MeetSwift/MBProgressHUD.framework"
   install_framework "Pods-MeetSwift/Realm.framework"
   install_framework "Pods-MeetSwift/RealmSwift.framework"
+  install_framework "Pods-MeetSwift/SDWebImage.framework"
   install_framework "Pods-MeetSwift/SnapKit.framework"
   install_framework "Pods-MeetSwift/Spring.framework"
   install_framework "Pods-MeetSwift/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-MeetSwift/Alamofire.framework"
+  install_framework "Pods-MeetSwift/MBProgressHUD.framework"
   install_framework "Pods-MeetSwift/Realm.framework"
   install_framework "Pods-MeetSwift/RealmSwift.framework"
+  install_framework "Pods-MeetSwift/SDWebImage.framework"
   install_framework "Pods-MeetSwift/SnapKit.framework"
   install_framework "Pods-MeetSwift/Spring.framework"
   install_framework "Pods-MeetSwift/SwiftyJSON.framework"
