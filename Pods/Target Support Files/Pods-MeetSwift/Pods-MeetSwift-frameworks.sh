@@ -90,6 +90,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-MeetSwift/SDWebImage.framework"
   install_framework "Pods-MeetSwift/SnapKit.framework"
   install_framework "Pods-MeetSwift/Spring.framework"
+  install_framework "Pods-MeetSwift/SwiftDate.framework"
   install_framework "Pods-MeetSwift/SwiftyJSON.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
@@ -99,5 +100,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-MeetSwift/SDWebImage.framework"
   install_framework "Pods-MeetSwift/SnapKit.framework"
   install_framework "Pods-MeetSwift/Spring.framework"
+  install_framework "Pods-MeetSwift/SwiftDate.framework"
   install_framework "Pods-MeetSwift/SwiftyJSON.framework"
 fi

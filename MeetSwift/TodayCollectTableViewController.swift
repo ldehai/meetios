@@ -8,31 +8,29 @@
 
 import UIKit
 import SwiftyJSON
+import Realm
+import RealmSwift
+import SwiftDate
 
 class TodayCollectTableViewController: UITableViewController {
 
-    private var wordArray = [Word]()
+    var wordArray:Results<WordModel>?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "采集袋"
         self.navigationController?.setNavigationBarHidden(false, animated: true);
         self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
         
-        MAPI .getWordsTodayCollect { (respond) in
-            let json = JSON(data:respond)
-            let wordList = json["data"].array
-            for item in wordList! {
-                let word = Word.fromJSON(item)
-                self.wordArray.append(word!)
-            }
-            
-            self.tableView .reloadData()
-        }
+        //查询当天采集的单词
+        let yesterday = NSDate .yesterday()
+        let realm = try! Realm()
+        self.wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday)
+        self.tableView .reloadData()
     }
 
     // MARK: - Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.wordArray.count
+        return self.wordArray!.count
     }
 
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -43,9 +41,9 @@ class TodayCollectTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "WordCell")
 
-        let word = self.wordArray[indexPath.row]
-        cell.textLabel?.text = word.name
-        cell.detailTextLabel?.text = word.def_cn
+        let word = self.wordArray![indexPath.row]
+        cell.textLabel?.text = word.word!.name
+        cell.detailTextLabel?.text = word.word!.def_cn
 
         return cell
     }
@@ -53,7 +51,7 @@ class TodayCollectTableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         tableView .deselectRowAtIndexPath(indexPath, animated: true)
         
-        let word = self.wordArray[indexPath.row]
+        let word = self.wordArray![indexPath.row]
         MAPI.getWordDetail(word.id) { (respond) in
             let json = JSON(data:respond)
             let word = WordModel.fromJSON(json["data"])

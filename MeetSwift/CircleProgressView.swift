@@ -16,6 +16,9 @@ class CircleProgressView: UIView {
     //当前进度
     var currentProgress:Double = 50.0
     
+    //当前进度
+    var total:Int = 0
+    
     //中间数字的颜色
     var numberColor = UIColor .blackColor()
     
@@ -29,8 +32,9 @@ class CircleProgressView: UIView {
     var circleBorderWidth:CGFloat = 5.0
     
     //更新进度
-    func update(progress:Double){
+    func update(progress:Double,total:Int){
         self.currentProgress = progress
+        self.total = total
         self .setNeedsDisplay()
     }
     
@@ -72,7 +76,7 @@ class CircleProgressView: UIView {
         
         //画中间显示的数字
         CGContextSetLineWidth(context, 1.0);
-        let numberText = String(Int(self.currentProgress));
+        let numberText = String(Int(self.total));
         let size: CGSize = numberText.sizeWithAttributes([NSFontAttributeName: UIFont.systemFontOfSize(16.0)])
 
         let textFontAttributes = [

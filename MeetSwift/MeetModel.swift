@@ -15,9 +15,14 @@ public class WordModel:Object {
     dynamic var lat = ""
     dynamic var lon = ""
     dynamic var id = ""
+    dynamic var collectTime = NSDate()
     dynamic var word:Word? = Word()
     var sysExample = List<SysExample>()
     var userExample = List<UserExample>()
+    
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
     
     class func fromJSON(json: JSON) -> WordModel? {
         
@@ -62,6 +67,10 @@ public class Word:Object{
     dynamic var lat = ""
     dynamic var own = 0
     
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
+    
     class func fromJSON(json: JSON) -> Word? {
         let p = Word()
         p.name = json["content"].stringValue
@@ -82,6 +91,10 @@ public class SysExample:Object{
     dynamic var id = ""
     dynamic var content = ""
     dynamic var translation = ""
+    
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
     
     class func fromJSON(json: JSON) -> SysExample? {
         let p = SysExample()
@@ -107,6 +120,10 @@ public class User:Object{
     var golden:Int = 0
     var contributerWord:Int = 0
 
+    override public static func primaryKey() -> String? {
+        return "userId"
+    }
+    
     class func fromJSON(json: JSON) -> User? {
         let p = User()
         p.userId = json["userid"].stringValue
@@ -131,6 +148,10 @@ public class UserExample:Object{
     dynamic var content = ""
     dynamic var translation = ""
     dynamic var user:User? = User()
+    
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
     
     class func fromJSON(json: JSON) -> UserExample? {
         let p = UserExample()

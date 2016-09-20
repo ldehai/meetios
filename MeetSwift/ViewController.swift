@@ -11,17 +11,23 @@ import SnapKit
 import CoreLocation
 import SwiftyJSON
 import SDWebImage
+import RealmSwift
 
 class ViewController: UIViewController, CLLocationManagerDelegate{
 
-    var user = User()
+    var user:User?
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var wordCountView: UIView!
     @IBOutlet weak var wordCountLabel: UILabel!
+    @IBOutlet weak var gradeBtn: UIButton!
     @IBOutlet weak var gradeImage: UIImageView!
     @IBOutlet weak var goldView: UIView!
     @IBOutlet weak var goldCountLable: UILabel!
     @IBOutlet weak var goldImage: UIImageView!
+    @IBOutlet weak var topMan: UIButton!
+    @IBOutlet weak var recommendCity: UIButton!
+    @IBOutlet weak var topContribute: UIButton!
+    @IBOutlet weak var topWorld: UIButton!
     
     @IBOutlet weak var reviseView: CircleProgressView!
     @IBOutlet weak var todayView: CircleProgressView!
@@ -51,6 +57,66 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationController?.setNavigationBarHidden(true, animated: true);
         
+        self .setContraints()
+        
+        //获取个人详情
+        MAPI .getUserProfile { (respond) in
+            let json = JSON(data:respond)
+            self.user = User.fromJSON(json["data"])
+            
+            self.avatarImage .sd_setImageWithURL(NSURL(fileURLWithPath: ImageBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
+            self.wordCountLabel.text = String(self.user!.wordcount)
+            self.reviseView.update(Double(self.user!.wordcount + 1), total: 1)
+            self.goldCountLable.text = String(self.user!.golden)
+            self.gradeBtn .setTitle(String(self.user!.grade), forState: UIControlState.Normal)
+            self.gradeBtn.layer.borderWidth = 1
+            self.gradeBtn.layer.borderColor = UIColor .whiteColor().CGColor
+//            //查询当天采集的单词
+//            let realm = try! Realm()
+//            let wordArray = realm.objects(WordModel.self).filter("collecttime < 2")
+//            self.todayView.update(Double(wordArray.count))
+        }
+        
+        MAPI .getMyWords { (respond) in
+            let json = JSON(data:respond)
+            let data = json["data"]
+            self.wordCountLabel.text = String(data.count)
+        }
+        
+        self .refreshCollectCount()
+    }
+    
+    func refreshCollectCount(){
+        //查询当天采集的单词
+        let yesterday = NSDate .yesterday()
+        let realm = try! Realm()
+        let wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday)
+        
+        self.todayView.update(50.0, total: wordArray.count)
+    }
+    
+    func setContraints(){
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        
+        //每日精进
+        todayView.circleColor = MainColor!
+        todayView.backgroundColor = UIColor .clearColor()
+        todayView.circleBorderWidth = 20
+        todayView .update(60,total: 100)
+        todayView.userInteractionEnabled = true
+        let gestureToday = UITapGestureRecognizer(target: self, action: #selector(openTodayPractice))
+        todayView .addGestureRecognizer(gestureToday)
+        
+        //温故知新
+        reviseView.circleColor = MainColor!
+        reviseView.backgroundColor = UIColor .clearColor()
+        reviseView.circleBorderWidth = 20
+//        reviseView.update(80,total: 100)
+        reviseView.userInteractionEnabled = true
+        let gestureRevise = UITapGestureRecognizer(target: self, action: #selector(openReviseWords))
+        reviseView .addGestureRecognizer(gestureRevise)
+        
         avatarImage.snp_makeConstraints { (make) in
             make.width.height.equalTo(60);
         };
@@ -61,32 +127,30 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             make.leading.equalTo(avatarImage);
             make.top.equalTo(avatarImage.snp_centerY);
         }
+        gradeBtn .addTarget(self, action: #selector(openUserProfile), forControlEvents: UIControlEvents.TouchUpInside)
         
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
+        goldView .snp_makeConstraints { (make) in
+            make.left.equalTo(self.view.snp_centerX).offset(30)
+        }
         
-        todayView.circleColor = MainColor!
-        todayView.backgroundColor = UIColor .clearColor()
-        todayView.circleBorderWidth = 20
-        todayView .update(60)
-        todayView.userInteractionEnabled = true
-        let gestureToday = UITapGestureRecognizer(target: self, action: #selector(openTodayPractice))
-        todayView .addGestureRecognizer(gestureToday)
+        todayView .snp_makeConstraints { (make) in
+            make.right.equalTo(self.view.snp_centerX).offset(-30)
+        }
+        reviseView .snp_makeConstraints { (make) in
+            make.left.equalTo(self.view.snp_centerX).offset(30)
+        }
         
-        reviseView.circleColor = MainColor!
-        reviseView.backgroundColor = UIColor .clearColor()
-        reviseView.circleBorderWidth = 20
-        reviseView.update(80)
-        reviseView.userInteractionEnabled = true
-        let gestureRevise = UITapGestureRecognizer(target: self, action: #selector(openReviseWords))
-        reviseView .addGestureRecognizer(gestureRevise)
-        
-        //获取个人详情
-        MAPI .getUserProfile { (respond) in
-            let json = JSON(data:respond)
-            self.user = User.fromJSON(json["data"])!
-            
-            self.avatarImage .sd_setImageWithURL(NSURL(fileURLWithPath: ImageBaseURL + self.user.avatar!), placeholderImage: UIImage(named: "avatar"))
+        topMan .snp_makeConstraints { (make) in
+            make.right.equalTo(self.view.snp_centerX).offset(-30)
+        }
+        recommendCity .snp_makeConstraints { (make) in
+            make.left.equalTo(self.view.snp_centerX).offset(30)
+        }
+        topContribute .snp_makeConstraints { (make) in
+            make.right.equalTo(self.view.snp_centerX).offset(-30)
+        }
+        topWorld .snp_makeConstraints { (make) in
+            make.left.equalTo(self.view.snp_centerX).offset(30)
         }
     }
     
@@ -106,6 +170,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
+        self .refreshCollectCount()
     }
     
     func openUserProfile(){

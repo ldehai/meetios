@@ -47,11 +47,11 @@ class WordDetailViewController: UIViewController {
                 let realm = try! Realm()
                 try! realm.write {
                     self.word.word?.own = 1
-                    realm.add(self.word)
+                    self.word.collectTime = NSDate()
+                    realm.add(self.word, update: true)
                 }
                 
                 self.dismissViewControllerAnimated(false){
-                    
                 }
         }
     }
@@ -78,7 +78,16 @@ class WordDetailViewController: UIViewController {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 100.0;//Choose your custom row height
+        switch indexPath.section {
+        case 0:
+            return 100
+        case 1:
+            return 100
+        case 2:
+            return 100
+        default:
+            return 100
+        }
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat

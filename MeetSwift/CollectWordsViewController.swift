@@ -13,6 +13,8 @@ import RealmSwift
 
 class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
 
+    @IBOutlet weak var boxTipView: UIButton!
+    @IBOutlet weak var shopTipView: UIView!
     @IBOutlet weak var mapView: MKMapView!
     lazy var wordArray = [Word]()
     var coordinate:CLLocationCoordinate2D?
@@ -42,6 +44,8 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         locationManager.requestAlwaysAuthorization()
         locationManager.startUpdatingLocation()
         
+        self .refreshCollectCount()
+        
         NSNotificationCenter .defaultCenter() .addObserver(self, selector: #selector(collectWord(_:)), name: NOTIFY_COLLECT_WORD, object: nil)
     }
 
@@ -58,6 +62,17 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
                 }
             }
         }
+        
+        self .refreshCollectCount()
+    }
+    
+    func refreshCollectCount(){
+        //查询当天采集的单词
+        let yesterday = NSDate .yesterday()
+        let realm = try! Realm()
+        let wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday)
+        
+        self.boxTipView .setTitle(String(wordArray.count), forState: UIControlState.Normal)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -169,10 +184,10 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
                 let json = JSON(data:respond)
                 let word = WordModel.fromJSON(json["data"])
                 
-                let realm = try! Realm()
-                try! realm.write {
-                    realm.add(word!)
-                }
+//                let realm = try! Realm()
+//                try! realm.write {
+//                    realm.add(word!)
+//                }
             }
         }
     }
