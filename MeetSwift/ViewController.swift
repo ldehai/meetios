@@ -145,8 +145,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     func openTodayPractice(){
-        let todayCollect = TodayCollectTableViewController()
-        self.navigationController!.pushViewController(todayCollect, animated: true)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let ReviseWordsVC:TodayCollectTableViewController = storyboard.instantiateViewControllerWithIdentifier("TodayCollectTableVC") as! TodayCollectTableViewController
+        self.navigationController!.pushViewController(ReviseWordsVC, animated: true)
     }
 
     func openReviseWords(){

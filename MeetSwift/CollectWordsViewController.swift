@@ -24,8 +24,8 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
     
     //今日采集
     @IBAction func myCollectAction(sender: AnyObject) {
-        let todayCollect = TodayCollectTableViewController()
-        self.navigationController!.pushViewController(todayCollect, animated: true)
+//        let todayCollect = TodayCollectTableViewController()
+//        self.navigationController!.pushViewController(todayCollect, animated: true)
     }
     
     //商店
