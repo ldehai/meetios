@@ -73,7 +73,6 @@ class UserProfileCollectionViewController: UICollectionViewController {
     
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
-        let cell1 = UICollectionReusableView()
         if (kind == UICollectionElementKindSectionHeader) {
             
             let cell: UserProfileReusableView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "UserProfileReusableViewId", forIndexPath: indexPath) as! UserProfileReusableView
@@ -85,7 +84,9 @@ class UserProfileCollectionViewController: UICollectionViewController {
             }
             return cell
         }
-        return cell1
+        
+        let cell = UICollectionReusableView()
+        return cell
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize{

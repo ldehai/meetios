@@ -10,6 +10,7 @@ import UIKit
 import MapKit
 import SwiftyJSON
 import RealmSwift
+import FoursquareAPIClient
 
 class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
 
@@ -99,7 +100,27 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
                 if self.bHaveLocation == true{
                     return
                 }
-                self.getNearByWords((locations.last?.coordinate)!)
+                
+                let client = FoursquareAPIClient(clientId: "S1VSRLLNCHK3FVAFF4LHJC1Q5NKO534OAI5VCQ0C0UKNBQB1",
+                    clientSecret: "JNJWCRFZAUXCYYMYNLL4TVWRKABL3AGKLX232SG21JDI52PZ")
+                let lat:String = (locations.last?.coordinate.latitude.description)!
+                let lon:String = (locations.last?.coordinate.longitude.description)!
+                let parameter: [String: String] = [
+                    "ll": lat + "," + lon,
+                    "limit": "1",
+                ];
+                
+                client.requestWithPath("venues/search", parameter: parameter) {
+                    (data, error) in
+                    
+                    // parse the JSON with NSJSONSerialization or Lib like SwiftyJson
+                    
+                    // result: {"meta":{"code":200},"notifications":[{"...
+                    print(NSString(data: data!, encoding: NSUTF8StringEncoding))
+                    
+                    self.getNearByWords((locations.last?.coordinate)!)
+                }
+                
             } else {
                 print("Problem with the data received from geocoder")
             }

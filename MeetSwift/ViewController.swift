@@ -71,16 +71,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             self.gradeBtn .setTitle(String(self.user!.grade), forState: UIControlState.Normal)
             self.gradeBtn.layer.borderWidth = 1
             self.gradeBtn.layer.borderColor = UIColor .whiteColor().CGColor
-//            //查询当天采集的单词
-//            let realm = try! Realm()
-//            let wordArray = realm.objects(WordModel.self).filter("collecttime < 2")
-//            self.todayView.update(Double(wordArray.count))
-        }
-        
-        MAPI .getMyWords { (respond) in
-            let json = JSON(data:respond)
-            let data = json["data"]
-            self.wordCountLabel.text = String(data.count)
         }
         
         self .refreshCollectCount()

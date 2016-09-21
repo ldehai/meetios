@@ -41,6 +41,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //消息监听
         NSNotificationCenter .defaultCenter() .addObserver(self, selector:#selector(loginOK), name: NOTIFY_LOGIN_OK, object: nil)
         
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes:([UIUserNotificationType.Sound, UIUserNotificationType.Alert, UIUserNotificationType.Badge]) , categories: nil))
+        
+        application .registerForRemoteNotifications()
+        
         return true
     }
 
@@ -51,6 +55,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.window?.rootViewController = nav
     }
+
+    func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData){
+        
+    }
+    
+    func application(application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError){
+        
+    }
+    
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]){
+        
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification){
+        
+    }
     
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -60,6 +80,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        let notification = UILocalNotification()
+        notification.alertBody = "我会在后台"
+        notification.alertAction = "Open"
+        application.presentLocalNotificationNow(notification)
     }
 
     func applicationWillEnterForeground(application: UIApplication) {

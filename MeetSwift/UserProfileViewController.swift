@@ -43,12 +43,17 @@ class UserProfileViewController: UIViewController {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UserProfileCell = tableView .dequeueReusableCellWithIdentifier("UserProfileCell") as! UserProfileCell
-        cell.user = self.user
-//        cell.textLabel?.text = word.name
-//        cell.detailTextLabel?.text = word.def_cn
+        switch indexPath.row {
+        case 0:
+            let cell: UserProfileCell = tableView .dequeueReusableCellWithIdentifier("UserProfileCell") as! UserProfileCell
+            cell.user = self.user
+            return cell
+            
+        default:
+            let cell:UITableViewCell = tableView .dequeueReusableCellWithIdentifier("normalcell")!
+            return cell
+        }
         
-        return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){

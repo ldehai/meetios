@@ -42,7 +42,7 @@ class MAPI: NSObject {
         let parameters = ["lat":lat,
                           "lon":lon,
                           "token":MAPI .accessToken(),
-                          "tags":["商场","食物","345"]];
+                          "tags":["商场","食物"]];
         print(parameters)
         Alamofire.request(.POST, APIBase + "/word", parameters: parameters, encoding: .JSON)
             .responseJSON { response in

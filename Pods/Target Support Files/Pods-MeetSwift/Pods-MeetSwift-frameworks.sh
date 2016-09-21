@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-MeetSwift/Alamofire.framework"
+  install_framework "Pods-MeetSwift/FoursquareAPIClient.framework"
   install_framework "Pods-MeetSwift/Realm.framework"
   install_framework "Pods-MeetSwift/RealmSwift.framework"
   install_framework "Pods-MeetSwift/SDWebImage.framework"
@@ -95,6 +96,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-MeetSwift/Alamofire.framework"
+  install_framework "Pods-MeetSwift/FoursquareAPIClient.framework"
   install_framework "Pods-MeetSwift/Realm.framework"
   install_framework "Pods-MeetSwift/RealmSwift.framework"
   install_framework "Pods-MeetSwift/SDWebImage.framework"

@@ -1,8 +1,9 @@
 PODS:
   - Alamofire (3.5.0)
-  - Crashlytics (3.8.1):
+  - Crashlytics (3.8.2):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.8)
+  - FoursquareAPIClient (1.0.1)
   - Realm (1.1.0):
     - Realm/Headers (= 1.1.0)
   - Realm/Headers (1.1.0)
@@ -20,6 +21,7 @@ DEPENDENCIES:
   - Alamofire (~> 3.4)
   - Crashlytics
   - Fabric
+  - FoursquareAPIClient
   - RealmSwift
   - SDWebImage (~> 3.8)
   - SnapKit (~> 0.22.0)
@@ -39,8 +41,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
-  Crashlytics: 4391d8df0b125345e9f209c5db6e7f40a6a8435d
+  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
   Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
+  FoursquareAPIClient: 3cdd26eb65b2112a2175eda1118ecd78fbbb8529
   Realm: ceecf1a4540c4ce9efe196fe73fa9855bce05bd8
   RealmSwift: 838058b2db95b12cb86bd0cf209df642c33fb60a
   SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
