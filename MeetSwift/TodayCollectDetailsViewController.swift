@@ -111,8 +111,7 @@ class TodayCollectDetailsViewController: UIViewController,UITableViewDelegate,UI
     }
     func settupBottomView()  {
         bottomView = UIView()
-    
-       //bottomView.backgroundColor = UIColor.redColor()
+
         self.view.addSubview(bottomView)
         bottomView.snp_makeConstraints { (make) in
             make.top.equalTo(kDeviceheight)
@@ -120,10 +119,47 @@ class TodayCollectDetailsViewController: UIViewController,UITableViewDelegate,UI
             make.left.right.equalTo(0)
         }
         
+        let unskilledBtn = UIButton.init(type: .Custom)
+        unskilledBtn.backgroundColor = UIColor.init(hex: "BA77FF")
+        unskilledBtn.setTitle("不熟练", forState: .Normal)
+        bottomView.addSubview(unskilledBtn)
+        unskilledBtn.snp_makeConstraints { (make) in
+            make.left.equalTo(30)
+            make.bottom.equalTo(-15)
+            make.size.equalTo(CGSizeMake(100, 30))
+        }
+
+      let unskilledLabel = settupLabel("3", fontSize: 13.0, color: UIColor.init(hex: "BA77FF"))
+        bottomView.addSubview(unskilledLabel)
+        unskilledLabel.snp_makeConstraints { (make) in
+            make.leading.equalTo(unskilledBtn.snp_leading)
+            make.bottom.equalTo(unskilledBtn.snp_top)
+        }
+        let label =  settupLabel("不熟练", fontSize: 13.0, color: UIColor.init(hex: "9B9B9B"))
+        bottomView.addSubview(label)
+        label.snp_makeConstraints { (make) in
+            make.top.equalTo(unskilledLabel.snp_top)
+            make.left.equalTo(unskilledLabel.snp_right)
+        }
         
-        let btn = UIButton.init(type: .Custom)
-        btn.backgroundColor = UIColor.redColor()
-//        btn.setTitle("", forState: <#T##UIControlState#>)
+        
+        let skilledBtn = UIButton.init(type: .Custom)
+        skilledBtn.backgroundColor = UIColor.init(hex: "2ECC71")
+        skilledBtn.setTitle("熟练", forState: .Normal)
+        bottomView.addSubview(skilledBtn)
+        skilledBtn.snp_makeConstraints { (make) in
+            make.right.equalTo(-30)
+            make.bottom.equalTo(-15)
+            make.size.equalTo(CGSizeMake(100, 30))
+        }
+        let remainingLabel = settupLabel("剩下20个", fontSize: 13.0, color: UIColor.init(hex: "9B9B9B"))
+        
+        bottomView.addSubview(remainingLabel)
+        remainingLabel.snp_makeConstraints { (make) in
+            make.trailing.equalTo(skilledBtn.snp_trailing)
+            make.bottom.equalTo(skilledBtn.snp_top)
+        }
+        
     }
     
     func settupTopView() {
