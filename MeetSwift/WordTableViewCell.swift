@@ -10,13 +10,11 @@ import UIKit
 
 class WordTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var bgView: UIView!
-    
-    @IBOutlet weak var pronunciation: UILabel!
-   
     @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var pronunciation: UILabel!
     @IBOutlet weak var definition_en: UILabel!
     @IBOutlet weak var definition_cn: UILabel!
+    @IBOutlet weak var bgView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

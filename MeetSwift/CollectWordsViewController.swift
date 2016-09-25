@@ -202,20 +202,22 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
             let word = annotation.word
             
             //点击大头针时，获取单词详情保存到本地
-            MAPI.getWordDetail(word!.id) { (respond) in
-                let json = JSON(data:respond)
-                let word = WordModel.fromJSON(json["data"])
-                
-//                let realm = try! Realm()
-//                try! realm.write {
-//                    realm.add(word!)
-//                }
-            }
+//            MAPI.getWordDetail(word!.id) { (respond) in
+//                let json = JSON(data:respond)
+//                let word = WordModel.fromJSON(json["data"])
+//                
+//            }
         }
     }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl){
         if let annotation = view.annotation as? WordAnnotation{
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let wordDetail:WordDetailViewController = storyboard.instantiateViewControllerWithIdentifier("WordDetailVC") as! WordDetailViewController
+            wordDetail.showMode = ShowMode.Collect
+            wordDetail.modalPresentationStyle = UIModalPresentationStyle.Custom;
+            
             let word = annotation.word
             let realm = try! Realm()
             let wordModel = realm.objects(WordModel.self).filter("id = '\(word?.id)'").first
@@ -223,19 +225,12 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
                 MAPI.getWordDetail(word!.id) { (respond) in
                     let json = JSON(data:respond)
                     let word = WordModel.fromJSON(json["data"])
-                    
-                    let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-                    let wordDetail:WordDetailViewController = storyboard.instantiateViewControllerWithIdentifier("WordDetailVC") as! WordDetailViewController
                     wordDetail.word = word
-                    wordDetail.modalPresentationStyle = UIModalPresentationStyle.Custom;
                     self.presentViewController(wordDetail, animated: false, completion: nil)
                 }
             }
             else{
-                let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-                let wordDetail:WordDetailViewController = storyboard.instantiateViewControllerWithIdentifier("WordDetailVC") as! WordDetailViewController
                 wordDetail.word = wordModel
-                wordDetail.modalPresentationStyle = UIModalPresentationStyle.Custom;
                 self.presentViewController(wordDetail, animated: false, completion: nil)
             }
         }

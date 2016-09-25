@@ -21,6 +21,11 @@ let NOTIFY_COLLECT_WORD:String = "NOTIFY_COLLECT_WORD"
  let kDeviceheight = UIScreen.mainScreen().bounds.size.height
 
 
+enum ShowMode {
+    case Show         // 浏览
+    case Collect      // 收集
+};
+
 final public class Config {
     public static let appGroupID: String = "group.AventLabs-Inc."
     

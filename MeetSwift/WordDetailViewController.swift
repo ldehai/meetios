@@ -14,8 +14,10 @@ class WordDetailViewController: UIViewController {
 
     @IBOutlet weak var popBg: UIView!
     @IBOutlet weak var wordName: UILabel!
+    @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var detailTableView: UITableView!
     var word:WordModel!
+    var showMode:ShowMode!
     
     //不采集直接关闭窗口
     @IBAction func closeDlg(sender: AnyObject) {
@@ -34,21 +36,22 @@ class WordDetailViewController: UIViewController {
         UIView .animateWithDuration(0.3, animations: {
             self.view.alpha = 0.0
             }) { (true) in
-                
-                //采集
-                MAPI.collectWord(self.word.word!.id, lon: (self.word.word?.lon)!, lat: (self.word.word?.lat)!) { (respond) in
-                    let json = JSON(data:respond)
-                    print(json["errorCode"])
-                }
-
-                NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_COLLECT_WORD, object:self, userInfo: ["wordId":self.word!.id])
-                
-                //保存到本地
-                let realm = try! Realm()
-                try! realm.write {
-                    self.word.word?.own = 1
-                    self.word.collectTime = NSDate()
-                    realm.add(self.word, update: true)
+                if self.showMode == ShowMode.Collect {
+                    //采集
+                    MAPI.collectWord(self.word.word!.id, lon: (self.word.word?.lon)!, lat: (self.word.word?.lat)!) { (respond) in
+                        let json = JSON(data:respond)
+                        print(json["errorCode"])
+                    }
+                    
+                    NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_COLLECT_WORD, object:self, userInfo: ["wordId":self.word!.id])
+                    
+                    //保存到本地
+                    let realm = try! Realm()
+                    try! realm.write {
+                        self.word.word?.own = 1
+                        self.word.collectTime = NSDate()
+                        realm.add(self.word, update: true)
+                    }
                 }
                 
                 self.dismissViewControllerAnimated(false){
@@ -61,6 +64,10 @@ class WordDetailViewController: UIViewController {
         self.view.backgroundColor = UIColor(white: 0.6, alpha: 0.6)
         
         wordName.text = self.word.word!.name
+        
+        if self.showMode == ShowMode.Show {
+            self.confirmBtn .setTitle("好的", forState: UIControlState.Normal)
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{

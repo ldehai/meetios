@@ -8,9 +8,13 @@
 
 import UIKit
 import Alamofire
+import ImageIO
+import SwiftyJSON
 
-let APIBase = "http://121.41.37.3:9000/api/meet"
-let ImageBaseURL = "http://121.41.37.3:9000/static/upload/"
+//let APIBase = "http://121.41.37.3:9000/api/meet"
+//let ImageBaseURL = "http://121.41.37.3:9000/static/upload/"
+let APIBase = "http://www.aventlabs.com:9000/api/meet"
+let ImageBaseURL = "http://www.aventlabs.com:9000/static/upload/"
 
 class MAPI: NSObject {
     class func accessToken() -> String{
@@ -68,14 +72,32 @@ class MAPI: NSObject {
     {
         let parameters = ["token":MAPI .accessToken()];
         Alamofire.request(.POST, APIBase + "/word/" + wordId, parameters: parameters, encoding: .JSON)
-            .responseJSON { response in
+            .responseString { response in
                 print(response.result)
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
                 
-                completion(respond: response.data!)
+                let convertStr = MAPI .stringByRemovingControlCharacters(response.result.value!)
+                completion(respond: convertStr.dataUsingEncoding(NSUTF8StringEncoding)!)
         }
+    }
+    
+    class func stringByRemovingControlCharacters(inputString:String) ->String
+    {
+        let mutable = NSMutableString(string: inputString)
+        
+        let controlChars = NSCharacterSet .controlCharacterSet
+        var range = mutable .rangeOfCharacterFromSet(controlChars())
+        if range.location != NSNotFound
+        {
+            while range.location != NSNotFound {
+                mutable .deleteCharactersInRange(range)
+                range = mutable .rangeOfCharacterFromSet(controlChars())
+            }
+        }
+        
+        return mutable as String;
     }
     
     //采集了一个单词
@@ -214,6 +236,24 @@ class MAPI: NSObject {
                 
                 completion(respond: response.data!)
         }
+    }
+    
+    //上传头像
+    class func updateAvatar(image:String, completion: (respond :NSData) ->())
+    {
+        let imageData = UIImagePNGRepresentation(UIImage(contentsOfFile: image)!)!
+        
+        Alamofire.upload(
+            .POST,
+            APIBase + "/user/" + MAPI .userId(),
+            multipartFormData: { multipartFormData in
+                multipartFormData.appendBodyPart(data: imageData, name: "images", mimeType: "image/png")
+            },
+            encodingCompletion: { encodingResult in
+                
+        })
+        
+//        Alamofire .upload(.POST, APIBase + "/user/" + MAPI .userId(), data: imageData)
     }
     
     //贡献榜
