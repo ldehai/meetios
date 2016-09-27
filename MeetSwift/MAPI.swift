@@ -14,7 +14,7 @@ import SwiftyJSON
 //let APIBase = "http://121.41.37.3:9000/api/meet"
 //let ImageBaseURL = "http://121.41.37.3:9000/static/upload/"
 let APIBase = "http://www.aventlabs.com:9000/api/meet"
-let ImageBaseURL = "http://www.aventlabs.com:9000/static/upload/"
+let SRCBaseURL = "http://www.aventlabs.com:9000/static/upload/"
 
 class MAPI: NSObject {
     class func accessToken() -> String{
@@ -87,7 +87,7 @@ class MAPI: NSObject {
     {
         let mutable = NSMutableString(string: inputString)
         
-        let controlChars = NSCharacterSet .controlCharacterSet
+        let controlChars = NSCharacterSet .newlineCharacterSet
         var range = mutable .rangeOfCharacterFromSet(controlChars())
         if range.location != NSNotFound
         {
@@ -127,28 +127,30 @@ class MAPI: NSObject {
     {
         let parameters = ["token":MAPI .accessToken()];
         Alamofire.request(.POST, APIBase + "/word/today_list", parameters: parameters, encoding: .JSON)
-            .responseJSON { response in
+            .responseString { response in
                 print(response.result)
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
                 
-                completion(respond: response.data!)
+                let convertStr = MAPI .stringByRemovingControlCharacters(response.result.value!)
+                completion(respond: convertStr.dataUsingEncoding(NSUTF8StringEncoding)!)
         }
     }
     
     //获取我的所有单词
-    class func getMyWords(completion: (respond :NSData) ->())
+    class func getMyWords(lastWordId:String,completion: (respond :NSData) ->())
     {
-        let parameters = ["token":MAPI .accessToken()];
+        let parameters = ["token":MAPI .accessToken(),"lastWordId":lastWordId];
         Alamofire.request(.POST, APIBase + "/myword", parameters: parameters, encoding: .JSON)
-            .responseJSON { response in
+            .responseString { response in
                 print(response.result)
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
                 
-                completion(respond: response.data!)
+                let convertStr = MAPI .stringByRemovingControlCharacters(response.result.value!)
+                completion(respond: convertStr.dataUsingEncoding(NSUTF8StringEncoding)!)
         }
     }
     
@@ -254,6 +256,21 @@ class MAPI: NSObject {
         })
         
 //        Alamofire .upload(.POST, APIBase + "/user/" + MAPI .userId(), data: imageData)
+    }
+    
+    //推荐城市
+    class func getRecommendCity(completion: (respond :NSData) ->())
+    {
+        let parameters = ["token":MAPI .accessToken()];
+        Alamofire.request(.POST, APIBase + "/recommendcity", parameters: parameters, encoding: .JSON)
+            .responseJSON { response in
+                print(response.result)
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+                }
+                
+                completion(respond: response.data!)
+        }
     }
     
     //贡献榜

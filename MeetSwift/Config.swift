@@ -15,6 +15,7 @@ let MainColor = UIColor(hex: "00A56F", alpha: 1.0)
 //define notify
 let NOTIFY_LOGIN_OK:String = "NOTIFY_LOGIN_OK"
 let NOTIFY_COLLECT_WORD:String = "NOTIFY_COLLECT_WORD"
+let NOTIFY_PLAY_WORD_VOICE:String = "NOTIFY_PLAY_WORD_VOICE"
 
 // MARK: - 屏幕宽高
  let kDeviceWidth = UIScreen.mainScreen().bounds.size.width

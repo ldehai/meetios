@@ -16,6 +16,7 @@ import RealmSwift
 class ViewController: UIViewController, CLLocationManagerDelegate{
 
     var user:User?
+    var city:RecommendCity?
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var wordCountView: UIView!
     @IBOutlet weak var wordCountLabel: UILabel!
@@ -32,6 +33,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var reviseView: CircleProgressView!
     @IBOutlet weak var todayView: CircleProgressView!
     let locationManager = CLLocationManager()
+    
+    @IBAction func recommendCityAction(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let topContributer:RecommendCityViewController = storyboard.instantiateViewControllerWithIdentifier("recommendCityVC") as! RecommendCityViewController
+        topContributer.city = self.city
+        self.navigationController!.pushViewController(topContributer, animated: true)
+    }
     
     @IBAction func topContributerAction(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
@@ -65,16 +73,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             let json = JSON(data:respond)
             self.user = User.fromJSON(json["data"])
             
-            self.avatarImage .sd_setImageWithURL(NSURL(fileURLWithPath: ImageBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
+            self.avatarImage .sd_setImageWithURL(NSURL(fileURLWithPath: SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
             self.wordCountLabel.text = String(self.user!.wordcount)
             self.reviseView.update(Double(self.user!.wordcount + 1), total: 1)
             self.goldCountLable.text = String(self.user!.golden)
             self.gradeBtn .setTitle(String(self.user!.grade), forState: UIControlState.Normal)
             self.gradeBtn.layer.borderWidth = 1
             self.gradeBtn.layer.borderColor = UIColor .whiteColor().CGColor
+            
+            self.todayView.update(50.0, total: (self.user?.todaywords)!)
+            self.reviseView.update(50.0, total: (self.user?.wordcount)!)
         }
         
-        self .refreshCollectCount()
+        MAPI .getRecommendCity { (respond) in
+            let json = JSON(data:respond)
+            self.city = RecommendCity.fromJSON(json["data"])
+            self.recommendCity .setTitle(self.city?.name, forState: UIControlState.Normal)
+        }
     }
     
     func refreshCollectCount(){

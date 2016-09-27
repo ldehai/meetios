@@ -19,7 +19,7 @@
 		A15ED1171D8478BB0022AA87 /* ReviseWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */; };
 		A15ED1191D847AAE0022AA87 /* RealmConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED1181D847AAE0022AA87 /* RealmConfig.swift */; };
 		A15ED11D1D853DCE0022AA87 /* WordAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED11C1D853DCE0022AA87 /* WordAnnotation.swift */; };
-		A15ED11F1D85AD690022AA87 /* TodayPracticeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED11E1D85AD690022AA87 /* TodayPracticeViewController.swift */; };
+		A1613B9C1D99860100DB431A /* RecommendCityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1613B9B1D99860100DB431A /* RecommendCityViewController.swift */; };
 		A19335BD1D839DDC00A9E4BD /* TopContributerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19335BC1D839DDC00A9E4BD /* TopContributerViewController.swift */; };
 		A19335BF1D83AA6400A9E4BD /* GlobalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A19335BE1D83AA6400A9E4BD /* GlobalViewController.swift */; };
 		A1B91D151D7F200D00BCF30A /* WordDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */; };
@@ -66,7 +66,7 @@
 		A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviseWordsViewController.swift; sourceTree = "<group>"; };
 		A15ED1181D847AAE0022AA87 /* RealmConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmConfig.swift; sourceTree = "<group>"; };
 		A15ED11C1D853DCE0022AA87 /* WordAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordAnnotation.swift; sourceTree = "<group>"; };
-		A15ED11E1D85AD690022AA87 /* TodayPracticeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayPracticeViewController.swift; sourceTree = "<group>"; };
+		A1613B9B1D99860100DB431A /* RecommendCityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecommendCityViewController.swift; sourceTree = "<group>"; };
 		A19335BC1D839DDC00A9E4BD /* TopContributerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopContributerViewController.swift; sourceTree = "<group>"; };
 		A19335BE1D83AA6400A9E4BD /* GlobalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalViewController.swift; sourceTree = "<group>"; };
 		A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordDetailViewController.swift; sourceTree = "<group>"; };
@@ -209,9 +209,8 @@
 				A11F60341D8EFF1300EA0B19 /* SetNickNameViewController.swift */,
 				A1EEB2D61D6C388D0089FA42 /* ViewController.swift */,
 				A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */,
-				A15ED11E1D85AD690022AA87 /* TodayPracticeViewController.swift */,
-				A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */,
 				A1B91D1D1D8178F900BCF30A /* TodayCollectTableViewController.swift */,
+				A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */,
 				A19335BC1D839DDC00A9E4BD /* TopContributerViewController.swift */,
 				D4EFFA961D918BB5006021C7 /* TodayCollectDetailsViewController.swift */,
 				A19335BE1D83AA6400A9E4BD /* GlobalViewController.swift */,
@@ -224,6 +223,7 @@
 				A1EEB2DB1D6C388D0089FA42 /* Assets.xcassets */,
 				A1EEB2DD1D6C388D0089FA42 /* LaunchScreen.storyboard */,
 				A1EEB2E01D6C388D0089FA42 /* Info.plist */,
+				A1613B9B1D99860100DB431A /* RecommendCityViewController.swift */,
 			);
 			path = MeetSwift;
 			sourceTree = "<group>";
@@ -400,7 +400,6 @@
 				A1B91D2B1D82691400BCF30A /* SignInViewController.swift in Sources */,
 				A1B91D1F1D817A6000BCF30A /* TodayCollectTableViewController.swift in Sources */,
 				A1B91D2E1D82728400BCF30A /* Config.swift in Sources */,
-				A15ED11F1D85AD690022AA87 /* TodayPracticeViewController.swift in Sources */,
 				A11F602F1D8EE7C800EA0B19 /* MBProgressHUD+MJ.m in Sources */,
 				A1B91D201D817A6000BCF30A /* StoreTableViewController.swift in Sources */,
 				A1B91D171D7F2ED200BCF30A /* MeetModel.swift in Sources */,
@@ -429,6 +428,7 @@
 				A15ED1191D847AAE0022AA87 /* RealmConfig.swift in Sources */,
 				A1B91D291D82690000BCF30A /* SignUpViewController.swift in Sources */,
 				A1B91D1A1D8117E100BCF30A /* WordBasicCell.swift in Sources */,
+				A1613B9C1D99860100DB431A /* RecommendCityViewController.swift in Sources */,
 				D457B0C91D92CAAB00576336 /* CommonView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

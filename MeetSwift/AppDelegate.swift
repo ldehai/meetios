@@ -10,11 +10,18 @@ import UIKit
 import Fabric
 import Crashlytics
 import RealmSwift
+import AVFoundation
+import MapKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate {
 
     var window: UIWindow?
+    var coordinate:CLLocationCoordinate2D?
+    let locationManager = CLLocationManager()
+    var lat = ""
+    var lon = ""
+    var isCollect = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -40,20 +47,74 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //消息监听
         NSNotificationCenter .defaultCenter() .addObserver(self, selector:#selector(loginOK), name: NOTIFY_LOGIN_OK, object: nil)
+        NSNotificationCenter .defaultCenter() .addObserver(self, selector:#selector(playWordVoice(_:)), name: NOTIFY_PLAY_WORD_VOICE, object: nil)
         
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes:([UIUserNotificationType.Sound, UIUserNotificationType.Alert, UIUserNotificationType.Badge]) , categories: nil))
         
         application .registerForRemoteNotifications()
         
+        //地址位置信息
+        self.locationManager.delegate = self
+        self.locationManager.requestAlwaysAuthorization()
+        
         return true
     }
 
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
+        manager.startUpdatingLocation()
+    }
+    
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
+            
+            if (error != nil) {
+                print("Reverse geocoder failed with error" + error!.localizedDescription)
+                return
+            }
+            
+            self.lat = (locations.last?.coordinate.latitude.description)!
+            self.lon = (locations.last?.coordinate.longitude.description)!
+
+            if (self.isCollect) {
+                return;
+            }
+            self .performSelector(#selector(self.restartLocation), withObject: nil, afterDelay: 60)
+            self .performSelector(#selector(self.stopLocation), withObject: nil, afterDelay: 20)
+            self.isCollect = true
+        })
+    }
+    
+    func restartLocation(){
+        self.locationManager .startUpdatingLocation()
+    }
+    
+    func stopLocation(){
+        self.locationManager .stopUpdatingLocation()
+        self.isCollect = false
+    }
+    
     func loginOK(){
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let userProfileVC:ViewController = storyboard.instantiateViewControllerWithIdentifier("rootVC") as! ViewController
         let nav = UINavigationController(rootViewController: userProfileVC)
         
         self.window?.rootViewController = nav
+    }
+    
+    var player = AVPlayer()
+    func playWordVoice(notify:NSNotification){
+        let voicePath = notify.object as? String
+        if voicePath == nil {
+            return
+        }
+        
+        let url = SRCBaseURL + voicePath!
+        let playerItem = AVPlayerItem( URL:NSURL( string:url )! )
+        player = AVPlayer(playerItem:playerItem)
+        player.rate = 1.0;
+        player.play()
+        
+        print("play")
     }
 
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData){

@@ -41,6 +41,11 @@ class WordDetailViewController: UIViewController {
                     MAPI.collectWord(self.word.word!.id, lon: (self.word.word?.lon)!, lat: (self.word.word?.lat)!) { (respond) in
                         let json = JSON(data:respond)
                         print(json["errorCode"])
+                        if json["errorCode"] .stringValue .isEmpty{
+                            let wordId = json["data"]["id"] .stringValue
+                            let userDefault = NSUserDefaults .standardUserDefaults()
+                            userDefault .setObject(wordId, forKey: "lastWordId")
+                        }
                     }
                     
                     NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_COLLECT_WORD, object:self, userInfo: ["wordId":self.word!.id])
@@ -67,6 +72,24 @@ class WordDetailViewController: UIViewController {
         
         if self.showMode == ShowMode.Show {
             self.confirmBtn .setTitle("好的", forState: UIControlState.Normal)
+        }
+        
+        if word.sysExample.count == 0 {
+            MAPI .getWordDetail(word.id, completion: { (respond) in
+                let json = JSON(data:respond)
+                let word = WordModel.fromJSON(json["data"])
+                self.word = word
+                
+                //保存到本地
+                let realm = try! Realm()
+                try! realm.write {
+                    self.word.word?.own = 1
+                    self.word.collectTime = NSDate()
+                    realm.add(self.word, update: true)
+                }
+                
+                self.detailTableView .reloadData()
+            })
         }
     }
     
@@ -131,8 +154,10 @@ class WordDetailViewController: UIViewController {
         //单词释义
         if indexPath.section == 0 {
             let cell: WordBasicCell = tableView.dequeueReusableCellWithIdentifier("WordBasicCell") as! WordBasicCell
-            
-            cell.pronunciation.text = word.word!.def_cn
+//            cell.audiofile = word.word.
+            cell.word = word.word
+            cell.pronunciation.text = word.word!.pronunc
+            cell.definition.text = word.word?.def_cn
             return cell
         }
         //系统例句

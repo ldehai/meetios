@@ -21,6 +21,7 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
     var coordinate:CLLocationCoordinate2D?
     let locationManager = CLLocationManager()
     var bHaveLocation:Bool = false
+    var city:RecommendCity?
     
     //今日采集
     @IBAction func myCollectAction(sender: AnyObject) {
@@ -42,9 +43,33 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         super.viewDidLoad()
         self.navigationController? .setNavigationBarHidden(true, animated: true);
         
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
-        locationManager.startUpdatingLocation()
+        if self.city == nil {
+            let appDelegate = UIApplication .sharedApplication().delegate as! AppDelegate
+            let lat = ((appDelegate.lat) as NSString) .doubleValue
+            let lon = ((appDelegate.lon) as NSString) .doubleValue
+            
+            let coordinate = CLLocationCoordinate2D (latitude: lat, longitude: lon)
+            mapView.centerCoordinate = coordinate
+            
+            let regionRadius: CLLocationDistance = 1000
+            let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
+            mapView.setRegion(region, animated: true)
+            
+            self.getNearByWords(coordinate)
+        }
+        else{
+            let lat = ((self.city?.lat)! as NSString) .doubleValue
+            let lon = ((self.city?.lon)! as NSString) .doubleValue
+            
+            let coordinate = CLLocationCoordinate2D (latitude: lat, longitude: lon)
+            mapView.centerCoordinate = coordinate
+            
+            let regionRadius: CLLocationDistance = 1000
+            let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
+            mapView.setRegion(region, animated: true)
+            
+            self.getNearByWords(coordinate)
+        }
         
         self .refreshCollectCount()
         
@@ -84,9 +109,16 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
-        mapView.showsUserLocation = (status == .AuthorizedAlways)
-        locationManager.startUpdatingLocation()
+/*    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
+        if self.city == nil {
+            mapView.showsUserLocation = (status == .AuthorizedAlways)
+            locationManager.startUpdatingLocation()
+        }
+        else{
+            let lat = ((self.city?.lat)! as NSString) .doubleValue
+            let lon = ((self.city?.lon)! as NSString) .doubleValue
+            mapView.setCenterCoordinate(CLLocationCoordinate2D (latitude: lat, longitude: lon) , animated: true)
+        }
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
@@ -127,19 +159,8 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
             }
         })
     }
-    
+    */
     func getNearByWords(coordinate:CLLocationCoordinate2D){
-        if coordinate.latitude > 0 {
-            locationManager.stopUpdatingLocation()
-            bHaveLocation = true
-        }
-        
-        mapView.centerCoordinate = coordinate
-        
-        let regionRadius: CLLocationDistance = 500
-        let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(region, animated: true)
-        
         self.wordArray.removeAll()
         MAPI.getWordsBy(String(format:"%f",(coordinate.longitude)), lat: String(format:"%f",(coordinate.latitude))) { (respond) in
             //解析返回的单词
@@ -197,18 +218,18 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         return nil
     }
     
-    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView){
-        if let annotation = view.annotation as? WordAnnotation{
-            let word = annotation.word
-            
-            //点击大头针时，获取单词详情保存到本地
+//    func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView){
+//        if let annotation = view.annotation as? WordAnnotation{
+//            let word = annotation.word
+//            
+//            //点击大头针时，获取单词详情保存到本地
 //            MAPI.getWordDetail(word!.id) { (respond) in
 //                let json = JSON(data:respond)
 //                let word = WordModel.fromJSON(json["data"])
 //                
 //            }
-        }
-    }
+//        }
+//    }
     
     func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl){
         if let annotation = view.annotation as? WordAnnotation{

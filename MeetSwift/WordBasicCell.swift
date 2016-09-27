@@ -9,7 +9,23 @@
 import UIKit
 
 class WordBasicCell: UITableViewCell {
-
+    var word:Word?{
+        didSet{
+            guard let word = word else {
+                return;
+            }
+            
+            pronunciation.text = word.pronunc
+            definition.text = word.def_cn
+            
+            pronunciation .sizeToFit()
+            definition .sizeToFit()
+        }
+    }
+    @IBAction func playVoice(sender: AnyObject) {
+        NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_PLAY_WORD_VOICE, object: word?.uk_audio)
+    }
+    @IBOutlet weak var voiceBtn: UIButton!
     @IBOutlet weak var pronunciation: UILabel!
     @IBOutlet weak var definition: UILabel!
     override func awakeFromNib() {

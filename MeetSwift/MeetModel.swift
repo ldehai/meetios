@@ -12,8 +12,6 @@ import RealmSwift
 import Realm
 
 public class WordModel:Object {
-    dynamic var lat = ""
-    dynamic var lon = ""
     dynamic var id = ""
     dynamic var collectTime = NSDate()
     dynamic var word:Word? = Word()
@@ -50,6 +48,7 @@ public class WordModel:Object {
         p.userExample = userExample
         p.word = word!
         p.id = word!.id
+        p.collectTime = (word?.collectTime)!
         
         return p
     }
@@ -66,6 +65,7 @@ public class Word:Object{
     dynamic var lon = ""
     dynamic var lat = ""
     dynamic var own = 0
+    dynamic var collectTime = NSDate()
     
     override public static func primaryKey() -> String? {
         return "id"
@@ -82,6 +82,16 @@ public class Word:Object{
         p.us_audio = json["us_audio"].stringValue
         p.lon = json["lon"].stringValue
         p.lat = json["lat"].stringValue
+        
+        //把日期从字符串转换到NSDate类型
+        let collectTime:String? = json["collecttime"].stringValue
+        if collectTime != nil && collectTime?.length > 0 {
+            let formatter = NSDateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+            formatter.timeZone = NSTimeZone(name: "GMT")
+            let date = formatter .dateFromString(collectTime!)
+            p.collectTime = date!
+        }
         
         return p
     }
@@ -114,6 +124,7 @@ public class User:Object{
     var tel:Int = 0
     var following:Int = 0
     var follower:Int = 0
+    var todaywords:Int = 0
     var wordcount:Int = 0
     var grade:Int = 0
     var gradename: String?
@@ -134,6 +145,7 @@ public class User:Object{
         p.tel = json["tel"].intValue
         p.following = json["following"].intValue
         p.follower = json["follower"].intValue
+        p.todaywords = json["todaywords"].intValue
         p.wordcount = json["wordcount"].intValue
         p.grade = json["grade"].intValue
         p.gradename = json["gradename"].stringValue
@@ -160,6 +172,32 @@ public class UserExample:Object{
         p.content = json["content"].stringValue
         p.translation = json["translation"].stringValue
         p.user = User.fromJSON(json["user"])!
+        
+        return p
+    }
+}
+
+public class RecommendCity:Object{
+    dynamic var id = ""
+    dynamic var code = ""
+    dynamic var name = ""
+    dynamic var lon = ""
+    dynamic var lat = ""
+    dynamic var thumbnail = ""
+    
+    override public static func primaryKey() -> String? {
+        return "id"
+    }
+    
+    class func fromJSON(json: JSON) -> RecommendCity? {
+        let p = RecommendCity()
+        
+        p.id = json["id"].stringValue
+        p.code = json["code"].stringValue
+        p.name = json["name"].stringValue
+        p.lon = json["lon"].stringValue
+        p.lat = json["lat"].stringValue
+        p.thumbnail = json["thumbnail"].stringValue
         
         return p
     }

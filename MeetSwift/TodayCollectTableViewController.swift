@@ -39,17 +39,18 @@ class TodayCollectTableViewController: UIViewController,UITableViewDelegate,UITa
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 150.0;
+        return 120.0;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: WordTableViewCell = tableView.dequeueReusableCellWithIdentifier("TodayCollectCellId", forIndexPath: indexPath) as! WordTableViewCell
         
         let word = self.wordArray![indexPath.row]
-        cell.name.text = word.word?.name
-        cell.pronunciation.text = word.word?.pronunc
-        cell.definition_en.text = word.word?.def_en
-        cell.definition_cn.text = word.word?.def_cn
+        cell.word = word.word
+//        cell.name.text = word.word?.name
+//        cell.pronunciation.text = word.word?.pronunc
+//        cell.definition_en.text = word.word?.def_en
+//        cell.definition_cn.text = word.word?.def_cn
         
         return cell
     }
