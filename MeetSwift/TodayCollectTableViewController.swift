@@ -16,6 +16,21 @@ class TodayCollectTableViewController: UIViewController,UITableViewDelegate,UITa
 
     var wordArray:Results<WordModel>?
     
+    @IBAction func trainAction(sender: AnyObject) {
+        let word = self.wordArray![0]
+        MAPI.getWordDetail(word.id) { (respond) in
+            let json = JSON(data:respond)
+            let word = WordModel.fromJSON(json["data"])
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let wordDetail:WordDetailViewController = storyboard.instantiateViewControllerWithIdentifier("WordDetailVC") as! WordDetailViewController
+            wordDetail.word = word
+            wordDetail.wordArray = self.wordArray
+            wordDetail.showMode = ShowMode.Train
+            wordDetail.modalPresentationStyle = UIModalPresentationStyle.Custom;
+            self.presentViewController(wordDetail, animated: false, completion: nil)
+        }
+    }
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +43,7 @@ class TodayCollectTableViewController: UIViewController,UITableViewDelegate,UITa
         //查询当天采集的单词
         let yesterday = NSDate .yesterday()
         let realm = try! Realm()
-        self.wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday)
+        self.wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday).sorted("collectTime")
         self.tableView .reloadData()
     }
 

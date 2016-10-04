@@ -17,13 +17,38 @@ class WordDetailViewController: UIViewController {
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var detailTableView: UITableView!
     var word:WordModel!
+    var wordArray:Results<WordModel>?
     var showMode:ShowMode!
+    var currentIndex = 0
     @IBOutlet weak var knowBtn: UIButton!
     @IBOutlet weak var unknowBtn: UIButton!
     @IBAction func knowAction(sender: AnyObject) {
+        currentIndex += 1
+        
+        let word = self.wordArray![currentIndex]
+        wordName.text = word.word!.name
+        MAPI.getWordDetail(word.id) { (respond) in
+            let json = JSON(data:respond)
+            let word = WordModel.fromJSON(json["data"])
+            self.word = word
+            
+            self.detailTableView .reloadData()
+        }
+    }
+    @IBAction func unknowAction(sender: AnyObject) {
+        currentIndex += 1
+        
+        let word = self.wordArray![currentIndex]
+        wordName.text = word.word!.name
+        MAPI.getWordDetail(word.id) { (respond) in
+            let json = JSON(data:respond)
+            let word = WordModel.fromJSON(json["data"])
+            self.word = word
+            
+            self.detailTableView .reloadData()
+        }
     }
     
-    @IBOutlet weak var unknowAction: UIButton!
     //不采集直接关闭窗口
     @IBAction func closeDlg(sender: AnyObject) {
         UIView .animateWithDuration(0.3, animations: {
@@ -75,10 +100,6 @@ class WordDetailViewController: UIViewController {
         
         wordName.text = self.word.word!.name
         
-        if self.showMode == ShowMode.Show {
-            self.confirmBtn .setTitle("好的", forState: UIControlState.Normal)
-        }
-        
         if word.sysExample.count == 0 {
             MAPI .getWordDetail(word.id, completion: { (respond) in
                 let json = JSON(data:respond)
@@ -104,12 +125,28 @@ class WordDetailViewController: UIViewController {
         self.view .setNeedsLayout()
         
         popBg .snp_updateConstraints { (make) in
-            make.edges.equalTo(0)
+            make.top.equalTo(20)
+            make.left.right.bottom.equalTo(0)
         }
         
         //开始刷新界面
-        UIView .animateWithDuration(0.3) { 
+        UIView .animateWithDuration(0.3, animations: { 
             self.view .layoutIfNeeded()
+            }) { (true) in
+                
+                if self.showMode == ShowMode.Show {
+                    self.confirmBtn .setTitle("好的", forState: UIControlState.Normal)
+                    self.confirmBtn.hidden = false
+                }
+                else if self.showMode == ShowMode.Collect{
+                    self.confirmBtn .setTitle("收了它", forState: UIControlState.Normal)
+                    self.confirmBtn.hidden = false
+                }
+                else if self.showMode == ShowMode.Train{
+                    self.confirmBtn.hidden = true
+                    self.knowBtn.hidden = false
+                    self.unknowBtn.hidden = false
+                }
         }
     }
     

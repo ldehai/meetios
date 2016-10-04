@@ -25,6 +25,7 @@ let NOTIFY_PLAY_WORD_VOICE:String = "NOTIFY_PLAY_WORD_VOICE"
 enum ShowMode {
     case Show         // 浏览
     case Collect      // 收集
+    case Train        // 训练
 };
 
 final public class Config {
