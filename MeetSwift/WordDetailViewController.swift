@@ -121,17 +121,18 @@ class WordDetailViewController: UIViewController {
     
     override func viewDidAppear(animated: Bool) {
         
-        //准备调整界面
-        self.view .setNeedsLayout()
-        
-        popBg .snp_updateConstraints { (make) in
-            make.top.equalTo(20)
-            make.left.right.bottom.equalTo(0)
-        }
-        
-        //开始刷新界面
-        UIView .animateWithDuration(0.3, animations: { 
-            self.view .layoutIfNeeded()
+        if self.showMode != ShowMode.Collect{
+            //准备调整界面
+            self.view .setNeedsLayout()
+            
+            popBg .snp_updateConstraints { (make) in
+                make.top.equalTo(20)
+                make.left.right.bottom.equalTo(0)
+            }
+            
+            //开始刷新界面
+            UIView .animateWithDuration(0.3, animations: {
+                self.view .layoutIfNeeded()
             }) { (true) in
                 
                 if self.showMode == ShowMode.Show {
@@ -147,6 +148,11 @@ class WordDetailViewController: UIViewController {
                     self.knowBtn.hidden = false
                     self.unknowBtn.hidden = false
                 }
+            }
+        }
+        else{
+            self.confirmBtn .setTitle("收了它", forState: UIControlState.Normal)
+            self.confirmBtn.hidden = false
         }
     }
     

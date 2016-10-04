@@ -168,13 +168,17 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
             let json = JSON(data:respond)
             print(json["errorCode"])
             
+            let annos = self.mapView .annotations
+            self.mapView .removeAnnotations(annos)
+            
             let wordList = json["data"].array
             for item in wordList! {
                 let word = Word.fromJSON(item)
                 self.wordArray.append(word!)
                 
-                let rand = Double(arc4random()%20)/1000.0
-                let wordCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude + rand, longitude: coordinate.longitude + rand*2)
+                let randX = Double(self .randomInRange(-10...10))/1000.0
+                let randY = Double(self .randomInRange(-15...15))/1000.0
+                let wordCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude + randY, longitude: coordinate.longitude + randX)
                 let newAnnotation = WordAnnotation()
                 newAnnotation.coordinate = wordCoordinate
                 newAnnotation.title = word?.name
@@ -198,7 +202,7 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
                 //大头针图标
                 let index = annotation.word?.name.startIndex.advancedBy(1)
                 let letter = annotation.word?.name.substringToIndex(index!)
-                pinView?.image = self .drawLetterAnnotation(UIImage(named: "pin")!, letter: letter!)
+                pinView?.image = self .drawLetterAnnotation(UIImage(named: "pin2")!, letter: letter!)
                 
                 //点击后弹出视图左侧图标
 //                let mugIconView = UIImageView(image: UIImage(named: "avatar"))
@@ -273,7 +277,7 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
             NSFontAttributeName: UIFont.systemFontOfSize(25.0),
             NSForegroundColorAttributeName: UIColor .whiteColor()
         ]
-        let rect = CGRectMake(10, 5, 30, 30)
+        let rect = CGRectMake(20, 15, 30, 30)
         letter.uppercaseString.drawInRect(rect, withAttributes: textFontAttributes)
 
         //获取已经绘制好的图
@@ -284,5 +288,11 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         
         //返回已经绘制好的图片
         return resultImage
+    }
+    
+    //生成随机数
+    func randomInRange(range: Range<Int>) -> Int {
+        let count = UInt32(range.endIndex - range.startIndex)
+        return  Int(arc4random_uniform(count)) + range.startIndex
     }
 }
