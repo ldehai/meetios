@@ -47,7 +47,6 @@
 		D44F8B9C1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F8B9A1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift */; };
 		D457B0C91D92CAAB00576336 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D457B0C81D92CAAB00576336 /* CommonView.swift */; };
 		D4EFFA951D91867F006021C7 /* WordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EFFA941D91867F006021C7 /* WordTableViewCell.swift */; };
-		D4EFFA971D918BB5006021C7 /* TodayCollectDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EFFA961D918BB5006021C7 /* TodayCollectDetailsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -98,7 +97,6 @@
 		D44F8B9A1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordContributionCollectionViewCell.swift; sourceTree = "<group>"; };
 		D457B0C81D92CAAB00576336 /* CommonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		D4EFFA941D91867F006021C7 /* WordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTableViewCell.swift; sourceTree = "<group>"; };
-		D4EFFA961D918BB5006021C7 /* TodayCollectDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayCollectDetailsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,8 +212,8 @@
 				A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */,
 				A1B91D1D1D8178F900BCF30A /* TodayCollectTableViewController.swift */,
 				A15ED1161D8478BB0022AA87 /* ReviseWordsViewController.swift */,
+				A1613B9B1D99860100DB431A /* RecommendCityViewController.swift */,
 				A19335BC1D839DDC00A9E4BD /* TopContributerViewController.swift */,
-				D4EFFA961D918BB5006021C7 /* TodayCollectDetailsViewController.swift */,
 				A19335BE1D83AA6400A9E4BD /* GlobalViewController.swift */,
 				A1B91D1E1D81791500BCF30A /* StoreTableViewController.swift */,
 				A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */,
@@ -226,7 +224,6 @@
 				A1EEB2DB1D6C388D0089FA42 /* Assets.xcassets */,
 				A1EEB2DD1D6C388D0089FA42 /* LaunchScreen.storyboard */,
 				A1EEB2E01D6C388D0089FA42 /* Info.plist */,
-				A1613B9B1D99860100DB431A /* RecommendCityViewController.swift */,
 			);
 			path = MeetSwift;
 			sourceTree = "<group>";
@@ -412,7 +409,6 @@
 				A1B91D151D7F200D00BCF30A /* WordDetailViewController.swift in Sources */,
 				D44F8B981D87C1500043AF9C /* UserProfileReusableView.swift in Sources */,
 				A1EEB2D71D6C388D0089FA42 /* ViewController.swift in Sources */,
-				D4EFFA971D918BB5006021C7 /* TodayCollectDetailsViewController.swift in Sources */,
 				A11F60351D8EFF1300EA0B19 /* SetNickNameViewController.swift in Sources */,
 				A1EEB2D51D6C388D0089FA42 /* AppDelegate.swift in Sources */,
 				A1B91D271D81BE4D00BCF30A /* UserProfileCell.swift in Sources */,

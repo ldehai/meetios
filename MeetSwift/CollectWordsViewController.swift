@@ -42,7 +42,7 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController? .setNavigationBarHidden(true, animated: true);
-        
+        NSNotificationCenter .defaultCenter() .addObserver(self, selector: #selector(loadWordList), name: NOTIFY_LOAD_WORDLIST, object: nil)
         if self.city == nil {
             let appDelegate = UIApplication .sharedApplication().delegate as! AppDelegate
             let lat = ((appDelegate.lat) as NSString) .doubleValue
@@ -58,6 +58,7 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
             self.getNearByWords(coordinate)
         }
         else{
+            //加载推荐城市地图
             let lat = ((self.city?.lat)! as NSString) .doubleValue
             let lon = ((self.city?.lon)! as NSString) .doubleValue
             
@@ -68,7 +69,12 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
             let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
             mapView.setRegion(region, animated: true)
             
-            self.getNearByWords(coordinate)
+            //显示城市简介
+            let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+            let recommendCity:RecommendCityViewController = storyboard.instantiateViewControllerWithIdentifier("recommendCityVC") as! RecommendCityViewController
+            recommendCity.city = self.city
+            recommendCity.modalPresentationStyle = UIModalPresentationStyle.Custom;
+            self.presentViewController(recommendCity, animated: false, completion: nil)
         }
         
         self .refreshCollectCount()
@@ -76,6 +82,20 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         NSNotificationCenter .defaultCenter() .addObserver(self, selector: #selector(collectWord(_:)), name: NOTIFY_COLLECT_WORD, object: nil)
     }
 
+    func loadWordList(){
+        let lat = ((self.city?.lat)! as NSString) .doubleValue
+        let lon = ((self.city?.lon)! as NSString) .doubleValue
+        
+        let coordinate = CLLocationCoordinate2D (latitude: lat, longitude: lon)
+        mapView.centerCoordinate = coordinate
+        
+        let regionRadius: CLLocationDistance = 1000
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
+        mapView.setRegion(region, animated: true)
+        
+        self.getNearByWords(coordinate)
+    }
+    
     func collectWord(notify:NSNotification){
         let userInfo = notify.userInfo as! [String: AnyObject]
         let wordId = userInfo["wordId"] as! String

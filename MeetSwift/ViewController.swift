@@ -37,10 +37,17 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     let locationManager = CLLocationManager()
     
     @IBAction func recommendCityAction(sender: AnyObject) {
+//        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+//        let topContributer:RecommendCityViewController = storyboard.instantiateViewControllerWithIdentifier("recommendCityVC") as! RecommendCityViewController
+//        topContributer.city = self.city
+//        self.navigationController!.pushViewController(topContributer, animated: true)
+//        
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let topContributer:RecommendCityViewController = storyboard.instantiateViewControllerWithIdentifier("recommendCityVC") as! RecommendCityViewController
-        topContributer.city = self.city
-        self.navigationController!.pushViewController(topContributer, animated: true)
+        let collectVC:CollectWordsViewController = storyboard.instantiateViewControllerWithIdentifier("CollectWords") as! CollectWordsViewController
+        collectVC.city = self.city
+        let nav = UINavigationController(rootViewController: collectVC)
+        nav.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
+        self.presentViewController(nav, animated: false, completion: nil)
     }
     
     @IBAction func topContributerAction(sender: AnyObject) {
