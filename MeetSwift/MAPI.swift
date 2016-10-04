@@ -51,6 +51,10 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/word", parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                     completion(respond: response.data!)
@@ -74,6 +78,10 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/word/" + wordId, parameters: parameters, encoding: .JSON)
             .responseString { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
@@ -114,6 +122,9 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/collect/" + word, parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
                 
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
@@ -129,6 +140,10 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/word/today_list", parameters: parameters, encoding: .JSON)
             .responseString { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
@@ -145,6 +160,10 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/myword", parameters: parameters, encoding: .JSON)
             .responseString { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
@@ -161,6 +180,10 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/user/" + MAPI .userId(), parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
@@ -176,6 +199,10 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/signin", parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
@@ -202,6 +229,10 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/signup", parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
@@ -265,6 +296,10 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/recommendcity", parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
@@ -280,6 +315,10 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/topcontributer", parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }
@@ -295,6 +334,10 @@ class MAPI: NSObject {
         Alamofire.request(.POST, APIBase + "/topworld", parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
                 if let JSON = response.result.value {
                     print("JSON: \(JSON)")
                 }

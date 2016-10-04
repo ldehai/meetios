@@ -16,18 +16,33 @@ class WordBasicCell: UITableViewCell {
             }
             
             pronunciation.text = word.pronunc
-            definition.text = word.def_cn
+            def_cn.text = word.def_cn
+            def_en.text = word.def_en
             
             pronunciation .sizeToFit()
-            definition .sizeToFit()
+            def_cn .sizeToFit()
+            def_en .sizeToFit()
         }
     }
+    
+    class func cellHeightForData(word:Word) -> CGFloat{
+        let width = kDeviceWidth - 100; // whatever your desired width is
+        let def_cn = NSMutableString(string: word.def_cn)
+        let rectdef_cn = def_cn .boundingRectWithSize(CGSizeMake(width, 10000), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: nil, context: nil)
+        
+        let def_en = NSMutableString(string: word.def_en)
+        let rectdef_en = def_en .boundingRectWithSize(CGSizeMake(width, 10000), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: nil, context: nil)
+        
+        return rectdef_cn.size.height + rectdef_en.size.height + 100
+    }
+    
     @IBAction func playVoice(sender: AnyObject) {
         NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_PLAY_WORD_VOICE, object: word?.uk_audio)
     }
+    @IBOutlet weak var def_en: UILabel!
+    @IBOutlet weak var def_cn: UILabel!
     @IBOutlet weak var voiceBtn: UIButton!
     @IBOutlet weak var pronunciation: UILabel!
-    @IBOutlet weak var definition: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

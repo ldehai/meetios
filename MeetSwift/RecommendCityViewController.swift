@@ -29,9 +29,14 @@ class RecommendCityViewController: UIViewController,UIWebViewDelegate {
         self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
         
 //        MAPI getreco
-        let url = NSURL(string:APIBase + "/recommcity/" + (city?.id)!)
-        let request = NSURLRequest(URL: url!)
-        self.webView .loadRequest(request);
+        guard city?.id == nil else{
+            let url = NSURL(string:APIBase + "/recommcity/" + (city?.id)!)
+            let request = NSURLRequest(URL: url!)
+            self.webView .loadRequest(request)
+            
+            return
+        }
+        
         // Do any additional setup after loading the view.
     }
 

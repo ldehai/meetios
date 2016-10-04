@@ -27,6 +27,7 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
         self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
         self.tableView.delegate = self
         self.tableView.dataSource = self
+//        self.tableView .registerClass(WordTableViewCell.self, forCellReuseIdentifier: "TodayCollectCellId")
         
         let realm = try! Realm()
         self.wordArray = realm.objects(WordModel.self)
@@ -44,6 +45,9 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
             print(json["errorCode"])
             
             let wordList = json["data"].array
+            if wordList == nil{
+                return
+            }
             for item in wordList! {
                 let word = WordModel.fromJSON(item)
                 //保存到本地
@@ -53,6 +57,10 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
                     word!.word!.own = 1
                     realm.add(word!, update: true)
                 }
+                
+                let wordId = item["word"]["collectid"] .stringValue
+                let userDefault = NSUserDefaults .standardUserDefaults()
+                userDefault .setObject(wordId, forKey: "lastWordId")
             }
             
             let realm = try! Realm()
@@ -79,13 +87,7 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
         let word = self.wordArray[indexPath.row]
         cell.textLabel?.text = word.word!.name
         cell.detailTextLabel?.text = word.word!.def_cn
-//        
-//        let word = self.wordArray![indexPath.row]
-//        cell.name.text = word.word?.name
-//        cell.pronunciation.text = word.word?.pronunc
-//        cell.definition_en.text = word.word?.def_en
-//        cell.definition_cn.text = word.word?.def_cn
-        
+
         return cell
     }
     

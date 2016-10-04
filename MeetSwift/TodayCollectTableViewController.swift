@@ -39,7 +39,7 @@ class TodayCollectTableViewController: UIViewController,UITableViewDelegate,UITa
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 120.0;
+        return 65.0;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

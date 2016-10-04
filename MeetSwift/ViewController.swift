@@ -30,6 +30,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var topContribute: UIButton!
     @IBOutlet weak var topWorld: UIButton!
     
+    @IBOutlet weak var topManName: UILabel!
+    @IBOutlet weak var topManAvatar: UIImageView!
     @IBOutlet weak var reviseView: CircleProgressView!
     @IBOutlet weak var todayView: CircleProgressView!
     let locationManager = CLLocationManager()
@@ -90,6 +92,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             self.city = RecommendCity.fromJSON(json["data"])
             self.recommendCity .setTitle(self.city?.name, forState: UIControlState.Normal)
         }
+        
+        MAPI .getTopRankWorld { (respond) in
+            let json = JSON(data:respond)
+            let userList = json["data"].array
+            if userList == nil
+            {
+                return
+            }
+            let item = userList?[0]
+            if let user = User.fromJSON((item)!){
+                self.topManName.text = user.nickName
+                self.topManAvatar .sd_setImageWithURL(NSURL(fileURLWithPath: SRCBaseURL + user.avatar!), placeholderImage: UIImage(named: "avatar"))
+            }
+        }
     }
     
     func refreshCollectCount(){
@@ -147,7 +163,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         }
         
         topMan .snp_makeConstraints { (make) in
-            make.right.equalTo(self.view.snp_centerX).offset(-30)
+            make.right.equalTo(self.view.snp_centerX)
         }
         recommendCity .snp_makeConstraints { (make) in
             make.left.equalTo(self.view.snp_centerX).offset(30)

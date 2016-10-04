@@ -80,7 +80,7 @@ class GlobalViewController: UIViewController {
         
         let user = self.userArray[indexPath.row]
         cell.textLabel?.text = user.nickName
-        cell.detailTextLabel?.text = String(user.contributerWord)
+        cell.detailTextLabel?.text = String(user.wordcount)
         
         return cell
     }

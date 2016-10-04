@@ -109,7 +109,7 @@ public class SysExample:Object{
     class func fromJSON(json: JSON) -> SysExample? {
         let p = SysExample()
         p.id = json["id"].stringValue
-        p.content = json["content"].stringValue
+        p.content = json["annotation"].stringValue
         p.translation = json["translation"].stringValue
         
         return p
@@ -169,7 +169,7 @@ public class UserExample:Object{
         let p = UserExample()
         
         p.id = json["id"].stringValue
-        p.content = json["content"].stringValue
+        p.content = json["annotation"].stringValue
         p.translation = json["translation"].stringValue
         p.user = User.fromJSON(json["user"])!
         

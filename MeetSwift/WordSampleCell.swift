@@ -23,13 +23,15 @@ class WordSampleCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    internal func contentHeight()-> CGFloat{
-        sentence.numberOfLines = 0; // allows label to have as many lines as needed
-        sentence .sizeToFit()
+    class func contentHeight(sample:SysExample)-> CGFloat{
         
-        translate_cn.numberOfLines = 0; // allows label to have as many lines as needed
-        translate_cn .sizeToFit()
+        let width = kDeviceWidth - 100; // whatever your desired width is
+        let content = NSMutableString(string: sample.content)
+        let contentSize = content .boundingRectWithSize(CGSizeMake(width, 10000), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: nil, context: nil)
         
-        return sentence.frame.height + translate_cn.frame.height
+        let translation = NSMutableString(string: sample.translation)
+        let translationSize = translation .boundingRectWithSize(CGSizeMake(width, 10000), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: nil, context: nil)
+        
+        return contentSize.size.height + translationSize.size.height + 40
     }
 }
