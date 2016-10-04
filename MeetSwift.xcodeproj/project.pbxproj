@@ -12,6 +12,7 @@
 		A11F60311D8EEE3500EA0B19 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F60301D8EEE3500EA0B19 /* GuideViewController.swift */; };
 		A11F60331D8EFEF800EA0B19 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F60321D8EFEF800EA0B19 /* VerifyViewController.swift */; };
 		A11F60351D8EFF1300EA0B19 /* SetNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F60341D8EFF1300EA0B19 /* SetNickNameViewController.swift */; };
+		A148F1231DA3E94D0029BAD9 /* TopManCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A148F1221DA3E94D0029BAD9 /* TopManCell.swift */; };
 		A14930111D717F210090E647 /* MAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14930101D717F210090E647 /* MAPI.swift */; };
 		A15C012F1D90112B00EC8188 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = A15C012D1D900AB900EC8188 /* MBProgressHUD.m */; };
 		A15ED1101D8456660022AA87 /* CircleProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A15ED10F1D8456660022AA87 /* CircleProgressView.swift */; };
@@ -58,6 +59,7 @@
 		A11F60301D8EEE3500EA0B19 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		A11F60321D8EFEF800EA0B19 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		A11F60341D8EFF1300EA0B19 /* SetNickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetNickNameViewController.swift; sourceTree = "<group>"; };
+		A148F1221DA3E94D0029BAD9 /* TopManCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopManCell.swift; sourceTree = "<group>"; };
 		A14930101D717F210090E647 /* MAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAPI.swift; sourceTree = "<group>"; };
 		A15C012C1D900AB900EC8188 /* MBProgressHUD.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		A15C012D1D900AB900EC8188 /* MBProgressHUD.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				D44F8B961D87C1500043AF9C /* UserProfileReusableView.swift */,
 				D44F8B9A1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift */,
 				D4EFFA941D91867F006021C7 /* WordTableViewCell.swift */,
+				A148F1221DA3E94D0029BAD9 /* TopManCell.swift */,
 			);
 			name = Cell;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				A1B91D1F1D817A6000BCF30A /* TodayCollectTableViewController.swift in Sources */,
 				A1B91D2E1D82728400BCF30A /* Config.swift in Sources */,
 				A11F602F1D8EE7C800EA0B19 /* MBProgressHUD+MJ.m in Sources */,
+				A148F1231DA3E94D0029BAD9 /* TopManCell.swift in Sources */,
 				A1B91D201D817A6000BCF30A /* StoreTableViewController.swift in Sources */,
 				A1B91D171D7F2ED200BCF30A /* MeetModel.swift in Sources */,
 				A11F60331D8EFEF800EA0B19 /* VerifyViewController.swift in Sources */,

@@ -71,16 +71,31 @@ class GlobalViewController: UIViewController {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 100.0;
+        return 68.0;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "WordCell")
+        let cell: TopManCell = tableView.dequeueReusableCellWithIdentifier("topmancell", forIndexPath: indexPath) as! TopManCell
+//        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "topmancell")
         
         let user = self.userArray[indexPath.row]
-        cell.textLabel?.text = user.nickName
-        cell.detailTextLabel?.text = String(user.wordcount)
+        cell.posBtn .setTitle(String(indexPath.row + 1), forState: UIControlState.Normal)
+        cell.nameLabel.text = user.nickName
+        cell.wordCountLabel.text = String(user.wordcount)
+        switch indexPath.row {
+        case 0:
+            cell.posBtn .setBackgroundImage(UIImage(named: "goldenLevel"), forState: UIControlState.Normal)
+        case 1:
+            cell.posBtn .setBackgroundImage(UIImage(named: "silverLevel"), forState: UIControlState.Normal)
+        case 2:
+            cell.posBtn .setBackgroundImage(UIImage(named: "copperLevel"), forState: UIControlState.Normal)
+            
+        default:
+            cell.posBtn .setBackgroundImage(nil, forState: UIControlState.Normal)
+        }
+//        cell.textLabel?.text = user.nickName
+//        cell.detailTextLabel?.text = String(user.wordcount)
         
         return cell
     }
