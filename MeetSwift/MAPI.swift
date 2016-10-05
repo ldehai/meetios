@@ -175,10 +175,10 @@ class MAPI: NSObject {
     }
     
     //获取我的个人信息
-    class func getUserProfile(completion: (respond :NSData) ->())
+    class func getUserProfile(userId:String,completion: (respond :NSData) ->())
     {
         let parameters = ["token":MAPI .accessToken()];
-        Alamofire.request(.POST, APIBase + "/user/" + MAPI .userId(), parameters: parameters, encoding: .JSON)
+        Alamofire.request(.POST, APIBase + "/user/" + userId, parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)
                 if response.result .isSuccess == false{

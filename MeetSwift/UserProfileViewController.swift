@@ -13,13 +13,14 @@ class UserProfileViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     var user:User!
+    var userId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "个人中心"
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
-        MAPI .getUserProfile { (respond) in
+        MAPI .getUserProfile(userId) { (respond) in
             let json = JSON(data:respond)
       
             self.user = User.fromJSON(json["data"])

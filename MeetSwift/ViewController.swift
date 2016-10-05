@@ -73,7 +73,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         self .setContraints()
         
         //获取个人详情
-        MAPI .getUserProfile { (respond) in
+        MAPI .getUserProfile(MAPI.userId()) { (respond) in
             let json = JSON(data:respond)
             self.user = User.fromJSON(json["data"])
             
@@ -202,6 +202,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     func openUserProfile(){
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
+        userProfileVC.userId = MAPI .userId()
         self.navigationController!.pushViewController(userProfileVC, animated: true)
     }
     

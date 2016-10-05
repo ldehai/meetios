@@ -196,7 +196,6 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
                 let word = Word.fromJSON(item)
                 self.wordArray.append(word!)
                 
-                
                 let newAnnotation = WordAnnotation()
                 newAnnotation.title = word?.name
                 newAnnotation.subtitle = word?.def_cn

@@ -95,4 +95,14 @@ class GlobalViewController: UIViewController {
         
         return cell
     }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        tableView .deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let user = self.userArray[indexPath.row]
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
+        userProfileVC.userId = user.userId!
+        self.navigationController!.pushViewController(userProfileVC, animated: true)
+    }
 }

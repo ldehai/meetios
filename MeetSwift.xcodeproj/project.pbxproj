@@ -41,9 +41,7 @@
 		A1EEB2DC1D6C388D0089FA42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A1EEB2DB1D6C388D0089FA42 /* Assets.xcassets */; };
 		A1EEB2DF1D6C388D0089FA42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1EEB2DD1D6C388D0089FA42 /* LaunchScreen.storyboard */; };
 		A1EEB2EB1D6DFA0B0089FA42 /* CollectWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */; };
-		D44F8B8F1D87BA9F0043AF9C /* UserProfileCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F8B8E1D87BA9F0043AF9C /* UserProfileCollectionViewController.swift */; };
 		D44F8B941D87BFE80043AF9C /* FootprintCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F8B921D87BFE80043AF9C /* FootprintCell.swift */; };
-		D44F8B981D87C1500043AF9C /* UserProfileReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F8B961D87C1500043AF9C /* UserProfileReusableView.swift */; };
 		D44F8B9C1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D44F8B9A1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift */; };
 		D457B0C91D92CAAB00576336 /* CommonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D457B0C81D92CAAB00576336 /* CommonView.swift */; };
 		D4EFFA951D91867F006021C7 /* WordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4EFFA941D91867F006021C7 /* WordTableViewCell.swift */; };
@@ -91,9 +89,7 @@
 		A1EEB2E01D6C388D0089FA42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectWordsViewController.swift; sourceTree = "<group>"; };
 		C18BD93F41EB40E675A9D400 /* Pods-MeetSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift.release.xcconfig"; sourceTree = "<group>"; };
-		D44F8B8E1D87BA9F0043AF9C /* UserProfileCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileCollectionViewController.swift; sourceTree = "<group>"; };
 		D44F8B921D87BFE80043AF9C /* FootprintCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootprintCell.swift; sourceTree = "<group>"; };
-		D44F8B961D87C1500043AF9C /* UserProfileReusableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileReusableView.swift; sourceTree = "<group>"; };
 		D44F8B9A1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordContributionCollectionViewCell.swift; sourceTree = "<group>"; };
 		D457B0C81D92CAAB00576336 /* CommonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		D4EFFA941D91867F006021C7 /* WordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTableViewCell.swift; sourceTree = "<group>"; };
@@ -160,7 +156,6 @@
 				A1B91D1B1D81198600BCF30A /* WordSampleCell.swift */,
 				A1B91D261D81BE4D00BCF30A /* UserProfileCell.swift */,
 				D44F8B921D87BFE80043AF9C /* FootprintCell.swift */,
-				D44F8B961D87C1500043AF9C /* UserProfileReusableView.swift */,
 				D44F8B9A1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift */,
 				D4EFFA941D91867F006021C7 /* WordTableViewCell.swift */,
 				A148F1221DA3E94D0029BAD9 /* TopManCell.swift */,
@@ -218,7 +213,6 @@
 				A1B91D1E1D81791500BCF30A /* StoreTableViewController.swift */,
 				A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */,
 				A1B91D211D81BC5C00BCF30A /* UserProfileViewController.swift */,
-				D44F8B8E1D87BA9F0043AF9C /* UserProfileCollectionViewController.swift */,
 				A11F60301D8EEE3500EA0B19 /* GuideViewController.swift */,
 				A1EEB2D81D6C388D0089FA42 /* Main.storyboard */,
 				A1EEB2DB1D6C388D0089FA42 /* Assets.xcassets */,
@@ -407,7 +401,6 @@
 				A11F60331D8EFEF800EA0B19 /* VerifyViewController.swift in Sources */,
 				A14930111D717F210090E647 /* MAPI.swift in Sources */,
 				A1B91D151D7F200D00BCF30A /* WordDetailViewController.swift in Sources */,
-				D44F8B981D87C1500043AF9C /* UserProfileReusableView.swift in Sources */,
 				A1EEB2D71D6C388D0089FA42 /* ViewController.swift in Sources */,
 				A11F60351D8EFF1300EA0B19 /* SetNickNameViewController.swift in Sources */,
 				A1EEB2D51D6C388D0089FA42 /* AppDelegate.swift in Sources */,
@@ -422,7 +415,6 @@
 				A11F60311D8EEE3500EA0B19 /* GuideViewController.swift in Sources */,
 				A1EEB2EB1D6DFA0B0089FA42 /* CollectWordsViewController.swift in Sources */,
 				A1B91D221D81BC5C00BCF30A /* UserProfileViewController.swift in Sources */,
-				D44F8B8F1D87BA9F0043AF9C /* UserProfileCollectionViewController.swift in Sources */,
 				D4EFFA951D91867F006021C7 /* WordTableViewCell.swift in Sources */,
 				A15ED1131D8462E20022AA87 /* HexColor.swift in Sources */,
 				A15ED1191D847AAE0022AA87 /* RealmConfig.swift in Sources */,

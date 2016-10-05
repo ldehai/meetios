@@ -29,7 +29,7 @@ class UserProfileCollectionViewController: UICollectionViewController {
         self.layout.headerReferenceSize = CGSizeMake(UIScreen.mainScreen().bounds.size.width, 300)
         self.collectionView?.backgroundColor = UIColor.whiteColor()
         
-        MAPI .getUserProfile { (respond) in
+        MAPI .getUserProfile() { (respond) in
             let json = JSON(data:respond)
             self.user = User.fromJSON(json["data"])
             self.collectionView!.reloadData()
