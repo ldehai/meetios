@@ -279,15 +279,29 @@ class MAPI: NSObject {
         
         Alamofire.upload(
             .POST,
-            APIBase + "/user/" + MAPI .userId(),
+            APIBase + "/avatar/" + MAPI .userId(),
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(data: imageData, name: "images", mimeType: "image/png")
+                multipartFormData.appendBodyPart(data: imageData, name: "image", mimeType: "image/png")
             },
             encodingCompletion: { encodingResult in
                 
+                switch encodingResult {
+                case .Success(let upload, _, _):
+                    upload.responseJSON { response in
+                        if let JSON = response.result.value {
+                            print("JSON: \(JSON)")
+                        }
+                        
+                        completion(respond: response.data!)
+                    }
+                    
+                case .Failure(_):
+                    break
+                    // failure block
+                }
         })
-        
-//        Alamofire .upload(.POST, APIBase + "/user/" + MAPI .userId(), data: imageData)
+ 
+//        Alamofire .upload(.POST, APIBase + "/avatar/" + MAPI .userId(), data: imageData)
     }
     
     //推荐城市

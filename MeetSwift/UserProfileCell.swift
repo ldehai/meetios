@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserProfileCell: UITableViewCell {
+class UserProfileCell: UITableViewCell,UIActionSheetDelegate {
 
     @IBOutlet weak var avatarImageView: UIImageView!
     @IBOutlet weak var nicknameLabel: UILabel!
@@ -17,6 +17,7 @@ class UserProfileCell: UITableViewCell {
     @IBOutlet weak var wordcountLabel: UILabel!
     @IBOutlet weak var gradeLabel: UILabel!
     @IBOutlet weak var goldenLabel: UILabel!
+    var avatarClick:(()->())?
     
     var user: User? {
         didSet {
@@ -29,7 +30,25 @@ class UserProfileCell: UITableViewCell {
             wordcountLabel.text = "\(user.wordcount)"
             gradeLabel.text = "\(user.grade)"
             goldenLabel.text = "\(user.golden)"
+            
+            if let image = UIImage(contentsOfFile: user.avatar!){
+                avatarImageView.image = image
+            }
+            else{
+                avatarImageView .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
+            }
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(changeAvatar))
+            avatarImageView .addGestureRecognizer(tap)
+            avatarImageView.userInteractionEnabled = true
         }
+    }
+    
+    func changeAvatar(){
+        guard let avatarClick = avatarClick else{
+            return
+        }
+        avatarClick()
     }
     
     override func awakeFromNib() {

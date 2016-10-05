@@ -16,6 +16,7 @@ import RealmSwift
 class ViewController: UIViewController, CLLocationManagerDelegate{
 
     var user:User?
+    var topManUserId = ""
     var city:RecommendCity?
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var wordCountView: UIView!
@@ -29,12 +30,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var recommendCity: UIButton!
     @IBOutlet weak var topContribute: UIButton!
     @IBOutlet weak var topWorld: UIButton!
-    
     @IBOutlet weak var topManName: UILabel!
     @IBOutlet weak var topManAvatar: UIImageView!
     @IBOutlet weak var reviseView: CircleProgressView!
     @IBOutlet weak var todayView: CircleProgressView!
     let locationManager = CLLocationManager()
+    
+    @IBAction func showTopManProfile(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
+        userProfileVC.userId = self.topManUserId
+        self.navigationController!.pushViewController(userProfileVC, animated: true)
+    }
     
     @IBAction func recommendCityAction(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
@@ -71,13 +78,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
         
         self .setContraints()
-        
+        self .refreshData()
+    }
+    
+    func refreshData(){
         //获取个人详情
         MAPI .getUserProfile(MAPI.userId()) { (respond) in
             let json = JSON(data:respond)
             self.user = User.fromJSON(json["data"])
-            
-            self.avatarImage .sd_setImageWithURL(NSURL(fileURLWithPath: SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
+            self.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
             self.wordCountLabel.text = String(self.user!.wordcount)
             self.reviseView.update(Double(self.user!.wordcount + 1), total: 1)
             self.goldCountLable.text = String(self.user!.golden)
@@ -105,7 +114,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             let item = userList?[0]
             if let user = User.fromJSON((item)!){
                 self.topManName.text = user.nickName
-                self.topManAvatar .sd_setImageWithURL(NSURL(fileURLWithPath: SRCBaseURL + user.avatar!), placeholderImage: UIImage(named: "avatar"))
+                self.topManUserId = user.userId!
+                self.topManAvatar .sd_setImageWithURL(NSURL(string:SRCBaseURL + user.avatar!), placeholderImage: UIImage(named: "avatar"))
+                
+                self.topMan .addTarget(self, action: #selector(self.showTopManProfile(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                
+                self.topManAvatar.userInteractionEnabled = true
+                let gesture = UITapGestureRecognizer(target: self, action: #selector(self.showTopManProfile(_:)))
+                self.topManAvatar .addGestureRecognizer(gesture)
             }
         }
     }
@@ -196,6 +212,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         
+        self .refreshData()
         self .refreshCollectCount()
     }
     

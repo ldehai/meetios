@@ -70,7 +70,7 @@ class GlobalViewController: UIViewController {
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
     {
-        return 68.0;
+        return 70.0;
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
@@ -81,6 +81,7 @@ class GlobalViewController: UIViewController {
         cell.posBtn .setTitle(String(indexPath.row + 1), forState: UIControlState.Normal)
         cell.nameLabel.text = user.nickName
         cell.wordCountLabel.text = String(user.wordcount)
+        cell.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + user.avatar!), placeholderImage: UIImage(named: "avatar"))
         switch indexPath.row {
         case 0:
             cell.posBtn .setBackgroundImage(UIImage(named: "goldenLevel"), forState: UIControlState.Normal)
