@@ -68,7 +68,11 @@ class WordDetailViewController: UIViewController {
             }) { (true) in
                 if self.showMode == ShowMode.Collect {
                     //采集
-                    MAPI.collectWord(self.word.word!.id, lon: (self.word.word?.lon)!, lat: (self.word.word?.lat)!) { (respond) in
+                    let appDelegate = UIApplication .sharedApplication().delegate as! AppDelegate
+                    MAPI.collectWord(self.word.word!.id,
+                                     lon: (self.word.word?.lon)!,
+                                     lat: (self.word.word?.lat)!,
+                                     city:appDelegate.city) { (respond) in
                         let json = JSON(data:respond)
                         print(json["errorCode"])
                         if json["errorCode"] .stringValue .isEmpty{
@@ -155,7 +159,11 @@ class WordDetailViewController: UIViewController {
             self.confirmBtn.hidden = false
         }
     }
-    
+
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int{
+        return 3
+    }
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         switch section {
         case 0:
@@ -218,7 +226,7 @@ class WordDetailViewController: UIViewController {
         //单词释义
         if indexPath.section == 0 {
             let cell: WordBasicCell = tableView.dequeueReusableCellWithIdentifier("WordBasicCell") as! WordBasicCell
-//            cell.audiofile = word.word.
+
             cell.word = word.word
             cell.pronunciation.text = word.word!.pronunc
             cell.def_cn.text = word.word?.def_cn
@@ -247,9 +255,4 @@ class WordDetailViewController: UIViewController {
         
         return cell
     }
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int{
-        return 3
-    }
-
 }

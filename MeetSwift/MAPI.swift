@@ -113,12 +113,13 @@ class MAPI: NSObject {
         word:String,
         lon:String,
         lat:String,
+        city:String,
         completion: (respond :NSData) ->())
     {
         let parameters = ["lat":lat,
                           "lon":lon,
                           "token":MAPI .accessToken(),
-                          "city":"南京"];
+                          "city":city];
         Alamofire.request(.POST, APIBase + "/collect/" + word, parameters: parameters, encoding: .JSON)
             .responseJSON { response in
                 print(response.result)

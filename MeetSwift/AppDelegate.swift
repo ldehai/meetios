@@ -12,6 +12,7 @@ import Crashlytics
 import RealmSwift
 import AVFoundation
 import MapKit
+import FoursquareAPIClient
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate {
@@ -21,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     let locationManager = CLLocationManager()
     var lat = ""
     var lon = ""
+    var city = ""
     var isCollect = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -65,11 +67,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     }
     
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+        
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
-            
             if (error != nil) {
                 print("Reverse geocoder failed with error" + error!.localizedDescription)
                 return
+            }
+            
+            if placemarks!.count > 0 {
+                let pm = placemarks![0] as CLPlacemark
+                var city = pm.locality
+                print(city)
+                if city == nil{
+                    city = ""
+                }
+                self.city = city!
             }
             
             self.lat = (locations.last?.coordinate.latitude.description)!
@@ -83,7 +95,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             self.isCollect = true
         })
     }
-    
+
     func restartLocation(){
         self.locationManager .startUpdatingLocation()
     }

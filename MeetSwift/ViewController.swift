@@ -37,11 +37,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     let locationManager = CLLocationManager()
     
     @IBAction func recommendCityAction(sender: AnyObject) {
-//        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-//        let topContributer:RecommendCityViewController = storyboard.instantiateViewControllerWithIdentifier("recommendCityVC") as! RecommendCityViewController
-//        topContributer.city = self.city
-//        self.navigationController!.pushViewController(topContributer, animated: true)
-//        
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let collectVC:CollectWordsViewController = storyboard.instantiateViewControllerWithIdentifier("CollectWords") as! CollectWordsViewController
         collectVC.city = self.city
@@ -206,10 +201,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     func openUserProfile(){
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-//        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
-//        
-       let userProfileVC:UserProfileCollectionViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileCollectionVC") as! UserProfileCollectionViewController  
-        
+        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
         self.navigationController!.pushViewController(userProfileVC, animated: true)
     }
     

@@ -27,7 +27,6 @@ class GlobalViewController: UIViewController {
         topTip .snp_makeConstraints { (make) in
             make.left.equalTo(15)
             make.right.equalTo(-15)
-//            make.top.equalTo(144)
         }
         topTip .sizeToFit()
         
@@ -77,7 +76,6 @@ class GlobalViewController: UIViewController {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
         
         let cell: TopManCell = tableView.dequeueReusableCellWithIdentifier("topmancell", forIndexPath: indexPath) as! TopManCell
-//        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "topmancell")
         
         let user = self.userArray[indexPath.row]
         cell.posBtn .setTitle(String(indexPath.row + 1), forState: UIControlState.Normal)
@@ -94,8 +92,6 @@ class GlobalViewController: UIViewController {
         default:
             cell.posBtn .setBackgroundImage(nil, forState: UIControlState.Normal)
         }
-//        cell.textLabel?.text = user.nickName
-//        cell.detailTextLabel?.text = String(user.wordcount)
         
         return cell
     }

@@ -29,7 +29,6 @@ class TopContributerViewController: UIViewController {
         tableView .snp_makeConstraints { (make) in
             make.left.right.bottom.equalTo(5)
             make.top.equalTo(topTip.snp_bottom).offset(5)
-//            make.edges.equalTo(self.view).inset(UIEdgeInsetsMake(88, 20, 20, 20))
         }
         
         MAPI .getTopContributer { (respond) in
