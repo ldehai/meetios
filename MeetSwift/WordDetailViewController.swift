@@ -30,6 +30,8 @@ class WordDetailViewController: UIViewController {
         MAPI.getWordDetail(word.id) { (respond) in
             let json = JSON(data:respond)
             let word = WordModel.fromJSON(json["data"])
+            word?.word?.lat = (self.word.word?.lat)!
+            word?.word?.lon = (self.word.word?.lon)!
             self.word = word
             
             self.detailTableView .reloadData()
@@ -108,6 +110,8 @@ class WordDetailViewController: UIViewController {
             MAPI .getWordDetail(word.id, completion: { (respond) in
                 let json = JSON(data:respond)
                 let word = WordModel.fromJSON(json["data"])
+                word?.word?.lat = (self.word.word?.lat)!
+                word?.word?.lon = (self.word.word?.lon)!
                 self.word = word
                 
                 //保存到本地

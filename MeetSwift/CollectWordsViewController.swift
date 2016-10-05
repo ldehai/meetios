@@ -196,13 +196,24 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
                 let word = Word.fromJSON(item)
                 self.wordArray.append(word!)
                 
-                let randX = Double(self .randomInRange(-10...10))/1000.0
-                let randY = Double(self .randomInRange(-15...15))/1000.0
-                let wordCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude + randY, longitude: coordinate.longitude + randX)
+                
                 let newAnnotation = WordAnnotation()
-                newAnnotation.coordinate = wordCoordinate
                 newAnnotation.title = word?.name
                 newAnnotation.subtitle = word?.def_cn
+                
+                //如果单词本身已经有坐标，就使用单词的坐标，否则就在当前位置随机生成一个坐标
+                if word?.lat == "" || word?.lon == ""{
+                    let randX = Double(self .randomInRange(-10...10))/1000.0
+                    let randY = Double(self .randomInRange(-15...15))/1000.0
+                    let wordCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude + randY, longitude: coordinate.longitude + randX)
+                    word?.lat = String(wordCoordinate.latitude)
+                    word?.lon = String(wordCoordinate.longitude)
+                    newAnnotation.coordinate = wordCoordinate
+                }
+                else{
+                    newAnnotation.coordinate = CLLocationCoordinate2D(latitude: Double((word?.lat)!)!, longitude: Double((word?.lon)!)!)
+                }
+                
                 newAnnotation.word = word
                 self.mapView.addAnnotation(newAnnotation)
             }
@@ -269,8 +280,11 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
             if wordModel == nil {
                 MAPI.getWordDetail(word!.id) { (respond) in
                     let json = JSON(data:respond)
-                    let word = WordModel.fromJSON(json["data"])
-                    wordDetail.word = word
+                    let newWord = WordModel.fromJSON(json["data"])
+                    newWord?.word?.lon = (word?.lon)!
+                    newWord?.word?.lat = (word?.lat)!
+                    
+                    wordDetail.word = newWord
                     self.presentViewController(wordDetail, animated: false, completion: nil)
                 }
             }
