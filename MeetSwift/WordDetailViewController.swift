@@ -12,6 +12,7 @@ import RealmSwift
 
 class WordDetailViewController: UIViewController {
 
+    @IBOutlet weak var tipView: UIView!
     @IBOutlet weak var popBg: UIView!
     @IBOutlet weak var wordName: UILabel!
     @IBOutlet weak var confirmBtn: UIButton!
@@ -23,21 +24,21 @@ class WordDetailViewController: UIViewController {
     @IBOutlet weak var knowBtn: UIButton!
     @IBOutlet weak var unknowBtn: UIButton!
     @IBAction func knowAction(sender: AnyObject) {
-        currentIndex += 1
-        
-        let word = self.wordArray![currentIndex]
-        wordName.text = word.word!.name
-        MAPI.getWordDetail(word.id) { (respond) in
-            let json = JSON(data:respond)
-            let word = WordModel.fromJSON(json["data"])
-            word?.word?.lat = (self.word.word?.lat)!
-            word?.word?.lon = (self.word.word?.lon)!
-            self.word = word
-            
-            self.detailTableView .reloadData()
-        }
+        self .getNextWord()
     }
     @IBAction func unknowAction(sender: AnyObject) {
+        self .getNextWord()
+    }
+    
+    func getNextWord(){
+        print(currentIndex)
+        if currentIndex + 1 == self.wordArray?.count  {
+            self.popBg.hidden = true
+            self.tipView.hidden = false
+            
+            return
+        }
+        
         currentIndex += 1
         
         let word = self.wordArray![currentIndex]

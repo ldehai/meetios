@@ -77,13 +77,13 @@ class MAPI: NSObject {
         let parameters = ["token":MAPI .accessToken()];
         Alamofire.request(.POST, APIBase + "/word/" + wordId, parameters: parameters, encoding: .JSON)
             .responseString { response in
-                print(response.result)
+//                print(response.result)
                 if response.result .isSuccess == false{
                     return
                 }
                 
                 if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
+//                    print("JSON: \(JSON)")
                 }
                 
                 let convertStr = MAPI .stringByRemovingControlCharacters(response.result.value!)
@@ -276,12 +276,12 @@ class MAPI: NSObject {
     class func updateAvatar(image:String, completion: (respond :NSData) ->())
     {
         let imageData = UIImagePNGRepresentation(UIImage(contentsOfFile: image)!)!
-        
+
         Alamofire.upload(
             .POST,
             APIBase + "/avatar/" + MAPI .userId(),
             multipartFormData: { multipartFormData in
-                multipartFormData.appendBodyPart(data: imageData, name: "image", mimeType: "image/png")
+                multipartFormData.appendBodyPart(data: imageData, name: "image",fileName: "anyname", mimeType: "image/png")
             },
             encodingCompletion: { encodingResult in
                 
@@ -300,8 +300,6 @@ class MAPI: NSObject {
                     // failure block
                 }
         })
- 
-//        Alamofire .upload(.POST, APIBase + "/avatar/" + MAPI .userId(), data: imageData)
     }
     
     //推荐城市
