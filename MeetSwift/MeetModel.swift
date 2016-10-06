@@ -88,7 +88,7 @@ public class Word:Object{
         if collectTime != nil && collectTime?.length > 0 {
             let formatter = NSDateFormatter()
             formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            formatter.timeZone = NSTimeZone(name: "GMT")
+            formatter.timeZone = NSTimeZone(name: "GMT+8")
             let date = formatter .dateFromString(collectTime!)
             p.collectTime = date!
         }

@@ -7,13 +7,14 @@ target "MeetSwift" do
     
 pod 'SnapKit', '~> 0.22.0'
 pod 'Alamofire', '~> 3.4'
-pod 'SwiftyJSON'
+pod 'SwiftyJSON', '~> 2.3.2'
 pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
 pod 'RealmSwift'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'SDWebImage', '~>3.8'
-pod 'SwiftDate'
+pod 'SwiftDate', '~>3.0.8'
 pod 'FoursquareAPIClient'
+pod 'JPush-iOS-SDK'
 end
 

@@ -32,10 +32,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     @IBOutlet weak var topWorld: UIButton!
     @IBOutlet weak var topManName: UILabel!
     @IBOutlet weak var topManAvatar: UIImageView!
-    @IBOutlet weak var reviseView: CircleProgressView!
-    @IBOutlet weak var todayView: CircleProgressView!
+    @IBOutlet weak var reviseView: UIView!
+    @IBOutlet weak var todayView: UIView!
     let locationManager = CLLocationManager()
     
+    @IBOutlet weak var totalWordCount: UILabel!
+    @IBOutlet weak var todayWordCount: UILabel!
     @IBAction func showTopManProfile(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
@@ -78,6 +80,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
         
         self .setContraints()
+        self .performSelector(#selector(self.getMyWords), withObject: nil, afterDelay: 0)
         self .refreshData()
     }
     
@@ -88,14 +91,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             self.user = User.fromJSON(json["data"])
             self.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
             self.wordCountLabel.text = String(self.user!.wordcount)
-            self.reviseView.update(Double(self.user!.wordcount + 1), total: 1)
+//            self.reviseView.update(Double(self.user!.wordcount + 1), total: 1)
             self.goldCountLable.text = String(self.user!.golden)
             self.gradeBtn .setTitle(String(self.user!.grade), forState: UIControlState.Normal)
             self.gradeBtn.layer.borderWidth = 1
             self.gradeBtn.layer.borderColor = UIColor .whiteColor().CGColor
             
-            self.todayView.update(50.0, total: (self.user?.todaywords)!)
-            self.reviseView.update(50.0, total: (self.user?.wordcount)!)
+//            self.todayView.update(50.0, total: (self.user?.todaywords)!)
+//            self.reviseView.update(50.0, total: (self.user?.wordcount)!)
+            self.totalWordCount.text = "\(self.user!.wordcount)"
         }
         
         MAPI .getRecommendCity { (respond) in
@@ -126,13 +130,48 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         }
     }
     
+    func getMyWords(){
+        let userDefault = NSUserDefaults .standardUserDefaults()
+        var lastWordId: String? = userDefault .objectForKey("lastWordId") as? String
+        if (lastWordId == nil) {
+            lastWordId = ""
+        }
+        MAPI.getMyWords(lastWordId!) { (respond) in
+            //解析返回的单词
+            //            print("JSON: \(respond)")
+            let json = JSON(data:respond)
+            print(json["errorCode"])
+            
+            let wordList = json["data"].array
+            if wordList == nil{
+                return
+            }
+            for item in wordList! {
+                let word = WordModel.fromJSON(item)
+                //保存到本地
+                print("save word:\(word?.word?.name)")
+                let realm = try! Realm()
+                try! realm.write {
+                    word!.word!.own = 1
+                    realm.add(word!, update: true)
+                }
+                
+                let wordId = item["word"]["collectid"] .stringValue
+                let userDefault = NSUserDefaults .standardUserDefaults()
+                userDefault .setObject(wordId, forKey: "lastWordId")
+            }
+            
+            self .refreshCollectCount()
+        }
+    }
+    
     func refreshCollectCount(){
         //查询当天采集的单词
-        let yesterday = NSDate .yesterday()
+        let yesterday = NSDate .today()
         let realm = try! Realm()
         let wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday)
-        
-        self.todayView.update(50.0, total: wordArray.count)
+        self.todayWordCount.text = String(wordArray.count)
+//        self.todayView.update(50.0, total: wordArray.count)
     }
     
     func setContraints(){
@@ -140,18 +179,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         locationManager.requestAlwaysAuthorization()
         
         //每日精进
-        todayView.circleColor = MainColor!
+//        todayView.circleColor = MainColor!
         todayView.backgroundColor = UIColor .clearColor()
-        todayView.circleBorderWidth = 20
-        todayView .update(60,total: 100)
+        todayView.layer.cornerRadius = 50
+        todayView.layer.borderColor = UIColor(hex: "4A4A4A", alpha: 0.6)! .CGColor
+        todayView.layer.borderWidth = 1
+//        todayView.circleBorderWidth = 20
+//        todayView .update(60,total: 100)
         todayView.userInteractionEnabled = true
         let gestureToday = UITapGestureRecognizer(target: self, action: #selector(openTodayPractice))
         todayView .addGestureRecognizer(gestureToday)
         
         //温故知新
-        reviseView.circleColor = MainColor!
+//        reviseView.circleColor = MainColor!
         reviseView.backgroundColor = UIColor .clearColor()
-        reviseView.circleBorderWidth = 20
+        reviseView.layer.cornerRadius = 50
+        reviseView.layer.borderColor = UIColor(hex: "4A4A4A", alpha: 0.6)! .CGColor
+        reviseView.layer.borderWidth = 1
+
+//        reviseView.circleBorderWidth = 20
 //        reviseView.update(80,total: 100)
         reviseView.userInteractionEnabled = true
         let gestureRevise = UITapGestureRecognizer(target: self, action: #selector(openReviseWords))
@@ -181,7 +227,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         }
         
         topMan .snp_makeConstraints { (make) in
-            make.right.equalTo(self.view.snp_centerX)
+            //make.right.equalTo(self.view.snp_centerX)
+            make.right.equalTo(self.view.snp_centerX).offset(-30)
         }
         recommendCity .snp_makeConstraints { (make) in
             make.left.equalTo(self.view.snp_centerX).offset(30)

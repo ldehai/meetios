@@ -19,7 +19,12 @@ class UserProfileViewController: UIViewController,UIActionSheetDelegate,UIImageP
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "个人中心"
+        if self.userId == MAPI .userId(){
+            self.title = "个人中心"
+        }
+        else{
+            self.title = "密友资料"
+        }
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         MAPI .getUserProfile(userId) { (respond) in

@@ -41,7 +41,7 @@ class TodayCollectTableViewController: UIViewController,UITableViewDelegate,UITa
         self.tableView.dataSource = self
         
         //查询当天采集的单词
-        let yesterday = NSDate .yesterday()
+        let yesterday = NSDate .today()
         let realm = try! Realm()
         self.wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday).sorted("collectTime")
         self.tableView .reloadData()

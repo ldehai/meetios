@@ -16,10 +16,18 @@ class SignInViewController: UIViewController {
     @IBOutlet weak var pwdField: SpringTextField!
     @IBAction func signInAction(sender: AnyObject) {
         if telField.text!.isEmpty {
+            self.telField.animation = "pop"
+            self.telField.curve = "spring"
+            self.telField.duration = 0.5
+            self.telField.animate()
             MBProgressHUD .showError("手机号码不能为空")
             return
         }
         if pwdField.text!.isEmpty {
+            self.pwdField.animation = "pop"
+            self.pwdField.curve = "spring"
+            self.pwdField.duration = 0.5
+            self.pwdField.animate()
             MBProgressHUD .showError("密码不能为空")
             return
         }
@@ -30,6 +38,10 @@ class SignInViewController: UIViewController {
                 MBProgressHUD .showError("用户名或密码有误")
                 return
             }
+            self.telField.animation = "FadeOut"
+            self.telField.curve = "easeIn"
+            self.telField.duration = 1.0
+            self.telField.animate()
             
             let userId = json["data"]["userid"].stringValue
             let accessToken = json["data"]["accesstoken"].stringValue
@@ -37,7 +49,7 @@ class SignInViewController: UIViewController {
             let userDefault = NSUserDefaults .standardUserDefaults()
             userDefault .setObject(userId, forKey: "userId")
             userDefault .setObject(accessToken, forKey: "accessToken")
-            
+        
             NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_LOGIN_OK, object: nil)
         }
     }
@@ -49,7 +61,7 @@ class SignInViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "登录"
         // Do any additional setup after loading the view.
     }
 

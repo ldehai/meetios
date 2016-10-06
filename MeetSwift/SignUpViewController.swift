@@ -27,7 +27,7 @@ class SignUpViewController: UIViewController {
 //    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "注册"
         // Do any additional setup after loading the view.
     }
 

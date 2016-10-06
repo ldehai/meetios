@@ -90,7 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             if (self.isCollect) {
                 return;
             }
-            self .performSelector(#selector(self.restartLocation), withObject: nil, afterDelay: 60)
+            self .performSelector(#selector(self.restartLocation), withObject: nil, afterDelay: 300)
             self .performSelector(#selector(self.stopLocation), withObject: nil, afterDelay: 20)
             self.isCollect = true
         })

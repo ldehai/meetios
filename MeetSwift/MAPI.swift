@@ -133,7 +133,25 @@ class MAPI: NSObject {
                 completion(respond: response.data!)
         }
     }
-    
+
+    //采集了一个单词
+    class func reviseComplete(completion: (respond :NSData) ->())
+    {
+        let parameters = ["token":MAPI .accessToken()];
+        Alamofire.request(.POST, APIBase + "/revisecomplete", parameters: parameters, encoding: .JSON)
+            .responseJSON { response in
+                print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+                }
+                completion(respond: response.data!)
+        }
+    }
+
     //获取当日采集的所有单词
     class func getWordsTodayCollect(completion: (respond :NSData) ->())
     {
