@@ -50,17 +50,12 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         self.navigationController? .setNavigationBarHidden(true, animated: true);
         NSNotificationCenter .defaultCenter() .addObserver(self, selector: #selector(loadWordList), name: NOTIFY_LOAD_WORDLIST, object: nil)
         
-        MAPI .getUserProfile(MAPI.userId()) { (respond) in
-            let json = JSON(data:respond)
-            self.user = User.fromJSON(json["data"])
-            self.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
-            self.wordCount.text = String(self.user!.wordcount)
-            //            self.reviseView.update(Double(self.user!.wordcount + 1), total: 1)
-            self.goldenCount.text = String(self.user!.golden)
-            self.gradeBtn .setTitle(String(self.user!.grade), forState: UIControlState.Normal)
-            self.gradeBtn.layer.borderWidth = 1
-            self.gradeBtn.layer.borderColor = UIColor .whiteColor().CGColor
-        }
+        self.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
+        self.wordCount.text = String(self.user!.wordcount)
+        self.gradeBtn .setTitle(String(self.user!.grade), forState: UIControlState.Normal)
+        self.gradeBtn.layer.borderWidth = 1
+        self.gradeBtn.layer.borderColor = UIColor .whiteColor().CGColor
+        self.goldenCount.text = String(self.user!.golden)
         
         if self.city == nil {
             let appDelegate = UIApplication .sharedApplication().delegate as! AppDelegate
@@ -134,11 +129,16 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
     
     func refreshCollectCount(){
         //查询当天采集的单词
-        let yesterday = NSDate .yesterday()
+        let yesterday = NSDate .today()
         let realm = try! Realm()
         let wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday)
         
         self.boxTipView .setTitle(String(wordArray.count), forState: UIControlState.Normal)
+        
+        //查询所有采集的单词
+        let allWordArray = realm.objects(WordModel.self)
+        self.wordCount.text = String(allWordArray.count)
+        
     }
     
     override func viewWillAppear(animated: Bool) {

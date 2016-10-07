@@ -52,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         
         //消息监听
         NSNotificationCenter .defaultCenter() .addObserver(self, selector:#selector(loginOK), name: NOTIFY_LOGIN_OK, object: nil)
+        NSNotificationCenter .defaultCenter() .addObserver(self, selector:#selector(logoutOK), name: NOTIFY_LOGOUT_OK, object: nil)
         NSNotificationCenter .defaultCenter() .addObserver(self, selector:#selector(playWordVoice(_:)), name: NOTIFY_PLAY_WORD_VOICE, object: nil)
         
         application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes:([UIUserNotificationType.Sound, UIUserNotificationType.Alert, UIUserNotificationType.Badge]) , categories: nil))
@@ -112,6 +113,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let userProfileVC:ViewController = storyboard.instantiateViewControllerWithIdentifier("rootVC") as! ViewController
         let nav = UINavigationController(rootViewController: userProfileVC)
+        
+        self.window?.rootViewController = nav
+    }
+    
+    func logoutOK(){
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let userProfileVC:GuideViewController = storyboard.instantiateViewControllerWithIdentifier("GuideVC") as! GuideViewController
+        let nav = UINavigationController(rootViewController: userProfileVC)
+        nav.navigationBar.tintColor = UIColor.blackColor()
         
         self.window?.rootViewController = nav
     }

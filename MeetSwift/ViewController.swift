@@ -67,7 +67,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     }
     @IBAction func goCollect(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let collectVC:UIViewController = storyboard.instantiateViewControllerWithIdentifier("CollectWords")
+        let collectVC:CollectWordsViewController = storyboard.instantiateViewControllerWithIdentifier("CollectWords") as! CollectWordsViewController
+        collectVC.user = self.user
         let nav = UINavigationController(rootViewController: collectVC)
         nav.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
         self.presentViewController(nav, animated: false, completion: nil)

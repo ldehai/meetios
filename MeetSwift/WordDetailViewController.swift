@@ -90,14 +90,14 @@ class WordDetailViewController: UIViewController {
                         }
                     }
                     
-                    NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_COLLECT_WORD, object:self, userInfo: ["wordId":self.word!.id])
-                    
                     //保存到本地
                     let realm = try! Realm()
                     try! realm.write {
                         self.word.word?.own = 1
                         self.word.collectTime = NSDate()
                         realm.add(self.word, update: true)
+                        
+                        NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_COLLECT_WORD, object:self, userInfo: ["wordId":self.word!.id])
                     }
                 }
                 

@@ -19,8 +19,15 @@ class UserProfileViewController: UIViewController,UIActionSheetDelegate,UIImageP
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         if self.userId == MAPI .userId(){
             self.title = "个人中心"
+            
+            let setBtn = UIButton(frame: CGRectMake(0,0,20,20))
+            setBtn .setImage(UIImage(named: "setting"), forState: UIControlState.Normal)
+            setBtn .addTarget(self, action: #selector(self.openSetting), forControlEvents: UIControlEvents.TouchUpInside)
+            let rightBtn = UIBarButtonItem(customView: setBtn)
+            self.navigationItem.rightBarButtonItem = rightBtn
         }
         else{
             self.title = "密友资料"
@@ -34,6 +41,12 @@ class UserProfileViewController: UIViewController,UIActionSheetDelegate,UIImageP
             
             self.tableView .reloadData()
         }
+    }
+    
+    func openSetting(){
+        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+        let settingVC:SettingViewController = storyboard.instantiateViewControllerWithIdentifier("SettingVC") as! SettingViewController
+        self.navigationController!.pushViewController(settingVC, animated: true)
     }
     
     override func didReceiveMemoryWarning() {
