@@ -1,43 +1,33 @@
 //
-//  ReviseWordsViewController.swift
+//  UserWordsViewController.swift
 //  MeetSwift
 //
-//  Created by andy on 9/11/16.
+//  Created by andy on 10/7/16.
 //  Copyright © 2016 AventLabs. All rights reserved.
 //
 
 import UIKit
 import SwiftyJSON
-import Realm
-import RealmSwift
 
-class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class UserWordsViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    
-    var collectView:UICollectionView!
-    var reviseBtn:UIButton!
-    var wordArray:Results<WordModel>!
+    var wordArray:[WordModel]? = [WordModel]()
+    var user:User!
+    var userId = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "我的单词库"
+        self.title = "\(self.user.nickName!)的单词库"
         self.navigationController?.setNavigationBarHidden(false, animated: true);
         self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
         //加载我的单词
-        let realm = try! Realm()
-        self.wordArray = realm.objects(WordModel.self)
         self.tableView .reloadData()
         
-        let userDefault = NSUserDefaults .standardUserDefaults()
-        var lastWordId: String? = userDefault .objectForKey("lastWordId") as? String
-        if (lastWordId == nil) {
-            lastWordId = ""
-        }
-        MAPI.getMyWords(lastWordId!) { (respond) in
+        MAPI.getUserWords(self.user.userId!) { (respond) in
             //解析返回的单词
             let json = JSON(data:respond)
             print(json["errorCode"])
@@ -46,32 +36,21 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
             if wordList == nil{
                 return
             }
+//            if self.wordArray == nil{
+//                self.wordArray = NSMutableArray()
+//            }
             for item in wordList! {
                 let word = WordModel.fromJSON(item)
-                //保存到本地
-                print("save word:\(word?.word?.name)")
-                let realm = try! Realm()
-                try! realm.write {
-                    word!.word!.own = 1
-                    realm.add(word!, update: true)
-                }
-                
-                let wordId = item["word"]["collectid"] .stringValue
-                let userDefault = NSUserDefaults .standardUserDefaults()
-                userDefault .setObject(wordId, forKey: "lastWordId")
+                self.wordArray?.insert(word!, atIndex: 0)
             }
             
-            let realm = try! Realm()
-            self.wordArray = realm.objects(WordModel.self)
-            if self.wordArray != nil{
-                self.tableView .reloadData()
-            }
+            self.tableView .reloadData()
         }
     }
     
     // MARK: - Table view data source
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.wordArray.count
+        return (self.wordArray?.count)!
     }
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
@@ -82,17 +61,17 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "WordCell")
         
-        let word = self.wordArray[indexPath.row]
-        cell.textLabel?.text = word.word!.name
-        cell.detailTextLabel?.text = word.word!.def_cn .htmlDecoded()
-
+        let word = self.wordArray?[indexPath.row]
+        cell.textLabel?.text = word?.word!.name
+        cell.detailTextLabel?.text = word?.word!.def_cn .htmlDecoded()
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
         tableView .deselectRowAtIndexPath(indexPath, animated: true)
         
-        let word = self.wordArray[indexPath.row]
+        let word = self.wordArray?[indexPath.row]
         
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let wordDetail:WordDetailViewController = storyboard.instantiateViewControllerWithIdentifier("WordDetailVC") as! WordDetailViewController

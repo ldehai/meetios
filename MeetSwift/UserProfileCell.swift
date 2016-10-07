@@ -18,6 +18,7 @@ class UserProfileCell: UITableViewCell,UIActionSheetDelegate {
     @IBOutlet weak var gradeLabel: UILabel!
     @IBOutlet weak var goldenLabel: UILabel!
     var avatarClick:(()->())?
+    var wordClick:(()->())?
     
     var user: User? {
         didSet {
@@ -35,12 +36,17 @@ class UserProfileCell: UITableViewCell,UIActionSheetDelegate {
                 avatarImageView.image = image
             }
             else{
-                avatarImageView .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
+                let random = Helper .randomInRange(1...1000)
+                avatarImageView .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar! + "?v=\(random)"), placeholderImage: UIImage(named: "avatar"))
             }
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(changeAvatar))
             avatarImageView .addGestureRecognizer(tap)
             avatarImageView.userInteractionEnabled = true
+            
+            let wordCountTap = UITapGestureRecognizer(target: self, action: #selector(wordCountClick))
+            wordcountLabel .addGestureRecognizer(wordCountTap)
+            wordcountLabel.userInteractionEnabled = true
         }
     }
     
@@ -49,6 +55,13 @@ class UserProfileCell: UITableViewCell,UIActionSheetDelegate {
             return
         }
         avatarClick()
+    }
+    
+    func wordCountClick(){
+        guard let wordClick = wordClick else{
+            return
+        }
+        wordClick()
     }
     
     override func awakeFromNib() {

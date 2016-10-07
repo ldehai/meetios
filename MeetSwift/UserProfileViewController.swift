@@ -77,6 +77,15 @@ class UserProfileViewController: UIViewController,UIActionSheetDelegate,UIImageP
                 }
             }
             
+            if self.userId != MAPI.userId() {
+                cell.wordClick = {Void in
+                    let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+                    let userWordsVC:UserWordsViewController = storyboard.instantiateViewControllerWithIdentifier("UserWordsVC") as! UserWordsViewController
+                    userWordsVC.user = self.user
+                    self.navigationController!.pushViewController(userWordsVC, animated: true)
+                }
+            }
+            
             return cell
             
         default:

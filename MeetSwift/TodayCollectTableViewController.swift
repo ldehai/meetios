@@ -14,6 +14,7 @@ import SwiftDate
 
 class TodayCollectTableViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    @IBOutlet weak var trainBtn: UIButton!
     var wordArray:Results<WordModel>?
     
     @IBAction func trainAction(sender: AnyObject) {
@@ -45,6 +46,11 @@ class TodayCollectTableViewController: UIViewController,UITableViewDelegate,UITa
         let realm = try! Realm()
         self.wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday).sorted("collectTime")
         self.tableView .reloadData()
+        
+        if self.wordArray?.count == 0 {
+            self.trainBtn.enabled = false
+            self.trainBtn.backgroundColor = UIColor(hex: "9B9B9B", alpha: 1.0)
+        }
     }
 
     // MARK: - Table view data source

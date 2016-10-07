@@ -82,23 +82,32 @@ class WordDetailViewController: UIViewController {
                                      lat: (self.word.word?.lat)!,
                                      city:appDelegate.city) { (respond) in
                         let json = JSON(data:respond)
-                        print(json["errorCode"])
-                        if json["errorCode"] .stringValue .isEmpty{
+                        let errorCode = json["code"] .intValue
+                        print(errorCode)
+                        if errorCode == 0 {
+                            let golden = json["data"]["golden"] .stringValue
                             let wordId = json["data"]["id"] .stringValue
                             let userDefault = NSUserDefaults .standardUserDefaults()
                             userDefault .setObject(wordId, forKey: "lastWordId")
+                            
+                            //保存到本地
+                            let realm = try! Realm()
+                            try! realm.write {
+                                self.word.word?.own = 1
+                                self.word.collectTime = NSDate()
+                                realm.add(self.word, update: true)
+                                
+                                NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_COLLECT_WORD, object:self, userInfo: ["wordId":self.word!.id])
+                            }
+                        }
+                        else{
+                            let msg = json["message"].stringValue
+                            let alert = UIAlertView(title: "提醒", message: msg, delegate: nil, cancelButtonTitle: "好的")
+                            alert .show()
                         }
                     }
                     
-                    //保存到本地
-                    let realm = try! Realm()
-                    try! realm.write {
-                        self.word.word?.own = 1
-                        self.word.collectTime = NSDate()
-                        realm.add(self.word, update: true)
-                        
-                        NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_COLLECT_WORD, object:self, userInfo: ["wordId":self.word!.id])
-                    }
+                    
                 }
                 
                 self.dismissViewControllerAnimated(false){
@@ -238,9 +247,9 @@ class WordDetailViewController: UIViewController {
             let cell: WordBasicCell = tableView.dequeueReusableCellWithIdentifier("WordBasicCell") as! WordBasicCell
 
             cell.word = word.word
-            cell.pronunciation.text = word.word!.pronunc
-            cell.def_cn.text = word.word?.def_cn
-            cell.def_en.text = word.word?.def_en
+//            cell.pronunciation.text = word.word!.pronunc
+//            cell.def_cn.text = word.word?.def_cn .htmlDecoded()
+//            cell.def_en.text = word.word?.def_en .htmlDecoded()
             
             return cell
         }
@@ -248,8 +257,8 @@ class WordDetailViewController: UIViewController {
         else if indexPath.section == 1{
             let cell: WordSampleCell = tableView.dequeueReusableCellWithIdentifier("WordSampleCell") as! WordSampleCell
             let sample = word.sysExample[indexPath.row]
-            cell.sentence.text = sample.content
-            cell.translate_cn.text = sample.translation
+            cell.sentence.text = sample.content .htmlDecoded()
+            cell.translate_cn.text = sample.translation .htmlDecoded()
             
             return cell
         }

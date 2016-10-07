@@ -81,7 +81,8 @@ class GlobalViewController: UIViewController {
         cell.posBtn .setTitle(String(indexPath.row + 1), forState: UIControlState.Normal)
         cell.nameLabel.text = user.nickName
         cell.wordCountLabel.text = String(user.wordcount)
-        cell.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + user.avatar!), placeholderImage: UIImage(named: "avatar"))
+        let random = Helper .randomInRange(1...1000)
+        cell.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + user.avatar! + "?v=\(random)"), placeholderImage: UIImage(named: "avatar"))
         switch indexPath.row {
         case 0:
             cell.posBtn .setBackgroundImage(UIImage(named: "goldenLevel"), forState: UIControlState.Normal)

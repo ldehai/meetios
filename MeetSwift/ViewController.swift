@@ -18,6 +18,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     var user:User?
     var topManUserId = ""
     var city:RecommendCity?
+    @IBOutlet weak var nickName: UILabel!
     @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var wordCountView: UIView!
     @IBOutlet weak var wordCountLabel: UILabel!
@@ -49,6 +50,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
         let collectVC:CollectWordsViewController = storyboard.instantiateViewControllerWithIdentifier("CollectWords") as! CollectWordsViewController
         collectVC.city = self.city
+        collectVC.user = self.user
         let nav = UINavigationController(rootViewController: collectVC)
         nav.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
         self.presentViewController(nav, animated: false, completion: nil)
@@ -83,7 +85,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         
         self .setContraints()
         self .performSelector(#selector(self.getMyWords), withObject: nil, afterDelay: 0)
-        self .refreshData()
     }
     
     func refreshData(){
@@ -91,7 +92,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         MAPI .getUserProfile(MAPI.userId()) { (respond) in
             let json = JSON(data:respond)
             self.user = User.fromJSON(json["data"])
-            self.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
+            self.nickName.text = self.user?.nickName
+            let random = Helper .randomInRange(1...1000)
+            self.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar! + "?v=\(random)"), placeholderImage: UIImage(named: "avatar"))
             self.wordCountLabel.text = String(self.user!.wordcount)
 //            self.reviseView.update(Double(self.user!.wordcount + 1), total: 1)
             self.goldCountLable.text = String(self.user!.golden)
@@ -140,7 +143,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         }
         MAPI.getMyWords(lastWordId!) { (respond) in
             //解析返回的单词
-            //            print("JSON: \(respond)")
+            print("JSON: \(respond)")
             let json = JSON(data:respond)
             print(json["errorCode"])
             

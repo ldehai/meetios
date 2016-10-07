@@ -75,9 +75,10 @@ public class Word:Object{
         let p = Word()
         p.name = json["content"].stringValue
         p.id = json["id"].stringValue
-        p.pronunc = json["pronunciation"].stringValue
-        p.def_en = json["en_definition"].stringValue
-        p.def_cn = json["cn_definition"].stringValue
+        p.pronunc = json["pronunciation"].stringValue .htmlDecoded()
+        p.def_en = json["en_definition"].stringValue .htmlDecoded()
+        p.def_en = p.def_en .stringByReplacingOccurrencesOfString(";", withString: "\n")
+        p.def_cn = json["cn_definition"].stringValue .htmlDecoded()
         p.uk_audio = json["uk_audio"].stringValue
         p.us_audio = json["us_audio"].stringValue
         p.lon = json["lon"].stringValue
@@ -109,8 +110,8 @@ public class SysExample:Object{
     class func fromJSON(json: JSON) -> SysExample? {
         let p = SysExample()
         p.id = json["id"].stringValue
-        p.content = json["annotation"].stringValue
-        p.translation = json["translation"].stringValue
+        p.content = json["content"].stringValue .htmlDecoded() .stringByTrimmingCharactersInSet(NSCharacterSet .whitespaceCharacterSet())
+        p.translation = json["translation"].stringValue .htmlDecoded() .stringByTrimmingCharactersInSet(NSCharacterSet .whitespaceCharacterSet())
         
         return p
     }
@@ -169,8 +170,8 @@ public class UserExample:Object{
         let p = UserExample()
         
         p.id = json["id"].stringValue
-        p.content = json["annotation"].stringValue
-        p.translation = json["translation"].stringValue
+        p.content = json["content"].stringValue .htmlDecoded() .stringByTrimmingCharactersInSet(NSCharacterSet .whitespaceCharacterSet())
+        p.translation = json["translation"].stringValue .htmlDecoded() .stringByTrimmingCharactersInSet(NSCharacterSet .whitespaceCharacterSet())
         p.user = User.fromJSON(json["user"])!
         
         return p

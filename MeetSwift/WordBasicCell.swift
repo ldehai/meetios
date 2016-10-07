@@ -16,8 +16,8 @@ class WordBasicCell: UITableViewCell {
             }
             
             pronunciation.text = word.pronunc
-            def_cn.text = word.def_cn
-            def_en.text = word.def_en
+            def_cn.text = word.def_cn .htmlDecoded()
+            def_en.text = word.def_en .htmlDecoded()
             
             pronunciation .sizeToFit()
             def_cn .sizeToFit()
@@ -33,7 +33,8 @@ class WordBasicCell: UITableViewCell {
         let def_en = NSMutableString(string: word.def_en)
         let rectdef_en = def_en .boundingRectWithSize(CGSizeMake(width, 10000), options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: nil, context: nil)
         
-        return rectdef_cn.size.height + rectdef_en.size.height + 100
+        let lines = def_en .componentsSeparatedByString("\n")
+        return rectdef_cn.size.height + rectdef_en.size.height + CGFloat(lines.count) * 20 + 50
     }
     
     @IBAction func playVoice(sender: AnyObject) {

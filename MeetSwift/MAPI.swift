@@ -175,6 +175,7 @@ class MAPI: NSObject {
     //获取我的所有单词
     class func getMyWords(lastWordId:String,completion: (respond :NSData) ->())
     {
+        print("call MAPI.getMyWords")
         let parameters = ["token":MAPI .accessToken(),"lastWordId":lastWordId];
         Alamofire.request(.POST, APIBase + "/myword", parameters: parameters, encoding: .JSON)
             .responseString { response in
@@ -188,6 +189,28 @@ class MAPI: NSObject {
                 }
                 
                 let convertStr = MAPI .stringByRemovingControlCharacters(response.result.value!)
+                print("convert result:\(convertStr)")
+                completion(respond: convertStr.dataUsingEncoding(NSUTF8StringEncoding)!)
+        }
+    }
+    
+    //获取其他人的所有单词
+    class func getUserWords(userId:String,completion: (respond :NSData) ->())
+    {
+        let parameters = ["token":MAPI .accessToken()];
+        Alamofire.request(.POST, APIBase + "/userword/" + userId, parameters: parameters, encoding: .JSON)
+            .responseString { response in
+                print(response.result)
+                if response.result .isSuccess == false{
+                    return
+                }
+                
+                if let JSON = response.result.value {
+                    print("JSON: \(JSON)")
+                }
+                
+                let convertStr = MAPI .stringByRemovingControlCharacters(response.result.value!)
+                print("convert result:\(convertStr)")
                 completion(respond: convertStr.dataUsingEncoding(NSUTF8StringEncoding)!)
         }
     }

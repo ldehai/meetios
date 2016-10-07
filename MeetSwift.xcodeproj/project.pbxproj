@@ -12,6 +12,9 @@
 		A11F60311D8EEE3500EA0B19 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F60301D8EEE3500EA0B19 /* GuideViewController.swift */; };
 		A11F60331D8EFEF800EA0B19 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F60321D8EFEF800EA0B19 /* VerifyViewController.swift */; };
 		A11F60351D8EFF1300EA0B19 /* SetNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F60341D8EFF1300EA0B19 /* SetNickNameViewController.swift */; };
+		A12F36D91DA7B6CA007F6E27 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12F36D81DA7B6CA007F6E27 /* StringExtension.swift */; };
+		A12F36DB1DA7E1B4007F6E27 /* UserWordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12F36DA1DA7E1B4007F6E27 /* UserWordsViewController.swift */; };
+		A12F36DD1DA7EA21007F6E27 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A12F36DC1DA7EA21007F6E27 /* Helper.swift */; };
 		A148F1231DA3E94D0029BAD9 /* TopManCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A148F1221DA3E94D0029BAD9 /* TopManCell.swift */; };
 		A148F1251DA750540029BAD9 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A148F1241DA750540029BAD9 /* SettingViewController.swift */; };
 		A14930111D717F210090E647 /* MAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = A14930101D717F210090E647 /* MAPI.swift */; };
@@ -57,6 +60,9 @@
 		A11F60301D8EEE3500EA0B19 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		A11F60321D8EFEF800EA0B19 /* VerifyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyViewController.swift; sourceTree = "<group>"; };
 		A11F60341D8EFF1300EA0B19 /* SetNickNameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetNickNameViewController.swift; sourceTree = "<group>"; };
+		A12F36D81DA7B6CA007F6E27 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		A12F36DA1DA7E1B4007F6E27 /* UserWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserWordsViewController.swift; sourceTree = "<group>"; };
+		A12F36DC1DA7EA21007F6E27 /* Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
 		A148F1221DA3E94D0029BAD9 /* TopManCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopManCell.swift; sourceTree = "<group>"; };
 		A148F1241DA750540029BAD9 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		A14930101D717F210090E647 /* MAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MAPI.swift; sourceTree = "<group>"; };
@@ -134,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				A15ED1121D8462E20022AA87 /* HexColor.swift */,
+				A12F36D81DA7B6CA007F6E27 /* StringExtension.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -147,6 +154,7 @@
 				A1B91D2F1D8273A500BCF30A /* UserDefault.swift */,
 				A15ED1181D847AAE0022AA87 /* RealmConfig.swift */,
 				D457B0C81D92CAAB00576336 /* CommonView.swift */,
+				A12F36DC1DA7EA21007F6E27 /* Helper.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -216,6 +224,7 @@
 				A1B91D1E1D81791500BCF30A /* StoreTableViewController.swift */,
 				A1B91D141D7F200D00BCF30A /* WordDetailViewController.swift */,
 				A1B91D211D81BC5C00BCF30A /* UserProfileViewController.swift */,
+				A12F36DA1DA7E1B4007F6E27 /* UserWordsViewController.swift */,
 				A148F1241DA750540029BAD9 /* SettingViewController.swift */,
 				A1EEB2D81D6C388D0089FA42 /* Main.storyboard */,
 				A1EEB2DB1D6C388D0089FA42 /* Assets.xcassets */,
@@ -395,6 +404,7 @@
 				A1B91D301D8273A500BCF30A /* UserDefault.swift in Sources */,
 				A19335BD1D839DDC00A9E4BD /* TopContributerViewController.swift in Sources */,
 				A1B91D2B1D82691400BCF30A /* SignInViewController.swift in Sources */,
+				A12F36DB1DA7E1B4007F6E27 /* UserWordsViewController.swift in Sources */,
 				A1B91D1F1D817A6000BCF30A /* TodayCollectTableViewController.swift in Sources */,
 				A148F1251DA750540029BAD9 /* SettingViewController.swift in Sources */,
 				A1B91D2E1D82728400BCF30A /* Config.swift in Sources */,
@@ -417,12 +427,14 @@
 				A15ED1171D8478BB0022AA87 /* ReviseWordsViewController.swift in Sources */,
 				A15ED11D1D853DCE0022AA87 /* WordAnnotation.swift in Sources */,
 				A11F60311D8EEE3500EA0B19 /* GuideViewController.swift in Sources */,
+				A12F36DD1DA7EA21007F6E27 /* Helper.swift in Sources */,
 				A1EEB2EB1D6DFA0B0089FA42 /* CollectWordsViewController.swift in Sources */,
 				A1B91D221D81BC5C00BCF30A /* UserProfileViewController.swift in Sources */,
 				D4EFFA951D91867F006021C7 /* WordTableViewCell.swift in Sources */,
 				A15ED1131D8462E20022AA87 /* HexColor.swift in Sources */,
 				A15ED1191D847AAE0022AA87 /* RealmConfig.swift in Sources */,
 				A1B91D291D82690000BCF30A /* SignUpViewController.swift in Sources */,
+				A12F36D91DA7B6CA007F6E27 /* StringExtension.swift in Sources */,
 				A1B91D1A1D8117E100BCF30A /* WordBasicCell.swift in Sources */,
 				A1613B9C1D99860100DB431A /* RecommendCityViewController.swift in Sources */,
 				D457B0C91D92CAAB00576336 /* CommonView.swift in Sources */,
@@ -551,6 +563,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MeetSwift/Third/MeetSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -567,6 +580,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.aventlabs.meet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MeetSwift/Third/MeetSwift-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

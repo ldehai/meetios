@@ -21,6 +21,7 @@ class SettingViewController: UITableViewController,UIAlertViewDelegate {
             let userDefault = NSUserDefaults .standardUserDefaults()
             userDefault .removeObjectForKey("userId")
             userDefault .removeObjectForKey("accessToken")
+            userDefault .removeObjectForKey("lastWordId")
             
             NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_LOGOUT_OK, object: nil)
         }
@@ -35,5 +36,20 @@ class SettingViewController: UITableViewController,UIAlertViewDelegate {
         logoutBtn.layer.cornerRadius = 5;
         logoutBtn.layer.borderColor = UIColor(hex: "7E62BE", alpha: 1.0)?.CGColor
         logoutBtn.layer.borderWidth = 1
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
+        tableView .deselectRowAtIndexPath(indexPath, animated: true)
+        
+        switch indexPath.row {
+        case 0:
+            break
+        case 1:
+            //写评论
+            UIApplication .sharedApplication() .openURL(NSURL(string:"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1145700018&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8")!)
+            break
+        default:
+            break
+        }
     }
 }

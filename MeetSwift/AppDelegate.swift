@@ -15,7 +15,7 @@ import MapKit
 import FoursquareAPIClient
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate,UIAlertViewDelegate {
 
     var window: UIWindow?
     var coordinate:CLLocationCoordinate2D?
@@ -68,8 +68,43 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
 
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
         manager.startUpdatingLocation()
+        
+        switch status {
+        case .NotDetermined:
+            print("用户未选择")
+        case .Restricted:
+            print("受限制")
+        case.Denied:
+            print("被拒绝")
+            if CLLocationManager .locationServicesEnabled() { // 定位服务开启
+                print("用户真正拒绝")
+                
+                let alert = UIAlertView(title: "提醒", message: "Meet英语需要开启定位才能采集单词，现在去开启吗?", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
+                alert.show()
+                
+            } else {
+                print("服务未开启")
+                
+                let alert = UIAlertView(title: "提醒", message: "Meet英语需要开启定位才能采集单词", delegate: nil, cancelButtonTitle: "知道了")
+                alert.show()
+            }
+        case .AuthorizedAlways:
+            print("前后台定位授权")
+        case .AuthorizedWhenInUse:
+            print("前台定位授权")
+        }
     }
     
+    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+        if buttonIndex == 1 {
+            // 跳转到设置界面
+            let url = NSURL(string: UIApplicationOpenSettingsURLString)
+            if UIApplication.sharedApplication().canOpenURL(url!) {
+                UIApplication.sharedApplication().openURL(url!)
+            }
+        }
+    }
+
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
         CLGeocoder().reverseGeocodeLocation(manager.location!, completionHandler: {(placemarks, error)->Void in
@@ -166,10 +201,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-        let notification = UILocalNotification()
-        notification.alertBody = "我会在后台"
-        notification.alertAction = "Open"
-        application.presentLocalNotificationNow(notification)
+//        let notification = UILocalNotification()
+//        notification.alertBody = "我会在后台"
+//        notification.alertAction = "Open"
+//        application.presentLocalNotificationNow(notification)
     }
 
     func applicationWillEnterForeground(application: UIApplication) {

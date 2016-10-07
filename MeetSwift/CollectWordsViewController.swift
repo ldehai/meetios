@@ -11,6 +11,8 @@ import MapKit
 import SwiftyJSON
 import RealmSwift
 import FoursquareAPIClient
+import SpriteKit
+import SceneKit
 
 class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
     @IBOutlet weak var goldenCount: UILabel!
@@ -140,7 +142,12 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         self.wordCount.text = String(allWordArray.count)
         
     }
-    
+//    
+//    func animateGolden(){
+//        let scene = SCNView(frame: CGRectMake(0, 0, kDeviceWidth, kDeviceheight))
+//        let sprite = SceneKit(scene)
+//        self.view .addSubview(sprite)
+//    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         

@@ -19,7 +19,7 @@ class WordTableViewCell: UITableViewCell {
         didSet{
             
             name.text = word?.name
-            pronunciation.text = word?.pronunc
+            pronunciation.text = word?.pronunc .htmlDecoded()
             definition_cn.text = word?.def_cn
             definition_en.text = word?.def_en
             
