@@ -62,6 +62,7 @@ class SignInViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "登录"
+        self.navigationController?.navigationBar.hidden = false
         // Do any additional setup after loading the view.
     }
 

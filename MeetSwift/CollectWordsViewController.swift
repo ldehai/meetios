@@ -13,7 +13,11 @@ import RealmSwift
 import FoursquareAPIClient
 
 class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationManagerDelegate {
-
+    @IBOutlet weak var goldenCount: UILabel!
+    @IBOutlet weak var gradeView: UIButton!
+    @IBOutlet weak var gradeBtn: UIButton!
+    @IBOutlet weak var wordCount: UILabel!
+    @IBOutlet weak var avatarImage: UIImageView!
     @IBOutlet weak var boxTipView: UIButton!
     @IBOutlet weak var shopTipView: UIView!
     @IBOutlet weak var mapView: MKMapView!
@@ -22,7 +26,9 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
     let locationManager = CLLocationManager()
     var bHaveLocation:Bool = false
     var city:RecommendCity?
+    var user:User?
     
+
     //今日采集
     @IBAction func myCollectAction(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
@@ -43,6 +49,19 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         super.viewDidLoad()
         self.navigationController? .setNavigationBarHidden(true, animated: true);
         NSNotificationCenter .defaultCenter() .addObserver(self, selector: #selector(loadWordList), name: NOTIFY_LOAD_WORDLIST, object: nil)
+        
+        MAPI .getUserProfile(MAPI.userId()) { (respond) in
+            let json = JSON(data:respond)
+            self.user = User.fromJSON(json["data"])
+            self.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
+            self.wordCount.text = String(self.user!.wordcount)
+            //            self.reviseView.update(Double(self.user!.wordcount + 1), total: 1)
+            self.goldenCount.text = String(self.user!.golden)
+            self.gradeBtn .setTitle(String(self.user!.grade), forState: UIControlState.Normal)
+            self.gradeBtn.layer.borderWidth = 1
+            self.gradeBtn.layer.borderColor = UIColor .whiteColor().CGColor
+        }
+        
         if self.city == nil {
             let appDelegate = UIApplication .sharedApplication().delegate as! AppDelegate
             let lat = ((appDelegate.lat) as NSString) .doubleValue
@@ -126,6 +145,7 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        UIApplication.sharedApplication().statusBarHidden = true
         
     }
     

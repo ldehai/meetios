@@ -27,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        application.statusBarHidden = true
+        
         //崩溃服务初始化(www.fabric.io)
         Fabric.with([Crashlytics.self])
         
@@ -43,6 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,CLLocationManagerDelegate 
             let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
             let userProfileVC:GuideViewController = storyboard.instantiateViewControllerWithIdentifier("GuideVC") as! GuideViewController
             let nav = UINavigationController(rootViewController: userProfileVC)
+            nav.navigationBar.tintColor = UIColor.blackColor()
             
             self.window?.rootViewController = nav
         }

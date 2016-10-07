@@ -78,6 +78,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationController?.setNavigationBarHidden(true, animated: true);
         self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
+        UIApplication.sharedApplication().statusBarHidden = false
         
         self .setContraints()
         self .performSelector(#selector(self.getMyWords), withObject: nil, afterDelay: 0)
@@ -258,6 +259,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        UIApplication.sharedApplication().statusBarHidden = false
         
         self .refreshData()
         self .refreshCollectCount()

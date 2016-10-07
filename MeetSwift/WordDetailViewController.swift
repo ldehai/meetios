@@ -39,7 +39,7 @@ class WordDetailViewController: UIViewController {
             //复习完成后通知服务器，可能有金币奖励
             MAPI .reviseComplete({ (respond) in
                 let json = JSON(data:respond)
-                let golden = json["data"]["golden"]
+                let golden = json["data"]["golden"] .stringValue
             })
             return
         }

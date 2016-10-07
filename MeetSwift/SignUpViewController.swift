@@ -28,6 +28,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "注册"
+        self.navigationController?.navigationBar.hidden = false
         // Do any additional setup after loading the view.
     }
 

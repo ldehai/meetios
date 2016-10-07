@@ -8,28 +8,83 @@
 
 import UIKit
 
-class GuideViewController: UIViewController {
-
+class GuideViewController: UIViewController,UIScrollViewDelegate {
+    var currentPage = 0
+    var scrollView:UIScrollView?
+    var pageControl:UIPageControl?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBar.hidden = true
 
         // Do any additional setup after loading the view.
+        self.scrollView = UIScrollView(frame: self.view.frame)
+        self.view .addSubview(self.scrollView!)
+        self.scrollView?.snp_makeConstraints(closure: { (make) in
+            make.edges.equalTo(0)
+        })
+        self.view .sendSubviewToBack(self.scrollView!)
+        
+        let pageWidth = self.view.frame.size.width;
+        let contentWidth = self.view.frame.size.width * 4;
+        let contentHeight = self.view.frame.size.height*2/3;
+        self.scrollView?.contentSize = CGSizeMake(contentWidth, 0)
+        self.scrollView?.showsHorizontalScrollIndicator = false
+        self.scrollView?.showsVerticalScrollIndicator = false
+        self.scrollView?.scrollsToTop = false
+        self.scrollView?.pagingEnabled = true
+        self.scrollView?.delegate = self
+        
+        //图片用assets管理，支持不同尺寸的屏幕比较方便，代码只需要管使用的图片名称就好了
+        let guideTip = ["采集单词很有趣，学习就像玩游戏",
+                        "记忆曲线设计，自动复习计划，无需烦神",
+                        "密友社区，贴身教练，学习不再寂寞空虚冷",
+                        "多条记忆线索，想忘记都难：）"]
+        for i in 1...4 {
+            let guideImageName = "guide\(i)"
+            let imageView = UIImageView(image: UIImage(named: guideImageName))
+            imageView.contentMode = UIViewContentMode.Center
+            imageView.frame = CGRectMake(CGFloat(i-1)*pageWidth, 0, pageWidth, contentHeight)
+            self.scrollView?.addSubview(imageView)
+            
+            let guideTipView = UILabel(frame: CGRectMake(CGFloat(i-1)*pageWidth, contentHeight, pageWidth, 40))
+            guideTipView.backgroundColor = UIColor.clearColor()
+            guideTipView.text = guideTip[i-1]
+            guideTipView.font = UIFont .systemFontOfSize(14)
+            guideTipView.textAlignment = NSTextAlignment.Center
+            self.scrollView?.addSubview(guideTipView)
+        }
+        
+        self.currentPage = 0;
+        self.pageControl = UIPageControl()
+        self.pageControl?.pageIndicatorTintColor = UIColor(hex: "DEE1E2", alpha: 0.4)
+        self.pageControl?.currentPageIndicatorTintColor = UIColor(hex: "4A4A4A", alpha: 0.4)
+        
+        self.pageControl?.numberOfPages = 4
+        self.pageControl?.currentPage = 0
+        self.view .addSubview(self.pageControl!)
+        self.pageControl?.snp_makeConstraints(closure: { (make) in
+            make.centerX.equalTo(self.view)
+            make.bottom.equalTo(self.view).offset(-115)
+            make.size.equalTo(CGSizeMake(100, 40))
+        })
+
+        self.scrollView?.setContentOffset(CGPointMake(0, 0), animated: false)
+        
+        //初始设为隐藏，视图显示时加入动态显示的效果，显得比较平滑
+        self.scrollView?.alpha = 0.0
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.navigationBar.hidden = true
+        
+        UIView .animateWithDuration(0.5) { 
+            self.scrollView?.alpha = 1.0
+        }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func scrollViewDidEndDecelerating(scrollView:UIScrollView)
+    {
+        self.pageControl?.currentPage = Int(scrollView.contentOffset.x/UIScreen.mainScreen().bounds.size.width);
     }
-    */
-
 }
