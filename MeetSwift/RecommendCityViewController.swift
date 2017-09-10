@@ -13,9 +13,9 @@ class RecommendCityViewController: UIViewController,UIWebViewDelegate {
 
     var city:RecommendCity?
     @IBOutlet weak var webView: UIWebView!
-    @IBAction func goAction(sender: AnyObject) {
-        NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_LOAD_WORDLIST, object: nil)
-        self.dismissViewControllerAnimated(false){
+    @IBAction func goAction(_ sender: AnyObject) {
+        NotificationCenter.default .post(name: Notification.Name(rawValue: NOTIFY_LOAD_WORDLIST), object: nil)
+        self.dismiss(animated: false){
         }
     }
     
@@ -24,13 +24,13 @@ class RecommendCityViewController: UIViewController,UIWebViewDelegate {
         
         self.title = "推荐城市"
         self.navigationController?.setNavigationBarHidden(false, animated: true);
-        self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.webView.scrollView .showsVerticalScrollIndicator = false
         self.webView.delegate = self
 
         guard city?.id == nil else{
-            let url = NSURL(string:APIBase + "/recommcity/" + (city?.id)!)
-            let request = NSURLRequest(URL: url!)
+            let url = URL(string:APIBase + "/recommcity/" + (city?.id)!)
+            let request = URLRequest(url: url!)
             self.webView .loadRequest(request)
             
             return

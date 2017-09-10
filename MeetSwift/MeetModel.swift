@@ -11,18 +11,18 @@ import SwiftyJSON
 import RealmSwift
 import Realm
 
-public class WordModel:Object {
+open class WordModel:Object {
     dynamic var id = ""
-    dynamic var collectTime = NSDate()
+    dynamic var collectTime = Date()
     dynamic var word:Word? = Word()
     var sysExample = List<SysExample>()
     var userExample = List<UserExample>()
     
-    override public static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "id"
     }
     
-    class func fromJSON(json: JSON) -> WordModel? {
+    class func fromJSON(_ json: JSON) -> WordModel? {
         
         let p = WordModel()
         
@@ -54,7 +54,7 @@ public class WordModel:Object {
     }
 }
 
-public class Word:Object{
+open class Word:Object{
     dynamic var name = ""
     dynamic var id = ""
     dynamic var pronunc = ""
@@ -65,19 +65,19 @@ public class Word:Object{
     dynamic var lon = ""
     dynamic var lat = ""
     dynamic var own = 0
-    dynamic var collectTime = NSDate()
+    dynamic var collectTime = Date()
     
-    override public static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "id"
     }
     
-    class func fromJSON(json: JSON) -> Word? {
+    class func fromJSON(_ json: JSON) -> Word? {
         let p = Word()
         p.name = json["content"].stringValue
         p.id = json["id"].stringValue
         p.pronunc = json["pronunciation"].stringValue .htmlDecoded()
         p.def_en = json["en_definition"].stringValue .htmlDecoded()
-        p.def_en = p.def_en .stringByReplacingOccurrencesOfString(";", withString: "\n")
+        p.def_en = p.def_en .replacingOccurrences(of: ";", with: "\n")
         p.def_cn = json["cn_definition"].stringValue .htmlDecoded()
         p.uk_audio = json["uk_audio"].stringValue
         p.us_audio = json["us_audio"].stringValue
@@ -86,11 +86,11 @@ public class Word:Object{
         
         //把日期从字符串转换到NSDate类型
         let collectTime:String? = json["collecttime"].stringValue
-        if collectTime != nil && collectTime?.length > 0 {
-            let formatter = NSDateFormatter()
+        if collectTime != nil && (collectTime?.length)! > 0 {
+            let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            formatter.timeZone = NSTimeZone(name: "GMT+8")
-            let date = formatter .dateFromString(collectTime!)
+            formatter.timeZone = TimeZone(identifier: "GMT+8")
+            let date = formatter .date(from: collectTime!)
             p.collectTime = date!
         }
         
@@ -98,26 +98,26 @@ public class Word:Object{
     }
 }
 
-public class SysExample:Object{
+open class SysExample:Object{
     dynamic var id = ""
     dynamic var content = ""
     dynamic var translation = ""
     
-    override public static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "id"
     }
     
-    class func fromJSON(json: JSON) -> SysExample? {
+    class func fromJSON(_ json: JSON) -> SysExample? {
         let p = SysExample()
         p.id = json["id"].stringValue
-        p.content = json["content"].stringValue .htmlDecoded() .stringByTrimmingCharactersInSet(NSCharacterSet .whitespaceCharacterSet())
-        p.translation = json["translation"].stringValue .htmlDecoded() .stringByTrimmingCharactersInSet(NSCharacterSet .whitespaceCharacterSet())
+        p.content = json["content"].stringValue .htmlDecoded() .trimmingCharacters(in: CharacterSet.whitespaces)
+        p.translation = json["translation"].stringValue .htmlDecoded() .trimmingCharacters(in: CharacterSet.whitespaces)
         
         return p
     }
 }
 
-public class User:Object{
+open class User:Object{
     var userId: String?
     var nickName: String?
     var avatar: String?
@@ -132,11 +132,11 @@ public class User:Object{
     var golden:Int = 0
     var contributerWord:Int = 0
 
-    override public static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "userId"
     }
     
-    class func fromJSON(json: JSON) -> User? {
+    class func fromJSON(_ json: JSON) -> User? {
         let p = User()
         p.userId = json["userid"].stringValue
         p.nickName = json["nickname"].stringValue
@@ -156,29 +156,29 @@ public class User:Object{
     }
 }
 
-public class UserExample:Object{
+open class UserExample:Object{
     dynamic var id = ""
     dynamic var content = ""
     dynamic var translation = ""
     dynamic var user:User? = User()
     
-    override public static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "id"
     }
     
-    class func fromJSON(json: JSON) -> UserExample? {
+    class func fromJSON(_ json: JSON) -> UserExample? {
         let p = UserExample()
         
         p.id = json["id"].stringValue
-        p.content = json["content"].stringValue .htmlDecoded() .stringByTrimmingCharactersInSet(NSCharacterSet .whitespaceCharacterSet())
-        p.translation = json["translation"].stringValue .htmlDecoded() .stringByTrimmingCharactersInSet(NSCharacterSet .whitespaceCharacterSet())
+        p.content = json["content"].stringValue .htmlDecoded() .trimmingCharacters(in: CharacterSet.whitespaces)
+        p.translation = json["translation"].stringValue .htmlDecoded() .trimmingCharacters(in: CharacterSet.whitespaces)
         p.user = User.fromJSON(json["user"])!
         
         return p
     }
 }
 
-public class RecommendCity:Object{
+open class RecommendCity:Object{
     dynamic var id = ""
     dynamic var code = ""
     dynamic var name = ""
@@ -186,11 +186,11 @@ public class RecommendCity:Object{
     dynamic var lat = ""
     dynamic var thumbnail = ""
     
-    override public static func primaryKey() -> String? {
+    override open static func primaryKey() -> String? {
         return "id"
     }
     
-    class func fromJSON(json: JSON) -> RecommendCity? {
+    class func fromJSON(_ json: JSON) -> RecommendCity? {
         let p = RecommendCity()
         
         p.id = json["id"].stringValue

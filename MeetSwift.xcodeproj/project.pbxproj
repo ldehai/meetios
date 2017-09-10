@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		066C9C6DF264D6850C8B15B3 /* Pods_MeetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C7257901B74844DD6CF9D94 /* Pods_MeetSwift.framework */; };
+		0CA92B184FA943587BBF9B1D /* Pods_MeetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 896A9137D9A74E665EAE6A1C /* Pods_MeetSwift.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A11F602F1D8EE7C800EA0B19 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = A11F602E1D8EE7C800EA0B19 /* MBProgressHUD+MJ.m */; };
 		A11F60311D8EEE3500EA0B19 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F60301D8EEE3500EA0B19 /* GuideViewController.swift */; };
 		A11F60331D8EFEF800EA0B19 /* VerifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11F60321D8EFEF800EA0B19 /* VerifyViewController.swift */; };
@@ -39,6 +39,7 @@
 		A1B91D2B1D82691400BCF30A /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D2A1D82691400BCF30A /* SignInViewController.swift */; };
 		A1B91D2E1D82728400BCF30A /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D2D1D82728400BCF30A /* Config.swift */; };
 		A1B91D301D8273A500BCF30A /* UserDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B91D2F1D8273A500BCF30A /* UserDefault.swift */; };
+		A1CD8D451E1F36B2009CFA95 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A1CD8D441E1F36B2009CFA95 /* UserNotifications.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A1EEB2D51D6C388D0089FA42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB2D41D6C388D0089FA42 /* AppDelegate.swift */; };
 		A1EEB2D71D6C388D0089FA42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1EEB2D61D6C388D0089FA42 /* ViewController.swift */; };
 		A1EEB2DA1D6C388D0089FA42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A1EEB2D81D6C388D0089FA42 /* Main.storyboard */; };
@@ -52,8 +53,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		6C7257901B74844DD6CF9D94 /* Pods_MeetSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		72B42701F12D3C037CA9A09A /* Pods-MeetSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift.debug.xcconfig"; sourceTree = "<group>"; };
+		5932682322F54AD185CF60BB /* Pods-MeetSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift.release.xcconfig"; sourceTree = "<group>"; };
+		896A9137D9A74E665EAE6A1C /* Pods_MeetSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MeetSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A11F60291D8EE4C800EA0B19 /* MeetSwift-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MeetSwift-Bridging-Header.h"; sourceTree = "<group>"; };
 		A11F602D1D8EE7C800EA0B19 /* MBProgressHUD+MJ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD+MJ.h"; sourceTree = "<group>"; };
 		A11F602E1D8EE7C800EA0B19 /* MBProgressHUD+MJ.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD+MJ.m"; sourceTree = "<group>"; };
@@ -88,6 +89,7 @@
 		A1B91D2A1D82691400BCF30A /* SignInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		A1B91D2D1D82728400BCF30A /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		A1B91D2F1D8273A500BCF30A /* UserDefault.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefault.swift; sourceTree = "<group>"; };
+		A1CD8D441E1F36B2009CFA95 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		A1EEB2D11D6C388D0089FA42 /* MeetSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MeetSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A1EEB2D41D6C388D0089FA42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A1EEB2D61D6C388D0089FA42 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -96,11 +98,11 @@
 		A1EEB2DE1D6C388D0089FA42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A1EEB2E01D6C388D0089FA42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1EEB2EA1D6DFA0B0089FA42 /* CollectWordsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectWordsViewController.swift; sourceTree = "<group>"; };
-		C18BD93F41EB40E675A9D400 /* Pods-MeetSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetSwift.release.xcconfig"; path = "Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift.release.xcconfig"; sourceTree = "<group>"; };
 		D44F8B921D87BFE80043AF9C /* FootprintCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootprintCell.swift; sourceTree = "<group>"; };
 		D44F8B9A1D87E07B0043AF9C /* WordContributionCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordContributionCollectionViewCell.swift; sourceTree = "<group>"; };
 		D457B0C81D92CAAB00576336 /* CommonView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonView.swift; sourceTree = "<group>"; };
 		D4EFFA941D91867F006021C7 /* WordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordTableViewCell.swift; sourceTree = "<group>"; };
+		EC0A91DC4EB91F58A59F871E /* Pods-MeetSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MeetSwift.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,20 +110,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				066C9C6DF264D6850C8B15B3 /* Pods_MeetSwift.framework in Frameworks */,
+				A1CD8D451E1F36B2009CFA95 /* UserNotifications.framework in Frameworks */,
+				0CA92B184FA943587BBF9B1D /* Pods_MeetSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		1FAA6D62A5F8FFF0BE9EFE30 /* Pods */ = {
+		370B10CC7790FD6119F5FA0D /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				72B42701F12D3C037CA9A09A /* Pods-MeetSwift.debug.xcconfig */,
-				C18BD93F41EB40E675A9D400 /* Pods-MeetSwift.release.xcconfig */,
+				EC0A91DC4EB91F58A59F871E /* Pods-MeetSwift.debug.xcconfig */,
+				5932682322F54AD185CF60BB /* Pods-MeetSwift.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		91AB2F7FF3526DE4B0076817 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A1CD8D441E1F36B2009CFA95 /* UserNotifications.framework */,
+				896A9137D9A74E665EAE6A1C /* Pods_MeetSwift.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		A11F60231D8EDAB100EA0B19 /* Third */ = {
@@ -187,8 +199,8 @@
 			children = (
 				A1EEB2D31D6C388D0089FA42 /* MeetSwift */,
 				A1EEB2D21D6C388D0089FA42 /* Products */,
-				1FAA6D62A5F8FFF0BE9EFE30 /* Pods */,
-				B354D076EAAABACEAB4982E3 /* Frameworks */,
+				370B10CC7790FD6119F5FA0D /* Pods */,
+				91AB2F7FF3526DE4B0076817 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -234,14 +246,6 @@
 			path = MeetSwift;
 			sourceTree = "<group>";
 		};
-		B354D076EAAABACEAB4982E3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				6C7257901B74844DD6CF9D94 /* Pods_MeetSwift.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -249,14 +253,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = A1EEB2E31D6C388D0089FA42 /* Build configuration list for PBXNativeTarget "MeetSwift" */;
 			buildPhases = (
-				97D7F8656E5A3BD7C51D93FC /* [CP] Check Pods Manifest.lock */,
+				7C6088F5C466497F3B54EAD4 /* [CP] Check Pods Manifest.lock */,
 				A1EEB2CD1D6C388D0089FA42 /* Sources */,
 				A1EEB2CE1D6C388D0089FA42 /* Frameworks */,
 				A1EEB2CF1D6C388D0089FA42 /* Resources */,
-				EB39F04F6420F0499AA3A929 /* [CP] Embed Pods Frameworks */,
-				99E67C9A85451F3426EF02F6 /* [CP] Copy Pods Resources */,
-				1F97F4220ED38DE64D8ED03F /* Embed Pods Frameworks */,
 				A1B91D2C1D826FB700BCF30A /* ShellScript */,
+				3FF1161E3E51B1B703500E91 /* [CP] Embed Pods Frameworks */,
+				674C372EF2EBFDDD6EE1532E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -280,6 +283,7 @@
 					A1EEB2D01D6C388D0089FA42 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 5W47V2SDCF;
+						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -320,14 +324,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1F97F4220ED38DE64D8ED03F /* Embed Pods Frameworks */ = {
+		3FF1161E3E51B1B703500E91 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,22 +339,7 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		97D7F8656E5A3BD7C51D93FC /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		99E67C9A85451F3426EF02F6 /* [CP] Copy Pods Resources */ = {
+		674C372EF2EBFDDD6EE1532E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -365,6 +354,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		7C6088F5C466497F3B54EAD4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		A1B91D2C1D826FB700BCF30A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -377,21 +381,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 3ca00201ea762c8d7baec7b71cb91f0ae2508a12 aa3d700db7f9dedbef7dafd857228690a2b0fc70058de3aeed077fc4f559d473";
-		};
-		EB39F04F6420F0499AA3A929 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MeetSwift/Pods-MeetSwift-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -500,7 +489,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -540,7 +529,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -550,7 +539,7 @@
 		};
 		A1EEB2E41D6C388D0089FA42 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 72B42701F12D3C037CA9A09A /* Pods-MeetSwift.debug.xcconfig */;
+			baseConfigurationReference = EC0A91DC4EB91F58A59F871E /* Pods-MeetSwift.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -563,13 +552,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MeetSwift/Third/MeetSwift-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		A1EEB2E51D6C388D0089FA42 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C18BD93F41EB40E675A9D400 /* Pods-MeetSwift.release.xcconfig */;
+			baseConfigurationReference = 5932682322F54AD185CF60BB /* Pods-MeetSwift.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -580,6 +570,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.aventlabs.meet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "MeetSwift/Third/MeetSwift-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

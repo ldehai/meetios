@@ -39,52 +39,53 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     @IBOutlet weak var totalWordCount: UILabel!
     @IBOutlet weak var todayWordCount: UILabel!
-    @IBAction func showTopManProfile(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
+    @IBAction func showTopManProfile(_ sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let userProfileVC:UserProfileViewController = storyboard.instantiateViewController(withIdentifier: "UserProfileVC") as! UserProfileViewController
         userProfileVC.userId = self.topManUserId
         self.navigationController!.pushViewController(userProfileVC, animated: true)
     }
     
-    @IBAction func recommendCityAction(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let collectVC:CollectWordsViewController = storyboard.instantiateViewControllerWithIdentifier("CollectWords") as! CollectWordsViewController
+    @IBAction func recommendCityAction(_ sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let collectVC:CollectWordsViewController = storyboard.instantiateViewController(withIdentifier: "CollectWords") as! CollectWordsViewController
         collectVC.city = self.city
         collectVC.user = self.user
         let nav = UINavigationController(rootViewController: collectVC)
-        nav.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
-        self.presentViewController(nav, animated: false, completion: nil)
+        nav.modalPresentationStyle = UIModalPresentationStyle.formSheet;
+        self.present(nav, animated: false, completion: nil)
     }
     
-    @IBAction func topContributerAction(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let topContributer:TopContributerViewController = storyboard.instantiateViewControllerWithIdentifier("topContributerVC") as! TopContributerViewController
+    @IBAction func topContributerAction(_ sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let topContributer:TopContributerViewController = storyboard.instantiateViewController(withIdentifier: "topContributerVC") as! TopContributerViewController
         self.navigationController!.pushViewController(topContributer, animated: true)
     }
     
-    @IBAction func globalRankAction(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let globalRankVC:GlobalViewController = storyboard.instantiateViewControllerWithIdentifier("globalRankVC") as! GlobalViewController
+    @IBAction func globalRankAction(_ sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let globalRankVC:GlobalViewController = storyboard.instantiateViewController(withIdentifier: "globalRankVC") as! GlobalViewController
         self.navigationController!.pushViewController(globalRankVC, animated: true)
     }
-    @IBAction func goCollect(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let collectVC:CollectWordsViewController = storyboard.instantiateViewControllerWithIdentifier("CollectWords") as! CollectWordsViewController
-        collectVC.user = self.user
-        let nav = UINavigationController(rootViewController: collectVC)
-        nav.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
-        self.presentViewController(nav, animated: false, completion: nil)
+    @IBAction func goCollect(_ sender: AnyObject) {
+        self.navigationController!.popViewController(animated: false)
+//        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
+//        let collectVC:CollectWordsViewController = storyboard.instantiateViewControllerWithIdentifier("CollectWords") as! CollectWordsViewController
+//        collectVC.user = self.user
+//        let nav = UINavigationController(rootViewController: collectVC)
+//        nav.modalPresentationStyle = UIModalPresentationStyle.FormSheet;
+//        self.presentViewController(nav, animated: false, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationController?.setNavigationBarHidden(true, animated: true);
-        self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
-        UIApplication.sharedApplication().statusBarHidden = false
+        self.navigationController?.navigationBar.tintColor = UIColor.black
+        UIApplication.shared.isStatusBarHidden = false
         
         self .setContraints()
-        self .performSelector(#selector(self.getMyWords), withObject: nil, afterDelay: 0)
+        self .perform(#selector(self.getMyWords), with: nil, afterDelay: 0)
     }
     
     func refreshData(){
@@ -93,14 +94,14 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             let json = JSON(data:respond)
             self.user = User.fromJSON(json["data"])
             self.nickName.text = self.user?.nickName
-            let random = Helper .randomInRange(1...1000)
-            self.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar! + "?v=\(random)"), placeholderImage: UIImage(named: "avatar"))
+            let random = Helper .randomInRange(1..<1000)
+            self.avatarImage .sd_setImage(with: URL(string:SRCBaseURL + self.user!.avatar! + "?v=\(random)"), placeholderImage: UIImage(named: "avatar"))
             self.wordCountLabel.text = String(self.user!.wordcount)
 //            self.reviseView.update(Double(self.user!.wordcount + 1), total: 1)
             self.goldCountLable.text = String(self.user!.golden)
-            self.gradeBtn .setTitle(String(self.user!.grade), forState: UIControlState.Normal)
+            self.gradeBtn .setTitle(String(self.user!.grade), for: UIControlState())
             self.gradeBtn.layer.borderWidth = 1
-            self.gradeBtn.layer.borderColor = UIColor .whiteColor().CGColor
+            self.gradeBtn.layer.borderColor = UIColor.white.cgColor
             
 //            self.todayView.update(50.0, total: (self.user?.todaywords)!)
 //            self.reviseView.update(50.0, total: (self.user?.wordcount)!)
@@ -110,7 +111,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
         MAPI .getRecommendCity { (respond) in
             let json = JSON(data:respond)
             self.city = RecommendCity.fromJSON(json["data"])
-            self.recommendCity .setTitle(self.city?.name, forState: UIControlState.Normal)
+            self.recommendCity .setTitle(self.city?.name, for: UIControlState())
         }
         
         MAPI .getTopRankWorld { (respond) in
@@ -124,11 +125,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
             if let user = User.fromJSON((item)!){
                 self.topManName.text = user.nickName
                 self.topManUserId = user.userId!
-                self.topManAvatar .sd_setImageWithURL(NSURL(string:SRCBaseURL + user.avatar!), placeholderImage: UIImage(named: "avatar"))
+                self.topManAvatar .sd_setImage(with: URL(string:SRCBaseURL + user.avatar!), placeholderImage: UIImage(named: "avatar"))
                 
-                self.topMan .addTarget(self, action: #selector(self.showTopManProfile(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                self.topMan .addTarget(self, action: #selector(self.showTopManProfile(_:)), for: UIControlEvents.touchUpInside)
                 
-                self.topManAvatar.userInteractionEnabled = true
+                self.topManAvatar.isUserInteractionEnabled = true
                 let gesture = UITapGestureRecognizer(target: self, action: #selector(self.showTopManProfile(_:)))
                 self.topManAvatar .addGestureRecognizer(gesture)
             }
@@ -136,8 +137,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     func getMyWords(){
-        let userDefault = NSUserDefaults .standardUserDefaults()
-        var lastWordId: String? = userDefault .objectForKey("lastWordId") as? String
+        let userDefault = UserDefaults.standard
+        var lastWordId: String? = userDefault .object(forKey: "lastWordId") as? String
         if (lastWordId == nil) {
             lastWordId = ""
         }
@@ -162,8 +163,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
                 }
                 
                 let wordId = item["word"]["collectid"] .stringValue
-                let userDefault = NSUserDefaults .standardUserDefaults()
-                userDefault .setObject(wordId, forKey: "lastWordId")
+                let userDefault = UserDefaults .standard
+                userDefault .set(wordId, forKey: "lastWordId")
             }
             
             self .refreshCollectCount()
@@ -172,7 +173,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     
     func refreshCollectCount(){
         //查询当天采集的单词
-        let yesterday = NSDate .today()
+        let yesterday = Date()
         let realm = try! Realm()
         let wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday)
         self.todayWordCount.text = String(wordArray.count)
@@ -180,106 +181,106 @@ class ViewController: UIViewController, CLLocationManagerDelegate{
     }
     
     func setContraints(){
-        locationManager.delegate = self
-        locationManager.requestAlwaysAuthorization()
+//        locationManager.delegate = self
+//        locationManager.requestAlwaysAuthorization()
         
         //每日精进
 //        todayView.circleColor = MainColor!
-        todayView.backgroundColor = UIColor .clearColor()
+        todayView.backgroundColor = UIColor.clear
         todayView.layer.cornerRadius = 50
-        todayView.layer.borderColor = UIColor(hex: "4A4A4A", alpha: 0.6)! .CGColor
+        todayView.layer.borderColor = UIColor(hex: "4A4A4A", alpha: 0.6)! .cgColor
         todayView.layer.borderWidth = 1
 //        todayView.circleBorderWidth = 20
 //        todayView .update(60,total: 100)
-        todayView.userInteractionEnabled = true
+        todayView.isUserInteractionEnabled = true
         let gestureToday = UITapGestureRecognizer(target: self, action: #selector(openTodayPractice))
         todayView .addGestureRecognizer(gestureToday)
         
         //温故知新
 //        reviseView.circleColor = MainColor!
-        reviseView.backgroundColor = UIColor .clearColor()
+        reviseView.backgroundColor = UIColor.clear
         reviseView.layer.cornerRadius = 50
-        reviseView.layer.borderColor = UIColor(hex: "4A4A4A", alpha: 0.6)! .CGColor
+        reviseView.layer.borderColor = UIColor(hex: "4A4A4A", alpha: 0.6)! .cgColor
         reviseView.layer.borderWidth = 1
 
 //        reviseView.circleBorderWidth = 20
 //        reviseView.update(80,total: 100)
-        reviseView.userInteractionEnabled = true
+        reviseView.isUserInteractionEnabled = true
         let gestureRevise = UITapGestureRecognizer(target: self, action: #selector(openReviseWords))
         reviseView .addGestureRecognizer(gestureRevise)
         
-        avatarImage.snp_makeConstraints { (make) in
+        avatarImage.snp.makeConstraints { (make) in
             make.width.height.equalTo(60);
         };
-        avatarImage.userInteractionEnabled = true
+        avatarImage.isUserInteractionEnabled = true
         let gesture = UITapGestureRecognizer(target: self, action: #selector(openUserProfile))
         avatarImage .addGestureRecognizer(gesture)
-        wordCountView.snp_makeConstraints { (make) in
+        wordCountView.snp.makeConstraints { (make) in
             make.leading.equalTo(avatarImage);
-            make.top.equalTo(avatarImage.snp_centerY);
+            make.top.equalTo(avatarImage.snp.centerY);
         }
-        gradeBtn .addTarget(self, action: #selector(openUserProfile), forControlEvents: UIControlEvents.TouchUpInside)
+        gradeBtn .addTarget(self, action: #selector(openUserProfile), for: UIControlEvents.touchUpInside)
         
-        goldView .snp_makeConstraints { (make) in
-            make.left.equalTo(self.view.snp_centerX).offset(30)
-        }
-        
-        todayView .snp_makeConstraints { (make) in
-            make.right.equalTo(self.view.snp_centerX).offset(-30)
-        }
-        reviseView .snp_makeConstraints { (make) in
-            make.left.equalTo(self.view.snp_centerX).offset(30)
+        goldView .snp.makeConstraints { (make) in
+            make.left.equalTo(self.view.snp.centerX).offset(30)
         }
         
-        topMan .snp_makeConstraints { (make) in
+        todayView .snp.makeConstraints { (make) in
+            make.right.equalTo(self.view.snp.centerX).offset(-30)
+        }
+        reviseView .snp.makeConstraints { (make) in
+            make.left.equalTo(self.view.snp.centerX).offset(30)
+        }
+        
+        topMan .snp.makeConstraints { (make) in
             //make.right.equalTo(self.view.snp_centerX)
-            make.right.equalTo(self.view.snp_centerX).offset(-30)
+            make.right.equalTo(self.view.snp.centerX).offset(-30)
         }
-        recommendCity .snp_makeConstraints { (make) in
-            make.left.equalTo(self.view.snp_centerX).offset(30)
+        recommendCity .snp.makeConstraints { (make) in
+            make.left.equalTo(self.view.snp.centerX).offset(30)
         }
-        topContribute .snp_makeConstraints { (make) in
-            make.right.equalTo(self.view.snp_centerX).offset(-30)
+        topContribute .snp.makeConstraints { (make) in
+            make.right.equalTo(self.view.snp.centerX).offset(-30)
         }
-        topWorld .snp_makeConstraints { (make) in
-            make.left.equalTo(self.view.snp_centerX).offset(30)
+        topWorld .snp.makeConstraints { (make) in
+            make.left.equalTo(self.view.snp.centerX).offset(30)
         }
     }
     
     func openTodayPractice(){
         
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let ReviseWordsVC:TodayCollectTableViewController = storyboard.instantiateViewControllerWithIdentifier("TodayCollectTableVC") as! TodayCollectTableViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let ReviseWordsVC:TodayCollectTableViewController = storyboard.instantiateViewController(withIdentifier: "TodayCollectTableVC") as! TodayCollectTableViewController
         self.navigationController!.pushViewController(ReviseWordsVC, animated: true)
     }
 
     func openReviseWords(){
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let ReviseWordsVC:ReviseWordsViewController = storyboard.instantiateViewControllerWithIdentifier("ReviseWordsVC") as! ReviseWordsViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let ReviseWordsVC:ReviseWordsViewController = storyboard.instantiateViewController(withIdentifier: "ReviseWordsVC") as! ReviseWordsViewController
         self.navigationController!.pushViewController(ReviseWordsVC, animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.sharedApplication().statusBarHidden = false
+//        UIApplication.shared.isStatusBarHidden = false
         
         self .refreshData()
         self .refreshCollectCount()
     }
     
     func openUserProfile(){
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let userProfileVC:UserProfileViewController = storyboard.instantiateViewControllerWithIdentifier("UserProfileVC") as! UserProfileViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let userProfileVC:UserProfileViewController = storyboard.instantiateViewController(withIdentifier: "UserProfileVC") as! UserProfileViewController
         userProfileVC.userId = MAPI .userId()
         self.navigationController!.pushViewController(userProfileVC, animated: true)
     }
     
-    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus){
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus){
         
     }
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]){
         
     }
 }

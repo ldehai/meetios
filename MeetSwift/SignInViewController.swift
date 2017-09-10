@@ -14,7 +14,7 @@ class SignInViewController: UIViewController {
 
     @IBOutlet weak var telField: SpringTextField!
     @IBOutlet weak var pwdField: SpringTextField!
-    @IBAction func signInAction(sender: AnyObject) {
+    @IBAction func signInAction(_ sender: AnyObject) {
         if telField.text!.isEmpty {
             self.telField.animation = "pop"
             self.telField.curve = "spring"
@@ -46,23 +46,23 @@ class SignInViewController: UIViewController {
             let userId = json["data"]["userid"].stringValue
             let accessToken = json["data"]["accesstoken"].stringValue
             
-            let userDefault = NSUserDefaults .standardUserDefaults()
-            userDefault .setObject(userId, forKey: "userId")
-            userDefault .setObject(accessToken, forKey: "accessToken")
+            let userDefault = UserDefaults .standard
+            userDefault .set(userId, forKey: "userId")
+            userDefault .set(accessToken, forKey: "accessToken")
         
-            NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_LOGIN_OK, object: nil)
+            NotificationCenter .default .post(name: NSNotification.Name(rawValue: NOTIFY_LOGIN_OK), object: nil)
         }
     }
-    @IBAction func signUpAction(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let signUpVC:SignUpViewController = storyboard.instantiateViewControllerWithIdentifier("SignUpVC") as! SignUpViewController
+    @IBAction func signUpAction(_ sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let signUpVC:SignUpViewController = storyboard.instantiateViewController(withIdentifier: "SignUpVC") as! SignUpViewController
         
         self.navigationController!.pushViewController(signUpVC, animated: true)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "登录"
-        self.navigationController?.navigationBar.hidden = false
+        self.navigationController?.navigationBar.isHidden = false
         // Do any additional setup after loading the view.
     }
 

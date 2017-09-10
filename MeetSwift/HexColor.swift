@@ -10,18 +10,18 @@ import UIKit
 
 extension NSObject {
     
-    func callSelectorAsync(selector: Selector, object: AnyObject?, delay: NSTimeInterval) -> NSTimer {
+    func callSelectorAsync(_ selector: Selector, object: AnyObject?, delay: TimeInterval) -> Timer {
         
-        let timer = NSTimer.scheduledTimerWithTimeInterval(delay, target: self, selector: selector, userInfo: object, repeats: false)
+        let timer = Timer.scheduledTimer(timeInterval: delay, target: self, selector: selector, userInfo: object, repeats: false)
         return timer
     }
     
-    func callSelector(selector: Selector, object: AnyObject?, delay: NSTimeInterval) {
+    func callSelector(_ selector: Selector, object: AnyObject?, delay: TimeInterval) {
         
         let delay = delay * Double(NSEC_PER_SEC)
-        let time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            NSThread.detachNewThreadSelector(selector, toTarget:self, withObject: object)
+        let time = DispatchTime.now() + Double(Int64(delay)) / Double(NSEC_PER_SEC)
+        DispatchQueue.main.asyncAfter(deadline: time, execute: {
+            Thread.detachNewThreadSelector(selector, toTarget:self, with: object)
         })
     }
 }
@@ -36,7 +36,7 @@ public extension UIColor {
      */
     public convenience init?(hex: String, alpha: Float = 1.0) {
         
-        if hex.rangeOfString("(^#?[0-9A-Fa-f]{6}$)|(^#?[0-9A-Fa-f]{3}$)", options: .RegularExpressionSearch) == nil {
+        if hex.range(of: "(^#?[0-9A-Fa-f]{6}$)|(^#?[0-9A-Fa-f]{3}$)", options: .regularExpression) == nil {
             self.init()
             return nil
         }
@@ -48,31 +48,31 @@ public extension UIColor {
         
         // Check for hash and remove the hash
         if hexString.hasPrefix("#") {
-            hexString = hexString.substringFromIndex(hexString.startIndex.advancedBy(1))
+            hexString = hexString.substring(from: hexString.characters.index(hexString.startIndex, offsetBy: 1))
         }
         
         // Deal with 3 character hex strings
         if hexString.characters.count == 3 {
-            red = (hexString as NSString).substringToIndex(1)
-            green = (hexString as NSString).substringWithRange(NSMakeRange(1, 1))
-            blue = (hexString as NSString).substringFromIndex(2)
+            red = (hexString as NSString).substring(to: 1)
+            green = (hexString as NSString).substring(with: NSMakeRange(1, 1))
+            blue = (hexString as NSString).substring(from: 2)
             
             red += red
             green += green
             blue += blue
         } else {
-            red = (hexString as NSString).substringToIndex(2)
-            green = (hexString as NSString).substringWithRange(NSMakeRange(2, 2))
-            blue = (hexString as NSString).substringFromIndex(4)
+            red = (hexString as NSString).substring(to: 2)
+            green = (hexString as NSString).substring(with: NSMakeRange(2, 2))
+            blue = (hexString as NSString).substring(from: 4)
         }
         
         var redInt: CUnsignedInt = 0
         var greenInt: CUnsignedInt = 0
         var blueInt: CUnsignedInt = 0
         
-        NSScanner(string: red).scanHexInt(&redInt)
-        NSScanner(string: green).scanHexInt(&greenInt)
-        NSScanner(string: blue).scanHexInt(&blueInt)
+        Scanner(string: red).scanHexInt32(&redInt)
+        Scanner(string: green).scanHexInt32(&greenInt)
+        Scanner(string: blue).scanHexInt32(&blueInt)
         
         self.init(
             red: CGFloat(redInt) / 255.0,

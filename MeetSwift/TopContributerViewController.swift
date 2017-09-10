@@ -19,16 +19,16 @@ class TopContributerViewController: UIViewController {
         super.viewDidLoad()
         self.title = "贡献榜"
         self.navigationController?.setNavigationBarHidden(false, animated: true);
-        self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         
         topTip .sizeToFit()
-        topTip .snp_makeConstraints { (make) in
+        topTip .snp.makeConstraints { (make) in
             make.left.right.equalTo(15)
         }
         
-        tableView .snp_makeConstraints { (make) in
+        tableView .snp.makeConstraints { (make) in
             make.left.right.bottom.equalTo(5)
-            make.top.equalTo(topTip.snp_bottom).offset(5)
+            make.top.equalTo(topTip.snp.bottom).offset(5)
         }
         
         MAPI .getTopContributer { (respond) in
@@ -44,18 +44,18 @@ class TopContributerViewController: UIViewController {
         }
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         return self.userArray.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat
     {
         return 100.0;
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell{
         
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "WordCell")
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "WordCell")
         
         let user = self.userArray[indexPath.row]
         cell.textLabel?.text = user.nickName

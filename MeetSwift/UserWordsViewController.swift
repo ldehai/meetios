@@ -20,7 +20,7 @@ class UserWordsViewController: UIViewController,UITableViewDelegate,UITableViewD
         super.viewDidLoad()
         self.title = "\(self.user.nickName!)的单词库"
         self.navigationController?.setNavigationBarHidden(false, animated: true);
-        self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -41,7 +41,7 @@ class UserWordsViewController: UIViewController,UITableViewDelegate,UITableViewD
 //            }
             for item in wordList! {
                 let word = WordModel.fromJSON(item)
-                self.wordArray?.insert(word!, atIndex: 0)
+                self.wordArray?.insert(word!, at: 0)
             }
             
             self.tableView .reloadData()
@@ -49,17 +49,17 @@ class UserWordsViewController: UIViewController,UITableViewDelegate,UITableViewD
     }
     
     // MARK: - Table view data source
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return (self.wordArray?.count)!
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 60.0;
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "WordCell")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "WordCell")
         
         let word = self.wordArray?[indexPath.row]
         cell.textLabel?.text = word?.word!.name
@@ -68,16 +68,16 @@ class UserWordsViewController: UIViewController,UITableViewDelegate,UITableViewD
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        tableView .deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        tableView .deselectRow(at: indexPath, animated: true)
         
         let word = self.wordArray?[indexPath.row]
         
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let wordDetail:WordDetailViewController = storyboard.instantiateViewControllerWithIdentifier("WordDetailVC") as! WordDetailViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let wordDetail:WordDetailViewController = storyboard.instantiateViewController(withIdentifier: "WordDetailVC") as! WordDetailViewController
         wordDetail.word = word
-        wordDetail.showMode = ShowMode.Show;
-        wordDetail.modalPresentationStyle = UIModalPresentationStyle.Custom;
-        self.presentViewController(wordDetail, animated: false, completion: nil)
+        wordDetail.showMode = ShowMode.show;
+        wordDetail.modalPresentationStyle = UIModalPresentationStyle.custom;
+        self.present(wordDetail, animated: false, completion: nil)
     }
 }

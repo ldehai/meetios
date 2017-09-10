@@ -11,42 +11,42 @@ import UIKit
 class SettingViewController: UITableViewController,UIAlertViewDelegate {
 
     @IBOutlet weak var logoutBtn: UIButton!
-    @IBAction func logout(sender: AnyObject) {
+    @IBAction func logout(_ sender: AnyObject) {
         let alert = UIAlertView(title: "提醒", message: "确定要退出登录吗?", delegate: self, cancelButtonTitle: "取消", otherButtonTitles: "确定")
         alert.show()
     }
     
-    func alertView(alertView: UIAlertView, clickedButtonAtIndex buttonIndex: Int){
+    func alertView(_ alertView: UIAlertView, clickedButtonAt buttonIndex: Int){
         if buttonIndex == 1 {
-            let userDefault = NSUserDefaults .standardUserDefaults()
-            userDefault .removeObjectForKey("userId")
-            userDefault .removeObjectForKey("accessToken")
-            userDefault .removeObjectForKey("lastWordId")
+            let userDefault = UserDefaults.standard
+            userDefault .removeObject(forKey: "userId")
+            userDefault .removeObject(forKey: "accessToken")
+            userDefault .removeObject(forKey: "lastWordId")
             
-            NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_LOGOUT_OK, object: nil)
+            NotificationCenter.default .post(name: Notification.Name(rawValue: NOTIFY_LOGOUT_OK), object: nil)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let footer = UIView(frame: CGRectZero)//[[UIView alloc] initWithFrame:CGRectZero];
+        let footer = UIView(frame: CGRect.zero)//[[UIView alloc] initWithFrame:CGRectZero];
         self.tableView.tableFooterView = footer
         
         logoutBtn.layer.cornerRadius = 5;
-        logoutBtn.layer.borderColor = UIColor(hex: "7E62BE", alpha: 1.0)?.CGColor
+        logoutBtn.layer.borderColor = UIColor(hex: "7E62BE", alpha: 1.0)?.cgColor
         logoutBtn.layer.borderWidth = 1
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        tableView .deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        tableView .deselectRow(at: indexPath, animated: true)
         
         switch indexPath.row {
         case 0:
             break
         case 1:
             //写评论
-            UIApplication .sharedApplication() .openURL(NSURL(string:"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1145700018&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8")!)
+            UIApplication.shared .openURL(URL(string:"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?id=1145700018&pageNumber=0&sortOrdering=2&type=Purple+Software&mt=8")!)
             break
         default:
             break

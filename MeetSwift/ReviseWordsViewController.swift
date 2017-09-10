@@ -23,7 +23,7 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
         super.viewDidLoad()
         self.title = "我的单词库"
         self.navigationController?.setNavigationBarHidden(false, animated: true);
-        self.navigationController?.navigationBar.tintColor = UIColor .blackColor()
+        self.navigationController?.navigationBar.tintColor = UIColor.black
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -32,8 +32,8 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
         self.wordArray = realm.objects(WordModel.self)
         self.tableView .reloadData()
         
-        let userDefault = NSUserDefaults .standardUserDefaults()
-        var lastWordId: String? = userDefault .objectForKey("lastWordId") as? String
+        let userDefault = UserDefaults.standard
+        var lastWordId: String? = userDefault .object(forKey: "lastWordId") as? String
         if (lastWordId == nil) {
             lastWordId = ""
         }
@@ -57,8 +57,8 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
                 }
                 
                 let wordId = item["word"]["collectid"] .stringValue
-                let userDefault = NSUserDefaults .standardUserDefaults()
-                userDefault .setObject(wordId, forKey: "lastWordId")
+                let userDefault = UserDefaults .standard
+                userDefault .set(wordId, forKey: "lastWordId")
             }
             
             let realm = try! Realm()
@@ -70,17 +70,17 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     // MARK: - Table view data source
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.wordArray.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat
     {
         return 60.0;
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "WordCell")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.subtitle, reuseIdentifier: "WordCell")
         
         let word = self.wordArray[indexPath.row]
         cell.textLabel?.text = word.word!.name
@@ -89,16 +89,16 @@ class ReviseWordsViewController: UIViewController,UITableViewDelegate,UITableVie
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath){
-        tableView .deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
+        tableView .deselectRow(at: indexPath, animated: true)
         
         let word = self.wordArray[indexPath.row]
         
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let wordDetail:WordDetailViewController = storyboard.instantiateViewControllerWithIdentifier("WordDetailVC") as! WordDetailViewController
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let wordDetail:WordDetailViewController = storyboard.instantiateViewController(withIdentifier: "WordDetailVC") as! WordDetailViewController
         wordDetail.word = word
-        wordDetail.showMode = ShowMode.Show;
-        wordDetail.modalPresentationStyle = UIModalPresentationStyle.Custom;
-        self.presentViewController(wordDetail, animated: false, completion: nil)
+        wordDetail.showMode = ShowMode.show;
+        wordDetail.modalPresentationStyle = UIModalPresentationStyle.custom;
+        self.present(wordDetail, animated: false, completion: nil)
     }
 }

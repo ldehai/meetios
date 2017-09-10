@@ -5,16 +5,17 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target "MeetSwift" do
     
-pod 'SnapKit', '~> 0.22.0'
-pod 'Alamofire', '~> 3.4'
-pod 'SwiftyJSON', '~> 2.3.2'
-pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift2'
+pod 'SnapKit', '~> 3.1.2'
+pod 'Alamofire', '~> 4.2.0'
+pod 'SwiftyJSON'
+pod 'Spring', :git => 'https://github.com/MengTo/Spring.git', :branch => 'swift3'
 pod 'RealmSwift'
 pod 'Fabric'
 pod 'Crashlytics'
 pod 'SDWebImage', '~>3.8'
-pod 'SwiftDate', '~>3.0.8'
+pod 'SwiftDate', '~>4.0'
 pod 'FoursquareAPIClient'
-pod 'JPush-iOS-SDK'
+#pod 'JPush-iOS-SDK'
+pod 'WechatKit'
 end
 

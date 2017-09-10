@@ -36,17 +36,17 @@ class UserProfileCell: UITableViewCell,UIActionSheetDelegate {
                 avatarImageView.image = image
             }
             else{
-                let random = Helper .randomInRange(1...1000)
-                avatarImageView .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar! + "?v=\(random)"), placeholderImage: UIImage(named: "avatar"))
+                let random = Helper .randomInRange(1..<1000)
+                avatarImageView .sd_setImage(with: URL(string:SRCBaseURL + self.user!.avatar! + "?v=\(random)"), placeholderImage: UIImage(named: "avatar"))
             }
             
             let tap = UITapGestureRecognizer(target: self, action: #selector(changeAvatar))
             avatarImageView .addGestureRecognizer(tap)
-            avatarImageView.userInteractionEnabled = true
+            avatarImageView.isUserInteractionEnabled = true
             
             let wordCountTap = UITapGestureRecognizer(target: self, action: #selector(wordCountClick))
             wordcountLabel .addGestureRecognizer(wordCountTap)
-            wordcountLabel.userInteractionEnabled = true
+            wordcountLabel.isUserInteractionEnabled = true
         }
     }
     
@@ -70,7 +70,7 @@ class UserProfileCell: UITableViewCell,UIActionSheetDelegate {
         // Initialization code
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

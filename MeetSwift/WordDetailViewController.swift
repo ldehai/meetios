@@ -23,18 +23,18 @@ class WordDetailViewController: UIViewController {
     var currentIndex = 0
     @IBOutlet weak var knowBtn: UIButton!
     @IBOutlet weak var unknowBtn: UIButton!
-    @IBAction func knowAction(sender: AnyObject) {
+    @IBAction func knowAction(_ sender: AnyObject) {
         self .getNextWord()
     }
-    @IBAction func unknowAction(sender: AnyObject) {
+    @IBAction func unknowAction(_ sender: AnyObject) {
         self .getNextWord()
     }
     
     func getNextWord(){
         print(currentIndex)
         if currentIndex + 1 == self.wordArray?.count  {
-            self.popBg.hidden = true
-            self.tipView.hidden = false
+            self.popBg.isHidden = true
+            self.tipView.isHidden = false
             
             //复习完成后通知服务器，可能有金币奖励
             MAPI .reviseComplete({ (respond) in
@@ -58,25 +58,25 @@ class WordDetailViewController: UIViewController {
     }
     
     //不采集直接关闭窗口
-    @IBAction func closeDlg(sender: AnyObject) {
-        UIView .animateWithDuration(0.3, animations: {
+    @IBAction func closeDlg(_ sender: AnyObject) {
+        UIView .animate(withDuration: 0.3, animations: {
             self.view.alpha = 0.0
-        }) { (true) in
+        }, completion: { (true) in
             
-            self.dismissViewControllerAnimated(false){
+            self.dismiss(animated: false){
                 
             }
-        }
+        }) 
     }
     
     //采集单词
-    @IBAction func collectWordAction(sender: AnyObject) {
-        UIView .animateWithDuration(0.3, animations: {
+    @IBAction func collectWordAction(_ sender: AnyObject) {
+        UIView .animate(withDuration: 0.3, animations: {
             self.view.alpha = 0.0
-            }) { (true) in
-                if self.showMode == ShowMode.Collect {
+            }, completion: { (true) in
+                if self.showMode == ShowMode.collect {
                     //采集
-                    let appDelegate = UIApplication .sharedApplication().delegate as! AppDelegate
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
                     MAPI.collectWord(self.word.word!.id,
                                      lon: (self.word.word?.lon)!,
                                      lat: (self.word.word?.lat)!,
@@ -87,17 +87,17 @@ class WordDetailViewController: UIViewController {
                         if errorCode == 0 {
                             let golden = json["data"]["golden"] .stringValue
                             let wordId = json["data"]["id"] .stringValue
-                            let userDefault = NSUserDefaults .standardUserDefaults()
-                            userDefault .setObject(wordId, forKey: "lastWordId")
+                            let userDefault = UserDefaults.standard
+                            userDefault .set(wordId, forKey: "lastWordId")
                             
                             //保存到本地
                             let realm = try! Realm()
                             try! realm.write {
                                 self.word.word?.own = 1
-                                self.word.collectTime = NSDate()
+                                self.word.collectTime = NSDate() as Date
                                 realm.add(self.word, update: true)
-                                
-                                NSNotificationCenter .defaultCenter() .postNotificationName(NOTIFY_COLLECT_WORD, object:self, userInfo: ["wordId":self.word!.id])
+                                NotificationCenter .default .post(name: NSNotification.Name(rawValue: NOTIFY_COLLECT_WORD), object: self, userInfo: ["wordId":self.word!.id])
+//                                NotificationCenter .default .postNotificationName(NOTIFY_COLLECT_WORD, object:self, userInfo: ["wordId":self.word!.id])
                             }
                         }
                         else{
@@ -110,9 +110,9 @@ class WordDetailViewController: UIViewController {
                     
                 }
                 
-                self.dismissViewControllerAnimated(false){
+                self.dismiss(animated: false){
                 }
-        }
+        }) 
     }
     
     override func viewDidLoad() {
@@ -133,7 +133,7 @@ class WordDetailViewController: UIViewController {
                 let realm = try! Realm()
                 try! realm.write {
                     self.word.word?.own = 1
-                    self.word.collectTime = NSDate()
+                    self.word.collectTime = NSDate() as Date
                     realm.add(self.word, update: true)
                 }
                 
@@ -142,48 +142,48 @@ class WordDetailViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         
-        if self.showMode != ShowMode.Collect{
+        if self.showMode != ShowMode.collect{
             //准备调整界面
             self.view .setNeedsLayout()
             
-            popBg .snp_updateConstraints { (make) in
+            popBg .snp.updateConstraints { (make) in
                 make.top.equalTo(20)
                 make.left.right.bottom.equalTo(0)
             }
             
             //开始刷新界面
-            UIView .animateWithDuration(0.3, animations: {
+            UIView .animate(withDuration: 0.3, animations: {
                 self.view .layoutIfNeeded()
-            }) { (true) in
+            }, completion: { (true) in
                 
-                if self.showMode == ShowMode.Show {
-                    self.confirmBtn .setTitle("好的", forState: UIControlState.Normal)
-                    self.confirmBtn.hidden = false
+                if self.showMode == ShowMode.show {
+                    self.confirmBtn .setTitle("好的", for: UIControlState())
+                    self.confirmBtn.isHidden = false
                 }
-                else if self.showMode == ShowMode.Collect{
-                    self.confirmBtn .setTitle("收了它", forState: UIControlState.Normal)
-                    self.confirmBtn.hidden = false
+                else if self.showMode == ShowMode.collect{
+                    self.confirmBtn .setTitle("收了它", for: UIControlState())
+                    self.confirmBtn.isHidden = false
                 }
-                else if self.showMode == ShowMode.Train{
-                    self.confirmBtn.hidden = true
-                    self.knowBtn.hidden = false
-                    self.unknowBtn.hidden = false
+                else if self.showMode == ShowMode.train{
+                    self.confirmBtn.isHidden = true
+                    self.knowBtn.isHidden = false
+                    self.unknowBtn.isHidden = false
                 }
-            }
+            }) 
         }
         else{
-            self.confirmBtn .setTitle("收了它", forState: UIControlState.Normal)
-            self.confirmBtn.hidden = false
+            self.confirmBtn .setTitle("收了它", for: UIControlState())
+            self.confirmBtn.isHidden = false
         }
     }
 
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int{
+    func numberOfSectionsInTableView(_ tableView: UITableView) -> Int{
         return 3
     }
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         switch section {
         case 0:
             return 1
@@ -196,7 +196,7 @@ class WordDetailViewController: UIViewController {
         }
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat
     {
         switch indexPath.section {
         case 0:
@@ -211,7 +211,7 @@ class WordDetailViewController: UIViewController {
         }
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat
     {
         switch section {
         case 0:
@@ -225,7 +225,7 @@ class WordDetailViewController: UIViewController {
         }
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String?{
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String?{
         switch section {
         case 0:
             return ""
@@ -238,13 +238,13 @@ class WordDetailViewController: UIViewController {
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell{
         
-        let cell: WordBasicCell = tableView.dequeueReusableCellWithIdentifier("WordBasicCell") as! WordBasicCell
+        let cell: WordBasicCell = tableView.dequeueReusableCell(withIdentifier: "WordBasicCell") as! WordBasicCell
         
         //单词释义
         if indexPath.section == 0 {
-            let cell: WordBasicCell = tableView.dequeueReusableCellWithIdentifier("WordBasicCell") as! WordBasicCell
+            let cell: WordBasicCell = tableView.dequeueReusableCell(withIdentifier: "WordBasicCell") as! WordBasicCell
 
             cell.word = word.word
 //            cell.pronunciation.text = word.word!.pronunc
@@ -255,7 +255,7 @@ class WordDetailViewController: UIViewController {
         }
         //系统例句
         else if indexPath.section == 1{
-            let cell: WordSampleCell = tableView.dequeueReusableCellWithIdentifier("WordSampleCell") as! WordSampleCell
+            let cell: WordSampleCell = tableView.dequeueReusableCell(withIdentifier: "WordSampleCell") as! WordSampleCell
             let sample = word.sysExample[indexPath.row]
             cell.sentence.text = sample.content .htmlDecoded()
             cell.translate_cn.text = sample.translation .htmlDecoded()
@@ -264,7 +264,7 @@ class WordDetailViewController: UIViewController {
         }
         //密友例句
         else if indexPath.section == 2{
-            let cell: WordSampleCell = tableView.dequeueReusableCellWithIdentifier("WordSampleCell") as! WordSampleCell
+            let cell: WordSampleCell = tableView.dequeueReusableCell(withIdentifier: "WordSampleCell") as! WordSampleCell
             let sample = word.userExample[indexPath.row]
             cell.sentence.text = sample.content
             cell.translate_cn.text = sample.translation

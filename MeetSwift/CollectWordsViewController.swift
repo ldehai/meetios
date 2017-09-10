@@ -30,74 +30,98 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
     var city:RecommendCity?
     var user:User?
     
+    @IBOutlet weak var userView: UIView!
 
     //今日采集
-    @IBAction func myCollectAction(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-        let ReviseWordsVC:TodayCollectTableViewController = storyboard.instantiateViewControllerWithIdentifier("TodayCollectTableVC") as! TodayCollectTableViewController
+    @IBAction func myCollectAction(_ sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let ReviseWordsVC:TodayCollectTableViewController = storyboard.instantiateViewController(withIdentifier: "TodayCollectTableVC") as! TodayCollectTableViewController
         self.navigationController!.pushViewController(ReviseWordsVC, animated: true)
     }
     
     //商店
-    @IBAction func openStore(sender: AnyObject) {
+    @IBAction func openStore(_ sender: AnyObject) {
     }
     
     //返回首页
-    @IBAction func goHome(sender: AnyObject) {
-        self.dismissViewControllerAnimated(false, completion: nil)
+    @IBAction func goHome(_ sender: AnyObject) {
+        self.dismiss(animated: false, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController? .setNavigationBarHidden(true, animated: true);
-        NSNotificationCenter .defaultCenter() .addObserver(self, selector: #selector(loadWordList), name: NOTIFY_LOAD_WORDLIST, object: nil)
+        NotificationCenter.default .addObserver(self, selector: #selector(loadWordList), name: NSNotification.Name(rawValue: NOTIFY_LOAD_WORDLIST), object: nil)
         
-        self.avatarImage .sd_setImageWithURL(NSURL(string:SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
-        self.wordCount.text = String(self.user!.wordcount)
-        self.gradeBtn .setTitle(String(self.user!.grade), forState: UIControlState.Normal)
-        self.gradeBtn.layer.borderWidth = 1
-        self.gradeBtn.layer.borderColor = UIColor .whiteColor().CGColor
-        self.goldenCount.text = String(self.user!.golden)
-        
-        if self.city == nil {
-            let appDelegate = UIApplication .sharedApplication().delegate as! AppDelegate
+        //获取个人详情
+        MAPI .getUserProfile(MAPI.userId()) { (respond) in
+            let json = JSON(data:respond)
+            self.user = User.fromJSON(json["data"])
+            
+            self.avatarImage .sd_setImage(with: URL(string:SRCBaseURL + self.user!.avatar!), placeholderImage: UIImage(named: "avatar"))
+            self.wordCount.text = String(self.user!.wordcount)
+            self.gradeBtn .setTitle(String(self.user!.grade), for: UIControlState())
+            self.gradeBtn.layer.borderWidth = 1
+            self.gradeBtn.layer.borderColor = UIColor.white.cgColor
+            self.goldenCount.text = String(self.user!.golden)
+        }
+
+        MAPI .getRecommendCity { (respond) in
+            let json = JSON(data:respond)
+            self.city = RecommendCity.fromJSON(json["data"])
+
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
             let lat = ((appDelegate.lat) as NSString) .doubleValue
             let lon = ((appDelegate.lon) as NSString) .doubleValue
             
             let coordinate = CLLocationCoordinate2D (latitude: lat, longitude: lon)
-            mapView.centerCoordinate = coordinate
+            self.mapView.centerCoordinate = coordinate
             
             let regionRadius: CLLocationDistance = 1000
             let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
-            mapView.setRegion(region, animated: true)
+            self.mapView.setRegion(region, animated: false)
             
             self.getNearByWords(coordinate)
         }
-        else{
-            //加载推荐城市地图
-            let lat = ((self.city?.lat)! as NSString) .doubleValue
-            let lon = ((self.city?.lon)! as NSString) .doubleValue
-            
-            let coordinate = CLLocationCoordinate2D (latitude: lat, longitude: lon)
-            mapView.centerCoordinate = coordinate
-            
-            let regionRadius: CLLocationDistance = 1000
-            let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
-            mapView.setRegion(region, animated: true)
-            
-            //显示城市简介
-            let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let recommendCity:RecommendCityViewController = storyboard.instantiateViewControllerWithIdentifier("recommendCityVC") as! RecommendCityViewController
-            recommendCity.city = self.city
-            recommendCity.modalPresentationStyle = UIModalPresentationStyle.Custom;
-            self.presentViewController(recommendCity, animated: false, completion: nil)
-        }
+        
+        userView.isUserInteractionEnabled = true
+        let gestureUserProfile = UITapGestureRecognizer(target: self, action: #selector(openUserProfile))
+        userView .addGestureRecognizer(gestureUserProfile)
         
         self .refreshCollectCount()
         
-        NSNotificationCenter .defaultCenter() .addObserver(self, selector: #selector(collectWord(_:)), name: NOTIFY_COLLECT_WORD, object: nil)
+        NotificationCenter.default .addObserver(self, selector: #selector(collectWord(_:)), name: NSNotification.Name(rawValue: NOTIFY_COLLECT_WORD), object: nil)
+        NotificationCenter.default .addObserver(self, selector: #selector(refreshLocation), name: NSNotification.Name(rawValue: NOTIFY_REFRESH_LOCATION), object: nil)
     }
 
+    func openUserProfile(){
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let userProfileVC:UserProfileViewController = storyboard.instantiateViewController(withIdentifier: "UserProfileVC") as! UserProfileViewController
+        userProfileVC.userId = MAPI .userId()
+        self.navigationController!.pushViewController(userProfileVC, animated: true)
+    }
+    
+//    func openUserProfile(){
+//        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+//        let userProfile:ViewController = storyboard.instantiateViewController(withIdentifier: "rootVC") as! ViewController
+//        self.navigationController!.pushViewController(userProfile, animated: true)
+//    }
+    
+    func refreshLocation(){
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let lat = ((appDelegate.lat) as NSString) .doubleValue
+        let lon = ((appDelegate.lon) as NSString) .doubleValue
+        
+        let coordinate = CLLocationCoordinate2D (latitude: lat, longitude: lon)
+        self.mapView.centerCoordinate = coordinate
+        
+        let regionRadius: CLLocationDistance = 1000
+        let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
+        self.mapView.setRegion(region, animated: false)
+        
+        self.getNearByWords(coordinate)
+    }
+    
     func loadWordList(){
         let lat = ((self.city?.lat)! as NSString) .doubleValue
         let lon = ((self.city?.lon)! as NSString) .doubleValue
@@ -107,12 +131,12 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         
         let regionRadius: CLLocationDistance = 1000
         let region = MKCoordinateRegionMakeWithDistance(coordinate, regionRadius * 2.0, regionRadius * 2.0)
-        mapView.setRegion(region, animated: true)
+        mapView.setRegion(region, animated: false)
         
         self.getNearByWords(coordinate)
     }
     
-    func collectWord(notify:NSNotification){
+    func collectWord(_ notify:Notification){
         let userInfo = notify.userInfo as! [String: AnyObject]
         let wordId = userInfo["wordId"] as! String
         
@@ -131,11 +155,11 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
     
     func refreshCollectCount(){
         //查询当天采集的单词
-        let yesterday = NSDate .today()
+        let yesterday = Date()
         let realm = try! Realm()
         let wordArray = realm.objects(WordModel.self).filter("collectTime > %@",yesterday)
         
-        self.boxTipView .setTitle(String(wordArray.count), forState: UIControlState.Normal)
+        self.boxTipView .setTitle(String(wordArray.count), for: UIControlState.normal)
         
         //查询所有采集的单词
         let allWordArray = realm.objects(WordModel.self)
@@ -148,11 +172,11 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
 //        let sprite = SceneKit(scene)
 //        self.view .addSubview(sprite)
 //    }
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        UIApplication.sharedApplication().statusBarHidden = true
+//        UIApplication.shared.isStatusBarHidden = true
         
     }
     
@@ -207,13 +231,17 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         })
     }
     */
-    func getNearByWords(coordinate:CLLocationCoordinate2D){
+    func getNearByWords(_ coordinate:CLLocationCoordinate2D){
         self.wordArray.removeAll()
-        MAPI.getWordsBy(String(format:"%f",(coordinate.longitude)), lat: String(format:"%f",(coordinate.latitude))) { (respond) in
+        MAPI.getWordsBy(String(format:"%f",(coordinate.longitude)) as NSString, lat: String(format:"%f",(coordinate.latitude)) as NSString) { (respond) in
             //解析返回的单词
             print("JSON: \(respond)")
             let json = JSON(data:respond)
             print(json["errorCode"])
+            let code = json["code"]
+            if code == "1"{
+                return
+            }
             
             let annos = self.mapView .annotations
             self.mapView .removeAnnotations(annos)
@@ -229,8 +257,8 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
                 
                 //如果单词本身已经有坐标，就使用单词的坐标，否则就在当前位置随机生成一个坐标
                 if word?.lat == "" || word?.lon == ""{
-                    let randX = Double(self .randomInRange(-10...10))/1000.0
-                    let randY = Double(self .randomInRange(-15...15))/1000.0
+                    let randX = Double(self .randomInRange(-10..<11))/1000.0
+                    let randY = Double(self .randomInRange(-15..<16))/1000.0
                     let wordCoordinate = CLLocationCoordinate2D(latitude: coordinate.latitude + randY, longitude: coordinate.longitude + randX)
                     word?.lat = String(wordCoordinate.latitude)
                     word?.lon = String(wordCoordinate.longitude)
@@ -246,19 +274,19 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         }
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView?{
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView?{
         if let annotation = annotation as? WordAnnotation{
             let identifier = "annotation"
             
-            var pinView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+            var pinView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
             
             if pinView == nil {
                 pinView = MKAnnotationView(annotation: annotation, reuseIdentifier: identifier)
                 pinView!.canShowCallout = true
                 
                 //大头针图标
-                let index = annotation.word?.name.startIndex.advancedBy(1)
-                let letter = annotation.word?.name.substringToIndex(index!)
+                let index = annotation.word?.name.characters.index((annotation.word?.name.startIndex)!, offsetBy: 1)
+                let letter = annotation.word?.name.substring(to: index!)
                 pinView?.image = self .drawLetterAnnotation(UIImage(named: "pin2")!, letter: letter!)
                 
                 //点击后弹出视图左侧图标
@@ -266,7 +294,7 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
 //                pinView!.leftCalloutAccessoryView = mugIconView
                 
                 //点击后弹出视图右侧按钮
-                let calloutView = UIButton(type: UIButtonType.DetailDisclosure)// as UIView
+                let calloutView = UIButton(type: UIButtonType.detailDisclosure)// as UIView
                 pinView!.rightCalloutAccessoryView = calloutView
             }
             else {
@@ -292,13 +320,13 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
 //        }
 //    }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl){
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl){
         if let annotation = view.annotation as? WordAnnotation{
             
-            let storyboard = UIStoryboard(name: "Main", bundle: NSBundle.mainBundle())
-            let wordDetail:WordDetailViewController = storyboard.instantiateViewControllerWithIdentifier("WordDetailVC") as! WordDetailViewController
-            wordDetail.showMode = ShowMode.Collect
-            wordDetail.modalPresentationStyle = UIModalPresentationStyle.Custom;
+            let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let wordDetail:WordDetailViewController = storyboard.instantiateViewController(withIdentifier: "WordDetailVC") as! WordDetailViewController
+            wordDetail.showMode = ShowMode.collect
+            wordDetail.modalPresentationStyle = UIModalPresentationStyle.custom;
             
             let word = annotation.word
             let realm = try! Realm()
@@ -311,18 +339,18 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
                     newWord?.word?.lat = (word?.lat)!
                     
                     wordDetail.word = newWord
-                    self.presentViewController(wordDetail, animated: false, completion: nil)
+                    self.present(wordDetail, animated: false, completion: nil)
                 }
             }
             else{
                 wordDetail.word = wordModel
-                self.presentViewController(wordDetail, animated: false, completion: nil)
+                self.present(wordDetail, animated: false, completion: nil)
             }
         }
     }
     
     //把单词第一个字母叠加到大头针图片上
-    func drawLetterAnnotation(image:UIImage,letter: String) -> UIImage {
+    func drawLetterAnnotation(_ image:UIImage,letter: String) -> UIImage {
         
         let width = image.size.width
         let height = image.size.height
@@ -330,15 +358,15 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         //绘制图片
         UIGraphicsBeginImageContext(CGSize(width: width, height: height))
         // 设置绘制图片的起始点
-        image.drawAtPoint(CGPoint(x: 0, y: 0))
+        image.draw(at: CGPoint(x: 0, y: 0))
         
         //设置字母的文字属性并绘制
         let textFontAttributes = [
-            NSFontAttributeName: UIFont.systemFontOfSize(25.0),
-            NSForegroundColorAttributeName: UIColor .whiteColor()
+            NSFontAttributeName: UIFont.systemFont(ofSize: 25.0),
+            NSForegroundColorAttributeName: UIColor.white
         ]
-        let rect = CGRectMake(20, 15, 30, 30)
-        letter.uppercaseString.drawInRect(rect, withAttributes: textFontAttributes)
+        let rect = CGRect(x: 20, y: 15, width: 30, height: 30)
+        letter.uppercased().draw(in: rect, withAttributes: textFontAttributes)
 
         //获取已经绘制好的图
         let resultImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -347,12 +375,12 @@ class CollectWordsViewController: UIViewController,MKMapViewDelegate,CLLocationM
         UIGraphicsEndImageContext()
         
         //返回已经绘制好的图片
-        return resultImage
+        return resultImage!
     }
     
     //生成随机数
-    func randomInRange(range: Range<Int>) -> Int {
-        let count = UInt32(range.endIndex - range.startIndex)
-        return  Int(arc4random_uniform(count)) + range.startIndex
+    func randomInRange(_ range: Range<Int>) -> Int {
+        let count = UInt32(range.upperBound - range.lowerBound)
+        return  Int(arc4random_uniform(count)) + range.lowerBound
     }
 }

@@ -10,7 +10,7 @@ import Foundation
 
 final public class MeetUserDefaults {
     
-    static let defaults = NSUserDefaults(suiteName: Config.appGroupID)!
+    static let defaults = UserDefaults(suiteName: Config.appGroupID)!
 //    public static var isLogined: Bool {
 //        
 //        if let _:MeetUserDefaults.accessToken {

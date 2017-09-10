@@ -19,9 +19,9 @@ class VerifyViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
 
-    override func viewDidAppear(animated: Bool) {
-        let userDefault = NSUserDefaults .standardUserDefaults()
-        let tel = userDefault .objectForKey("tel") as! String
+    override func viewDidAppear(_ animated: Bool) {
+        let userDefault = UserDefaults.standard
+        let tel = userDefault .object(forKey: "tel") as! String
         MAPI .getVerifyCode(tel) { (respond) in
             let json = JSON(data:respond)
             let code = json["code"]
@@ -51,15 +51,15 @@ class VerifyViewController: UIViewController {
     }
     */
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool{
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool{
         
         if verifyCode.text!.isEmpty {
             MBProgressHUD .showError("验证码要填哦")
             return false
         }
         
-        let userDefault = NSUserDefaults .standardUserDefaults()
-        let tel = userDefault .objectForKey("tel") as! String
+        let userDefault = UserDefaults.standard
+        let tel = userDefault .object(forKey: "tel") as! String
         MAPI .verifyCode(tel, verifycode: verifyCode.text!) { (respond) in
             let json = JSON(data:respond)
             let code = json["code"]
@@ -69,7 +69,7 @@ class VerifyViewController: UIViewController {
             }
         }
         
-        userDefault .setObject(verifyCode.text!, forKey: "verifycode")
+        userDefault .set(verifyCode.text!, forKey: "verifycode")
         return true
     }
 

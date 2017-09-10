@@ -25,7 +25,7 @@ extension String {
             ]
         
         for (name,value) in entities {
-            newStr = newStr.stringByReplacingOccurrencesOfString(name, withString: value)
+            newStr = newStr.replacingOccurrences(of: name, with: value)
         }
         return newStr
     }

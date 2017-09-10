@@ -28,7 +28,7 @@ class SignUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "注册"
-        self.navigationController?.navigationBar.hidden = false
+        self.navigationController?.navigationBar.isHidden = false
         // Do any additional setup after loading the view.
     }
 
@@ -40,12 +40,12 @@ class SignUpViewController: UIViewController {
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
     
-    override func shouldPerformSegueWithIdentifier(identifier: String, sender: AnyObject?) -> Bool{
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool{
         
         if telField.text!.isEmpty {
             MBProgressHUD .showError("手机号码不能为空")
@@ -56,9 +56,9 @@ class SignUpViewController: UIViewController {
             return false
         }
         
-        let userDefault = NSUserDefaults .standardUserDefaults()
-        userDefault .setObject(telField.text!, forKey: "tel")
-        userDefault .setObject(pwdField.text!, forKey: "pwd")
+        let userDefault = UserDefaults.standard
+        userDefault .set(telField.text!, forKey: "tel")
+        userDefault .set(pwdField.text!, forKey: "pwd")
         
         return true
     }

@@ -9,10 +9,10 @@
 import Foundation
 import UIKit
 
- public func settupLabel(text:String,fontSize:CGFloat = 15.0,color:UIColor = UIColor.blackColor()) ->(UILabel) {
+ public func settupLabel(_ text:String,fontSize:CGFloat = 15.0,color:UIColor = UIColor.black) ->(UILabel) {
         let label = UILabel.init()
         label.text = text
-        label.font = UIFont.systemFontOfSize(fontSize)
+        label.font = UIFont.systemFont(ofSize: fontSize)
         label.textColor = color
         return label
     }
